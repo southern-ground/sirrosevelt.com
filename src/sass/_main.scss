@@ -1,3 +1,10 @@
+.IIV::-webkit-media-controls-play-button,
+.IIV::-webkit-media-controls-start-playback-button {
+  opacity: 0;
+  pointer-events: none;
+  width: 5px;
+}
+
 html {
   body {
     margin: 0;
@@ -39,10 +46,10 @@ html {
       left: 0;
       right: 0;
       width: 100%;
-      @media only screen and (max-height:570px ){
+      @media only screen and (max-height: 567px) {
         position: relative;
       }
-      section{
+      section {
 
         display: flex;
         justify-content: center;
@@ -52,17 +59,20 @@ html {
         #title {
           margin: 60px 0 0;
           @include mobile {
+            margin: 20px 0 0 0;
             width: calc(100vw - 40px);
             max-width: 400px;
             height: auto;
           }
         }
+
         #logo {
           margin: 20px 0 0 0;
           width: 100%;
           max-width: 175px;
           @include extra-small {
-
+            max-width:60px;
+            margin: 5px 0 0 0;
           }
 
         }
@@ -76,22 +86,31 @@ html {
           letter-spacing: 4px;
           font-weight: 300;
         }
+
+        .small-wrap{
+          @include extra-small{
+            font-size:80%;
+            display:block;
+          }
+        }
+
         .purchase-links, .social-links {
           list-style: none;
           margin: 0;
           padding: 0;
-          li{
+          li {
             display: inline-block;
             padding: 0;
 
           }
 
         }
+
         .purchase-links {
           font-size: 1.4rem;
 
           li {
-            letter-spacing:4px;
+            letter-spacing: 4px;
             &:not(:last-child) {
               margin: 0 70px 0 0;
             }
@@ -106,13 +125,14 @@ html {
               }
             }
 
-            @include mobile{
+            @include mobile {
               &:not(:last-child) {
                 margin: 0;
               }
             }
           }
         }
+
         .social-links {
           li {
             a.social {
@@ -131,14 +151,18 @@ html {
                 background-position: 48px 0;
               }
             }
-            @include mobile{
+            @include mobile {
               margin-top: 0;
             }
           }
         }
+
         h3.hashtag {
           text-transform: uppercase;
           margin: 8px 0 20px;
+          @include extra-small{
+            margin: 8px 0 10px 0;
+          }
           padding: 0;
           font-size: 1.56rem;
           letter-spacing: 3px;
