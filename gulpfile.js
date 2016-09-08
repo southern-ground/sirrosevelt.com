@@ -94,8 +94,8 @@ gulp.task('render', function (done) {
     if(!config){ // called by itself, possibly?
         config = getData(require('yargs').argv);
     }
-
-    return gulp.src([dirs.src + '/*.html', dirs.src + '/css/main.css'])
+    
+    return gulp.src([dirs.src + '/**/*.html', '!' + dirs.src + '/rev.html'])
         .pipe(print(function(filepath) {
             return "\tRendering " + filepath;
         }))
@@ -113,6 +113,7 @@ gulp.task('git-revision', shell.task(commands.gitRevision));
 // ---------------------------------------------------------------------
 
 gulp.task('build', function (done) {
+
     runSequence(
         ['clean', 'sass'],
         ['render'],
