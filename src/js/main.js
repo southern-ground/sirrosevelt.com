@@ -28,15 +28,18 @@ var _ = window._;
     app.initVideo = function () {
         console.log('app::initVideo');
         if (app.isMobile) {
-            console.log('\tSuppress video init');
+            console.log('\tSuppressing video init');
+            var $el = $('#ambient-video');
+            $el.css('background-image', 'url(' + $el.data('background-image') + ')');
+            $el.css('background-size', 'cover');
+            $el.css('background-position', 'center center');
             return;
         }
         var $video = $('#ambient-video video');
-
-        $video.attr('poster', $video.data('poster'));
-        $video.attr('src', $video.data('src'));
-        $video.attr('autoplay', 'true');
-        $video.attr('loop', 'true');
+         $video.attr('poster', $video.data('poster'))
+             .attr('src', $video.data('src'))
+             .attr('autoplay', 'true')
+             .attr('loop', 'true');
     };
 
     app.resizeVideo = function () {
