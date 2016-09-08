@@ -53,7 +53,7 @@
       },
       "preprod": {
         "name": "preprod",
-        "assetURL": "https://s3.amazonaws.com/stage.sirrosevelt.com/",
+        "assetURL": "http://sirrosevelt.s3-website-us-east-1.amazonaws.com/",
         "links": {
           "itunes": "#itunes",
           "spotify": "#spotify",
@@ -65,7 +65,7 @@
       },
       "prod": {
         "name": "prod",
-        "assetURL": "./",
+        "assetURL": "http://sirrosevelt.s3-website-us-east-1.amazonaws.com/",
         "links": {
           "itunes": "#itunes",
           "spotify": "#spotify",
