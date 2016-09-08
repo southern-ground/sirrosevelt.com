@@ -43,11 +43,15 @@
         "name": "dev",
         "assetURL": "./",
         "links": {
-          "itunes": "#itunes",
-          "spotify": "#spotify",
-          "facebook": "#facebook",
-          "twitter": "#twitter",
-          "instagram": "#instagram",
+          "itunes": "http://republicrec.co/SundayFinest",
+          "appleMusic": "http://republicrec.co/SundayFinestAM",
+          "googlePlay": "http://republicrec.co/SundayFinestGP",
+          "amazon": "http://republicrec.co/SundayFinestAZ",
+          "spotify": "http://republicrec.co/SundayFinestSP",
+          "facebook": "#dev-facebook",
+          "twitter": "#dev-twitter",
+          "instagram": "#dev-instagram",
+          "youtube": "#dev-youtube",
           "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
         }
       },
@@ -55,11 +59,15 @@
         "name": "stage",
         "assetURL": "http://stage.sirrosevelt.com.s3-website-us-east-1.amazonaws.com/",
         "links": {
-          "itunes": "#itunes",
-          "spotify": "#spotify",
-          "facebook": "#facebook",
-          "twitter": "#twitter",
-          "instagram": "#instagram",
+          "itunes": "http://republicrec.co/SundayFinest",
+          "appleMusic": "http://republicrec.co/SundayFinestAM",
+          "googlePlay": "http://republicrec.co/SundayFinestGP",
+          "amazon": "http://republicrec.co/SundayFinestAZ",
+          "spotify": "http://republicrec.co/SundayFinestSP",
+          "facebook": "#stage-facebook",
+          "twitter": "#stage-twitter",
+          "instagram": "#stage-instagram",
+          "youtube": "#stage-youtube",
           "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
         }
       },
@@ -67,11 +75,15 @@
         "name": "preprod",
         "assetURL": "http://sirrosevelt.s3-website-us-east-1.amazonaws.com/",
         "links": {
-          "itunes": "#itunes",
-          "spotify": "#spotify",
-          "facebook": "#facebook",
-          "twitter": "#twitter",
-          "instagram": "#instagram",
+          "itunes": "http://republicrec.co/SundayFinest",
+          "appleMusic": "http://republicrec.co/SundayFinestAM",
+          "googlePlay": "http://republicrec.co/SundayFinestGP",
+          "amazon": "http://republicrec.co/SundayFinestAZ",
+          "spotify": "http://republicrec.co/SundayFinestSP",
+          "facebook": "#preprod-facebook",
+          "twitter": "#preprod-twitter",
+          "instagram": "#preprod-instagram",
+          "youtube": "#preprod-yotube",
           "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
         }
       },
@@ -79,11 +91,15 @@
         "name": "prod",
         "assetURL": "http://sirrosevelt.s3-website-us-east-1.amazonaws.com/",
         "links": {
-          "itunes": "#itunes",
-          "spotify": "#spotify",
+          "itunes": "http://republicrec.co/SundayFinest",
+          "appleMusic": "http://republicrec.co/SundayFinestAM",
+          "googlePlay": "http://republicrec.co/SundayFinestGP",
+          "amazon": "http://republicrec.co/SundayFinestAZ",
+          "spotify": "http://republicrec.co/SundayFinestSP",
           "facebook": "#facebook",
           "twitter": "#twitter",
           "instagram": "#instagram",
+          "youtube": "#youtube",
           "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
         }
       }
