@@ -3,11 +3,13 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     pkg = require('./package.json'),
     dirs = pkg['sir-rosevelt-configs'].directories,
+    commands = pkg['sir-rosevelt-configs'].commands,
     config,
     browserSync = require('browser-sync'),
     print = require('gulp-print'),
     sass = require('gulp-sass'),
     render = require('gulp-nunjucks-render'),
+    shell = require('gulp-shell'),
     data = require('gulp-data');
 
 var getData = function(argv){
@@ -103,6 +105,8 @@ gulp.task('render', function (done) {
         .pipe(render())
         .pipe(gulp.dest(dirs.dist));
 });
+
+gulp.task('git-revision', shell.task(commands.gitRevision));
 
 // ---------------------------------------------------------------------
 // | Main tasks                                                        |

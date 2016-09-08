@@ -19,6 +19,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-replace": "^0.5.3",
     "gulp-sass": "^2.3.2",
+    "gulp-shell": "^0.5.2",
     "jquery": "1.12.0",
     "jshint": "^2.8.0",
     "jshint-stylish": "^2.0.1",
@@ -34,10 +35,13 @@
       "dist": "dist",
       "src": "src"
     },
+    "commands":{
+      "gitRevision": "git rev-list HEAD --max-count=1 --format='%ci' > ./src/rev.html"
+    },
     "servers": {
       "stage": {
         "name": "stage",
-        "assetURL": ".\/",
+        "assetURL": "./",
         "links": {
           "itunes": "#itunes",
           "spotify": "#spotify",
@@ -61,7 +65,7 @@
       },
       "prod": {
         "name": "prod",
-        "assetURL": ".\/",
+        "assetURL": "./",
         "links": {
           "itunes": "#itunes",
           "spotify": "#spotify",
