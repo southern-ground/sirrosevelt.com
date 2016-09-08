@@ -1,18 +1,18 @@
-html{
-  body{
+html {
+  body {
     margin: 0;
-    padding:0;
+    padding: 0;
     background: black;
     position: relative;
     font-family: 'Raleway';
-    font-size:20px;
-    header{
+    font-size: 1.25rem;
+    header {
       display: none;
-      h1{
+      h1 {
         font-size: 0;
       }
     }
-    #ambient-video{
+    #ambient-video {
       position: fixed;
       top: 0;
       bottom: 0;
@@ -21,96 +21,124 @@ html{
       width: 100%;
       height: 100%;
       pointer-events: none;
-      video{
+      video {
         position: absolute;
       }
     }
 
-    #content{
+    #content {
       position: relative;
-
       color: white;
-
-      font-family: Raleway;
-
-      section{
+      section {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        #title{
+        #title {
           margin: 60px 0;
+          @include mobile{
+            width: calc(100vw - 40px);
+            max-width: 400px;
+            height: auto;
+          }
         }
-        #logo{
-          margin: 240px 0 0 0;
+        #logo {
+          margin: 160px 0 0 0;
+          @include extra-small{
+            margin: 20vh 0 0 0;
+          }
+
         }
-        h2{
+        h2 {
           text-transform: uppercase;
-          font-size:1.875rem;
+          font-size: 1.875rem;
           font-weight: normal;
-          margin: 50px 0 20px;
+          margin: 15px 0 0;
+          text-align: center;
+          letter-spacing: 4px;
+          font-weight: 300;
         }
-        .purchase-links, .social-links{
+        .purchase-links, .social-links {
           list-style: none;
           margin: 0;
           padding: 0;
           li{
             display: inline-block;
             padding: 0;
-            &:not(:last-child){
-              margin: 0 40px 0 0;
+            @include mobile{
+                display: block;
             }
           }
+
         }
-        .purchase-links{
+        .purchase-links {
           font-size: 1.4rem;
           text-transform: uppercase;
-          a{
-            color: white;
-            &:hover{
-              color: white;
+
+          li {
+            letter-spacing:4px;
+            &:not(:last-child) {
+              margin: 0 70px 0 0;
             }
-            &:visited{
+
+
+            a {
               color: white;
+              &:hover {
+                color: white;
+              }
+              &:visited {
+                color: white;
+              }
+            }
+
+            @include mobile{
+              &:not(:last-child) {
+                margin: 0;
+              }
             }
           }
         }
-        .social-links{
-          li{
-            margin-top: 20px;
-            a.social{
+        .social-links {
+          li {
+            a.social {
               display: inline-block;
               font-size: 0;
               width: 48px;
               height: 48px;
-              &.facebook{
+              margin: 0 20px 0 0;
+              &.facebook {
                 // Nothing
               }
-              &.instagram{
+              &.instagram {
                 background-position: -48px 0;
               }
-              &.twitter{
+              &.twitter {
                 background-position: 48px 0;
               }
             }
+            @include mobile{
+              margin-top: 0;
+            }
           }
         }
-        h3.hashtag{
+        h3.hashtag {
           text-transform: uppercase;
-          margin: 20px 0 0;
+          margin: 8px 0 0;
           padding: 0;
-          font-size:1.56rem;
-          a{
+          font-size: 1.56rem;
+          letter-spacing: 3px;
+          font-weight: 300;
+          a {
             color: white;
             text-decoration: none;
-            font-weight: normal;
-            &:hover{
+            &:hover {
               text-decoration: underline;
             }
-            &:visited{
+            &:visited {
               color: white;
             }
-            &:active{
+            &:active {
               color: white;
             }
           }
@@ -118,7 +146,7 @@ html{
       }
     }
 
-    footer{
+    footer {
       font-size: 0.625rem;
       opacity: 0.8;
       text-align: center;

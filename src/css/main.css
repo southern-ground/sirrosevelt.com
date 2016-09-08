@@ -78,7 +78,7 @@ html body {
   background: black;
   position: relative;
   font-family: 'Raleway';
-  font-size: 20px; }
+  font-size: 1.25rem; }
   html body header {
     display: none; }
     html body header h1 {
@@ -96,8 +96,7 @@ html body {
       position: absolute; }
   html body #content {
     position: relative;
-    color: white;
-    font-family: Raleway; }
+    color: white; }
     html body #content section {
       display: flex;
       justify-content: center;
@@ -105,13 +104,24 @@ html body {
       flex-direction: column; }
       html body #content section #title {
         margin: 60px 0; }
+        @media only screen and (max-width: 640px) {
+          html body #content section #title {
+            width: calc(100vw - 40px);
+            max-width: 400px;
+            height: auto; } }
       html body #content section #logo {
-        margin: 240px 0 0 0; }
+        margin: 160px 0 0 0; }
+        @media only screen and (max-width: 767px) {
+          html body #content section #logo {
+            margin: 20vh 0 0 0; } }
       html body #content section h2 {
         text-transform: uppercase;
         font-size: 1.875rem;
         font-weight: normal;
-        margin: 50px 0 20px; }
+        margin: 15px 0 0;
+        text-align: center;
+        letter-spacing: 4px;
+        font-weight: 300; }
       html body #content section .purchase-links, html body #content section .social-links {
         list-style: none;
         margin: 0;
@@ -119,37 +129,48 @@ html body {
         html body #content section .purchase-links li, html body #content section .social-links li {
           display: inline-block;
           padding: 0; }
-          html body #content section .purchase-links li:not(:last-child), html body #content section .social-links li:not(:last-child) {
-            margin: 0 40px 0 0; }
+          @media only screen and (max-width: 640px) {
+            html body #content section .purchase-links li, html body #content section .social-links li {
+              display: block; } }
       html body #content section .purchase-links {
         font-size: 1.4rem;
         text-transform: uppercase; }
-        html body #content section .purchase-links a {
-          color: white; }
-          html body #content section .purchase-links a:hover {
+        html body #content section .purchase-links li {
+          letter-spacing: 4px; }
+          html body #content section .purchase-links li:not(:last-child) {
+            margin: 0 70px 0 0; }
+          html body #content section .purchase-links li a {
             color: white; }
-          html body #content section .purchase-links a:visited {
-            color: white; }
-      html body #content section .social-links li {
-        margin-top: 20px; }
-        html body #content section .social-links li a.social {
-          display: inline-block;
-          font-size: 0;
-          width: 48px;
-          height: 48px; }
-          html body #content section .social-links li a.social.instagram {
-            background-position: -48px 0; }
-          html body #content section .social-links li a.social.twitter {
-            background-position: 48px 0; }
+            html body #content section .purchase-links li a:hover {
+              color: white; }
+            html body #content section .purchase-links li a:visited {
+              color: white; }
+          @media only screen and (max-width: 640px) {
+            html body #content section .purchase-links li:not(:last-child) {
+              margin: 0; } }
+      html body #content section .social-links li a.social {
+        display: inline-block;
+        font-size: 0;
+        width: 48px;
+        height: 48px;
+        margin: 0 20px 0 0; }
+        html body #content section .social-links li a.social.instagram {
+          background-position: -48px 0; }
+        html body #content section .social-links li a.social.twitter {
+          background-position: 48px 0; }
+      @media only screen and (max-width: 640px) {
+        html body #content section .social-links li {
+          margin-top: 0; } }
       html body #content section h3.hashtag {
         text-transform: uppercase;
-        margin: 20px 0 0;
+        margin: 8px 0 0;
         padding: 0;
-        font-size: 1.56rem; }
+        font-size: 1.56rem;
+        letter-spacing: 3px;
+        font-weight: 300; }
         html body #content section h3.hashtag a {
           color: white;
-          text-decoration: none;
-          font-weight: normal; }
+          text-decoration: none; }
           html body #content section h3.hashtag a:hover {
             text-decoration: underline; }
           html body #content section h3.hashtag a:visited {
