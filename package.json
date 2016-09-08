@@ -39,9 +39,21 @@
       "gitRevision": "git rev-list HEAD --max-count=1 --format='%ci' > ./src/rev.html"
     },
     "servers": {
+      "dev": {
+        "name": "dev",
+        "assetURL": "./",
+        "links": {
+          "itunes": "#itunes",
+          "spotify": "#spotify",
+          "facebook": "#facebook",
+          "twitter": "#twitter",
+          "instagram": "#instagram",
+          "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
+        }
+      },
       "stage": {
         "name": "stage",
-        "assetURL": "./",
+        "assetURL": "http://stage.sirrosevelt.com.s3-website-us-east-1.amazonaws.com/",
         "links": {
           "itunes": "#itunes",
           "spotify": "#spotify",
