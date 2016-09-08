@@ -15,6 +15,7 @@ var _ = window._;
 
     app.isIEOld = app.isIE() && app.isIE() < 9;
     app.isiPad = navigator.userAgent.match(/iPad/i);
+    app.isiMobile = navigator.userAgent.match(/(iPhone|iPad)/i);
 
     app.localizeSocial = function () {
         $('.social').each(function () {
@@ -27,19 +28,31 @@ var _ = window._;
 
     app.initVideo = function () {
         console.log('app::initVideo');
-        if (app.isMobile) {
-            console.log('\tSuppressing video init');
+
+        var $video = $('#ambient-video video');
+        $video.attr('poster', $video.data('poster'));
+
+        if (app.isMobile && !app.isiMobile) {
+            console.warn('Suppressing video init');
+            // Suppress the video; probably either an unsupported iOS device
+            // or Android
             var $el = $('#ambient-video');
-            $el.css('background-image', 'url(' + $el.data('background-image') + ')');
+            $el.css('background-image', "url('"+$el.data('background-image')+"')");
             $el.css('background-size', 'cover');
             $el.css('background-position', 'center center');
+            $video.css('display', 'none');
             return;
         }
-        var $video = $('#ambient-video video');
-         $video.attr('poster', $video.data('poster'))
-             .attr('src', $video.data('src'))
-             .attr('autoplay', 'true')
-             .attr('loop', 'true');
+
+        $video.attr('src', $video.data('src'))
+            .attr('autoplay', 'true')
+            .attr('loop', 'true');
+
+        if(app.isMobile && app.isiMobile){
+            console.warn('Attempting video play on iOS')
+            makeVideoPlayableInline($video.get(0), false);
+        }
+
     };
 
     app.resizeVideo = function () {
@@ -59,21 +72,27 @@ var _ = window._;
             height: 1080
         };
 
-        if (h > VIDEO.height) {
-            console.log(' too tall');
+        var scale = (Math.max(w/VIDEO.width, h/VIDEO.height) * 10000|1)/10000;
 
-        } else if (w > VIDEO.width) {
-            console.log(' too wide');
-        } else {
-            console.log('looks all right here');
+
+        if(w < VIDEO.width){
+            console.log('too wide');
+        }
+        if(h < VIDEO.height){
+            console.log('too tall');
         }
 
+        var newW = VIDEO.width * scale,
+            newH = VIDEO.height * scale;
+
         var $video = $('#ambient-video video');
+        console.log(newH, h);
+        console.log(newW, w);
         $video.css({
-            top: ((h - VIDEO.height) * 0.5) + "px",
-            left: ((w - VIDEO.width) * 0.5) + 'px',
-            width: VIDEO.width + 'px',
-            height: VIDEO.height + 'px'
+            top: ((h - newH) * 0.5)|1 + "px",
+            left: ((w - newW) * 0.5)|1 + 'px',
+            width: newW + 'px',
+            height: newH + 'px'
         });
 
         /*var img = $('.ambient-video').data('poster'),
