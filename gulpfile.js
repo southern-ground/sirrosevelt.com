@@ -30,6 +30,7 @@ gulp.task('clean', function (done) {
 gulp.task('copy', [
     'copy:jquery',
     'copy:normalize',
+    'copy:iphone-inline-video',
     'copy:underscore',
     'copy:sundry'
 ]);
@@ -47,6 +48,11 @@ gulp.task('copy:normalize', function () {
 
 gulp.task('copy:underscore', function () {
     return gulp.src(['node_modules/underscore/underscore-min.js', 'node_modules/underscore/underscore-min.map'])
+        .pipe(gulp.dest(dirs.dist + '/js/vendor'));
+});
+
+gulp.task('copy:iphone-inline-video', function () {
+    return gulp.src(['node_modules/iphone-inline-video/dist/iphone-inline-video.browser.js'])
         .pipe(gulp.dest(dirs.dist + '/js/vendor'));
 });
 
