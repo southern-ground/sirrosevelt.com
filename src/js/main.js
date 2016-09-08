@@ -21,9 +21,9 @@ var _ = window._;
         $('.social').each(function () {
             $(this).css('background', 'url(' + $(this).data('asset-path') + ')');
         });
-
-        $('.twitter').css('background-position', '48px 0');
         $('.instagram').css('background-position', '-48px 0');
+        $('.twitter').css('background-position', '-96px 0');
+        $('.youtube').css('background-position', '-144px 0');
     };
 
     app.initVideo = function () {
