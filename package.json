@@ -1,0 +1,90 @@
+{
+  "devDependencies": {
+    "@alrra/travis-scripts": "^1.1.1",
+    "apache-server-configs": "2.14.0",
+    "archiver": "^0.21.0",
+    "browser-sync": "^2.15.0",
+    "del": "^2.0.2",
+    "glob": "^6.0.1",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-data": "^1.2.1",
+    "gulp-header": "^1.2.2",
+    "gulp-if": "^2.0.1",
+    "gulp-jscs": "^3.0.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-nunjucks-render": "^2.0.0",
+    "gulp-print": "^2.0.1",
+    "gulp-rename": "^1.2.0",
+    "gulp-replace": "^0.5.3",
+    "gulp-sass": "^2.3.2",
+    "jquery": "1.12.0",
+    "jshint": "^2.8.0",
+    "jshint-stylish": "^2.0.1",
+    "normalize.css": "3.0.3",
+    "run-sequence": "^1.0.2",
+    "yargs": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "sir-rosevelt-configs": {
+    "directories": {
+      "dist": "dist",
+      "src": "src"
+    },
+    "servers": {
+      "stage": {
+        "name": "stage",
+        "assetURL": ".\/",
+        "links": {
+          "itunes": "#itunes",
+          "spotify": "#spotify",
+          "facebook": "#facebook",
+          "twitter": "#twitter",
+          "instagram": "#instagram",
+          "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
+        }
+      },
+      "preprod": {
+        "name": "preprod",
+        "assetURL": "https://s3.amazonaws.com/stage.sirrosevelt.com/",
+        "links": {
+          "itunes": "#itunes",
+          "spotify": "#spotify",
+          "facebook": "#facebook",
+          "twitter": "#twitter",
+          "instagram": "#instagram",
+          "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
+        }
+      },
+      "prod": {
+        "name": "prod",
+        "assetURL": ".\/",
+        "links": {
+          "itunes": "#itunes",
+          "spotify": "#spotify",
+          "facebook": "#facebook",
+          "twitter": "#twitter",
+          "instagram": "#instagram",
+          "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
+        }
+      }
+    }
+  },
+  "homepage": "http://sirrosevelt.com",
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/h5bp/html5-boilerplate/blob/master/LICENSE.txt"
+  },
+  "name": "sirrosevelt.com",
+  "private": true,
+  "scripts": {
+    "build": "gulp build"
+  },
+  "version": "5.3.0",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
