@@ -108,13 +108,13 @@ html {
 
         .purchase-links {
           font-size: 1.4rem;
-
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          flex-wrap: wrap;
           li {
             letter-spacing: 4px;
-            &:not(:last-child) {
-              margin: 0 70px 0 0;
-            }
-
+            margin: 0 20px;
             a {
               color: white;
               &:hover {
@@ -126,8 +126,11 @@ html {
             }
 
             @include mobile {
-              &:not(:last-child) {
-                margin: 0;
+              width: 50%;
+              margin: 0;
+              text-align:center;
+              img{
+                display: inline-block;
               }
             }
           }
@@ -149,6 +152,9 @@ html {
               }
               &.twitter {
                 background-position: 48px 0;
+              }
+              &.youtube {
+                background-position: 144px 0;
               }
             }
             @include mobile {
