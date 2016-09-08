@@ -95,25 +95,37 @@ html body {
     html body #ambient-video video {
       position: absolute; }
   html body #content {
-    position: relative;
-    color: white; }
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    right: 0;
+    width: 100%; }
+    @media only screen and (max-height: 570px) {
+      html body #content {
+        position: relative; } }
     html body #content section {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column; }
       html body #content section #title {
-        margin: 60px 0; }
+        margin: 60px 0 0; }
         @media only screen and (max-width: 640px) {
           html body #content section #title {
             width: calc(100vw - 40px);
             max-width: 400px;
             height: auto; } }
       html body #content section #logo {
-        margin: 160px 0 0 0; }
-        @media only screen and (max-width: 767px) {
-          html body #content section #logo {
-            margin: 20vh 0 0 0; } }
+        margin: 20px 0 0 0;
+        width: 100%;
+        max-width: 175px; }
       html body #content section h2 {
         text-transform: uppercase;
         font-size: 1.875rem;
@@ -129,12 +141,8 @@ html body {
         html body #content section .purchase-links li, html body #content section .social-links li {
           display: inline-block;
           padding: 0; }
-          @media only screen and (max-width: 640px) {
-            html body #content section .purchase-links li, html body #content section .social-links li {
-              display: block; } }
       html body #content section .purchase-links {
-        font-size: 1.4rem;
-        text-transform: uppercase; }
+        font-size: 1.4rem; }
         html body #content section .purchase-links li {
           letter-spacing: 4px; }
           html body #content section .purchase-links li:not(:last-child) {
@@ -163,7 +171,7 @@ html body {
           margin-top: 0; } }
       html body #content section h3.hashtag {
         text-transform: uppercase;
-        margin: 8px 0 0;
+        margin: 8px 0 20px;
         padding: 0;
         font-size: 1.56rem;
         letter-spacing: 3px;
