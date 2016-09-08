@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400" rel="stylesheet">
     <!--
     {{data.name}} build
+    Serving data from {{data.assetURL}}
     -->
 </head>
 <body>
@@ -26,7 +26,7 @@
     <h1 aria-live="polite" aria-hidden="false">Sir Rosevelt</h1>
 </header>
 
-<div id="ambient-video">
+<div id="ambient-video" data-background-image="{{data.assetURL}}img/mobile-background.jpg">
     <video
             class="ambient-video"
             data-src="{{data.assetURL}}video/sir-rosevelt-2000kbps.mp4"
@@ -43,9 +43,9 @@
                 alt="Sir Rosevelt"
                 title="Sir Rosevelt"
                 src="{{data.assetURL}}img/sir-rosevelt-top.png"
-                aria-hidden="true" />
+                aria-hidden="true"/>
 
-        <img id="logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sir-rosevelt-logo.png" />
+        <img id="logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sir-rosevelt-logo.png"/>
 
     </section>
 
@@ -66,13 +66,16 @@
 
         <ul class="social-links">
             <li>
-                <a href="{{data.links.facebook}}" class="social facebook" data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
+                <a href="{{data.links.facebook}}" class="social facebook"
+                   data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
             </li>
             <li>
-                <a href="{{data.links.twitter}}" class="social twitter" data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
+                <a href="{{data.links.twitter}}" class="social twitter"
+                   data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
             </li>
             <li>
-                <a href="{{data.links.instagram}}" class="social instagram" data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
+                <a href="{{data.links.instagram}}" class="social instagram"
+                   data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
             </li>
         </ul>
 
@@ -80,7 +83,7 @@
     </section>
 
 </div>
-<footer>&copy;2016 (serving data from {{data.assetURL}})</footer>
+<footer>&copy;2016</footer>
 
 <script src="{{data.assetURL}}js/vendor/jquery-1.12.0.min.js"></script>
 <script src="{{data.assetURL}}js/vendor/underscore-min.js"></script>
