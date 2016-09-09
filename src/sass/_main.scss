@@ -123,6 +123,10 @@ html {
               &:visited {
                 color: white;
               }
+              .store-button{
+                height: 40px;
+                width: auto;
+              }
             }
 
             @include mobile {
