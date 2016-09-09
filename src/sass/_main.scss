@@ -46,15 +46,23 @@ html {
       left: 0;
       right: 0;
       width: 100%;
-      @media only screen and (max-height: 567px) {
+
+      @include extra-small{
         position: relative;
       }
+
       section {
 
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+
+        &#lower{
+          @include extra-small{
+            margin-top: 50vh;
+          }
+        }
 
         #title {
           margin: 60px 0 0;
@@ -96,25 +104,28 @@ html {
 
         .purchase-links, .social-links {
           list-style: none;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-around;
+          flex-wrap: wrap;
           margin: 0;
           padding: 0;
           li {
-            display: inline-block;
             padding: 0;
-
           }
 
         }
 
         .purchase-links {
           font-size: 1.4rem;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          flex-wrap: wrap;
+
           li {
             letter-spacing: 4px;
-            margin: 0 20px;
+            margin-top: 20px;
+            &:not(:last-child){
+              margin-right: 20px;
+            }
+
             a {
               color: white;
               &:hover {
@@ -129,9 +140,11 @@ html {
               }
             }
 
-            @include mobile {
+            @include extra-small {
               width: 50%;
-              margin: 0;
+              &:not(:last-child){
+                margin-right: 0;
+              }
               text-align:center;
               img{
                 display: inline-block;
@@ -141,28 +154,24 @@ html {
         }
 
         .social-links {
+
           li {
+            margin: 0 20px;
             a.social {
               display: inline-block;
               font-size: 0;
               width: 48px;
               height: 48px;
-              margin: 0 20px 0 0;
-              &.facebook {
-                // Nothing
-              }
-              &.instagram {
-                background-position: -48px 0;
-              }
-              &.twitter {
-                background-position: 48px 0;
-              }
-              &.youtube {
-                background-position: 144px 0;
-              }
             }
-            @include mobile {
-              margin-top: 0;
+          }
+
+          @include extra-small{
+            width: 100%;
+            align-items: center;
+            li{
+              margin: 0;
+              width:25%;
+              text-align:center;
             }
           }
         }
