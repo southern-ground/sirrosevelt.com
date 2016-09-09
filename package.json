@@ -59,7 +59,7 @@
       },
       "stage": {
         "name": "stage",
-        "assetURL": "http://stage.sirrosevelt.com.s3-website-us-east-1.amazonaws.com/",
+        "assetURL": "http://staging.sirrosevelt.com.s3-website-us-east-1.amazonaws.com/",
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
