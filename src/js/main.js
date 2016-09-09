@@ -49,8 +49,13 @@ var _ = window._;
             .attr('loop', 'true');
 
         if(app.isMobile && app.isiMobile){
-            console.warn('Attempting video play on iOS')
-            makeVideoPlayableInline($video.get(0), false);
+            console.warn('Attempting video play on iOS');
+            $video.attr('muted', 'true');
+            var video = $video.get(0);
+            makeVideoPlayableInline(video, false);
+            setTimeout(function () {
+                video.play();
+            }, 1000);
         }
 
     };
@@ -86,8 +91,10 @@ var _ = window._;
             newH = VIDEO.height * scale;
 
         var $video = $('#ambient-video video');
-        console.log(newH, h);
-        console.log(newW, w);
+
+        // console.log(newH, h);
+        // console.log(newW, w);
+
         $video.css({
             top: ((h - newH) * 0.5)|1 + "px",
             left: ((w - newW) * 0.5)|1 + 'px',
