@@ -84,15 +84,11 @@ gulp.task('serve', function () {
 
     browserSync.init({server: "./dist"});
 
-    gulp.watch([dirs.src + "/**/*.js"], function(){
-        runSequence(['build'], browserSync.reload);
-    });
-
-    gulp.watch([dirs.src + "/sass/**/*.scss"], function(){
+    gulp.watch([dirs.src + "/**/*.js", dirs.src + "/sass/**/*.scss", dirs.src + "/img/*.*"], function(){
        runSequence(['build'], browserSync.reload);
     });
 
-    gulp.watch([dirs.dest + "/js/**/*.js", dirs.dest + "/css/**/*.css"], browserSync.reload());
+    gulp.watch([dirs.dest + "/js/**/*.js", dirs.dest + "/css/**/*.css", dirs.dest + "/img/**/*.*"], browserSync.reload());
 });
 
 gulp.task('render', function (done) {
