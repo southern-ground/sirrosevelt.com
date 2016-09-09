@@ -31,17 +31,17 @@
 
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="{{data.assetURL}}css/normalize.css">
-    <link rel="stylesheet" href="{{data.assetURL}}css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{data.assetURL}}css/main.css">
-    <script src="{{data.assetURL}}js/vendor/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/vendor/modernizr-2.8.3.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400" rel="stylesheet">
 
     <meta property="og:title" content="Sir Rosevelt"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://sirrosevelt.com"/>
-    <meta property="og:image" content="{{data.assetURL}}img/sundayfinest-singleart.jpg"/>
+    <meta property="og:image" content="{{data.assetURL}}img/facebook-share-sunday-finest.jpg"/>
 
     <!--
     Build:
@@ -67,6 +67,8 @@
             data-src="{{data.assetURL}}video/sir-rosevelt-2000kbps.mp4"
             data-poster="{{data.assetURL}}img/video-poster.jpg"
             autoplay
+            muted
+            loop
             webkit-playsinline>
     </video>
 </div>
@@ -94,12 +96,19 @@
 
         <ul class="purchase-links">
             <li>
-                <a href="{{data.links.itunes}}">
-                    <img class="store-button" src="{{data.assetURL}}img/Get_it_on_iTunes_Badge_US_1114.svg"/></a>
+                <a href="{{data.links.itunes}}"
+                   target="_blank">
+                    <img
+                            class="store-button"
+                            src="{{data.assetURL}}img/Get_it_on_iTunes_Badge_US_1114.svg"/>
+                </a>
             </li>
             <li>
-                <a href="{{data.links.appleMusic}}">
-                    <img class="store-button" src="{{data.assetURL}}img/US_Listen_on_Apple_Music_Badge.svg"/>
+                <a href="{{data.links.appleMusic}}"
+                   target="_blank">
+                    <img
+                            class="store-button"
+                            src="{{data.assetURL}}img/US_Listen_on_Apple_Music_Badge.svg"/>
                 </a>
             </li>
 
@@ -125,24 +134,38 @@
 
         <ul class="social-links">
             <li>
-                <a href="{{data.links.facebook}}" class="social facebook"
+                <a href="{{data.links.facebook}}"
+                   class="social facebook"
+                   target="_blank"
                    data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
             </li>
             <li>
-                <a href="{{data.links.twitter}}" class="social twitter"
+                <a href="{{data.links.twitter}}"
+                   class="social twitter"
+                   target="_blank"
                    data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
             </li>
             <li>
-                <a href="{{data.links.instagram}}" class="social instagram"
+                <a href="{{data.links.instagram}}"
+                   class="social instagram"
+                   target="_blank"
                    data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
             </li>
             <li>
-                <a href="{{data.links.youtube}}" class="social youtube"
+                <a href="{{data.links.youtube}}"
+                   class="social youtube"
+                   target="_blank"
                    data-asset-path="{{data.assetURL|safe}}img/social.png">YouTube</a>
             </li>
         </ul>
 
-        <h3 class="hashtag"><a href="{{data.links.twitterSearch}}" class="hash">#whoissirrosevelt</a></h3>
+        <h3 class="hashtag">
+            <a href="{{data.links.twitterSearch}}"
+               class="hash"
+               target="_blank">
+                #whoissirrosevelt
+            </a>
+        </h3>
 
     </section>
 

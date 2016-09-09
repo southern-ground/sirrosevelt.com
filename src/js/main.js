@@ -98,11 +98,7 @@ var _ = window._;
 
         var $video = $('#ambient-video video');
 
-        $video
-            .attr('src', $video.data('src'))
-            .attr('autoplay', 'true')
-            .attr('loop', 'true')
-            .attr('muted', 'true');
+        $video.attr('src', $video.data('src'));
 
         this.video = $video.get(0);
 
