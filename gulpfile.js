@@ -30,6 +30,7 @@ gulp.task('clean', function (done) {
 gulp.task('copy', [
     'copy:jquery',
     'copy:normalize',
+    'copy:bootstrap',
     'copy:iphone-inline-video',
     'copy:underscore',
     'copy:sundry'
@@ -39,6 +40,11 @@ gulp.task('copy:jquery', function () {
     return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
         .pipe(plugins.rename('jquery-' + pkg.devDependencies.jquery + '.min.js'))
         .pipe(gulp.dest(dirs.dist + '/js/vendor'));
+});
+
+gulp.task('copy:bootstrap', function () {
+    return gulp.src(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'node_modules/bootstrap/dist/css/bootstrap.min.css.map'])
+        .pipe(gulp.dest(dirs.dist + '/css'));
 });
 
 gulp.task('copy:normalize', function () {

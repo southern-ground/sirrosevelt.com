@@ -19,6 +19,14 @@ var _ = window._;
     app.isiPad = navigator.userAgent.match(/iPad/i);
     app.isiMobile = navigator.userAgent.match(/(iPhone|iPad)/i);
 
+    app.videoState = {
+        interval: 50.0,
+        lastPlayPos: 0,
+        currentPlayPos: 0,
+        bufferingDetected: false,
+        timeDelayed: 0
+    };
+
     app.localizeSocial = function () {
         $('.social').each(function () {
             $(this).css('background', 'url(' + $(this).data('asset-path') + ')');
@@ -28,11 +36,11 @@ var _ = window._;
         $('.youtube').css('background-position', '-144px 0');
     };
 
-    app.showStaticImage = function(){
+    app.showStaticImage = function () {
         var $el = $('#ambient-video'),
             $video = $('#ambient-video video');
 
-        $el.css('background-image', "url('"+$el.data('background-image')+"')");
+        $el.css('background-image', "url('" + $el.data('background-image') + "')");
         $el.css('background-size', 'cover');
         $el.css('background-position', 'center center');
 
@@ -40,12 +48,49 @@ var _ = window._;
         $video.attr('src', '');
     };
 
-    app.videoStarted = function(){
-        app.videoPlaying = true;
-        clearInterval(app.checkInterval);
-        (function(scope){
-            scope.video.removeEventListener('playing', scope.videoStarted);
-        })(app);
+    app.checkVideoPlaying = function () {
+
+        this.videoState.currentPlayPos = this.video.currentTime;
+
+        var offset = 1 / this.videoState.interval;
+
+        if (
+            !this.videoState.bufferingDetected
+            && this.videoState.currentPlayPos < (this.videoState.lastPlayPos + offset)
+            && !this.video.paused
+        ) {
+            console.warn('ambient video is buffering');
+            this.videoState.bufferingDetected = true;
+        }
+
+        if (
+            this.videoState.bufferingDetected
+            && this.videoState.currentPlayPos > (this.videoState.lastPlayPos + offset)
+            && !this.video.paused
+        ) {
+            this.videoState.bufferingDetected = false;
+        }
+
+        if (this.videoState.bufferingDetected) {
+            this.videoState.timeDelayed++;
+        } else {
+            if(this.videoState.lastPlayPos === this.videoState.currentPlayPos){
+                this.videoState.timeDelayed++;
+            }else{
+                this.videoState.timeDelayed = 0;
+            }
+        }
+
+        this.videoState.lastPlayPos = this.videoState.currentPlayPos;
+
+        if (this.videoState.timeDelayed * this.videoState.interval / 1000 > 2.5) {
+            clearInterval(this.checkPlayingInterval);
+            this.showStaticImage();
+        }else if(this.videoState.currentPlayPos > 1.5){
+            console.warn('ambient video playing');
+            clearInterval(this.checkPlayingInterval);
+        }
+
     };
 
     app.initVideo = function () {
@@ -53,41 +98,23 @@ var _ = window._;
 
         var $video = $('#ambient-video video');
 
+        $video
+            .attr('src', $video.data('src'))
+            .attr('autoplay', 'true')
+            .attr('loop', 'true')
+            .attr('muted', 'true');
+
         this.video = $video.get(0);
 
-        this.checkInterval = setTimeout(function(){
-            console.warn('checkInterval');
-            // Clean up the listener:
-            app.video.removeEventListener('playing', app.videoPlaying);
-            if(!app.videoPlaying){
-                // We can guess that the video ain't playing.
-                // If it hasn't started yet, it probably won't.
-                app.showStaticImage();
-            }
-        }, 2000);
-
-        $video.attr('poster', $video.data('poster'));
-
-        if (this.isMobile && !this.isiMobile) {
-            console.warn('Suppressing video init');
-            this.showStaticImage();
-            return;
-        }
-
-        $video.attr('src', $video.data('src'))
-            .attr('autoplay', 'true')
-            .attr('loop', 'true');
-
-        (function(scope){
-            scope.video.addEventListener('playing', scope.videoStarted);
-        })(this);
-
-        if(this.isMobile && this.isiMobile) {
-            console.warn('Attempting video play on iOS');
-            $video.attr('muted', 'true');
+        if(this.isMobile){
+            console.warn('Attempting to play video on mobile');
             makeVideoPlayableInline(this.video, false);
         }
 
+        // Monitor Progress:
+        this.checkPlayingInterval = setInterval(function () {
+            app.checkVideoPlaying();
+        }, this.videoState.interval);
     };
 
     app.resizeVideo = function () {
@@ -102,20 +129,20 @@ var _ = window._;
         var w = window.innerWidth,
             h = window.innerHeight,
             VIDEO = {
-            width: 1920,
-            height: 1080
-        },
-            scale = (Math.max(w/VIDEO.width, h/VIDEO.height) * 10000|1)/10000,
-            newW = VIDEO.width * scale,
-            newH = VIDEO.height * scale,
+                width: 1920,
+                height: 1080
+            },
+            scale = (Math.max(w / VIDEO.width, h / VIDEO.height) * 10000 | 1) / 10000,
+            newW = VIDEO.width * scale | 1,
+            newH = VIDEO.height * scale | 1,
             $video = $('#ambient-video video');
 
         // console.log(newH, h);
         // console.log(newW, w);
 
         $video.css({
-            top: ((h - newH) * 0.5)|1 + "px",
-            left: ((w - newW) * 0.5)|1 + 'px',
+            top: ((h - newH) * 0.5) | 1 + "px",
+            left: ((w - newW) * 0.5) | 1 + 'px',
             width: newW + 'px',
             height: newH + 'px'
         });

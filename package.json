@@ -45,15 +45,15 @@
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
-          "tbd":{
+          "tbd": {
             "googlePlay": "http://republicrec.co/SundayFinestGP",
             "amazon": "http://republicrec.co/SundayFinestAZ",
             "spotify": "http://republicrec.co/SundayFinestSP"
           },
-          "facebook": "#dev-facebook",
-          "twitter": "#dev-twitter",
-          "instagram": "#dev-instagram",
-          "youtube": "#dev-youtube",
+          "facebook": "https://www.facebook.com/sirrosevelt/",
+          "twitter": "https://www.twitter.com/SirROSEVELT",
+          "instagram": "https://www.instagram.com/sirrosevelt/",
+          "youtube": "https://www.youtube.com/channel/UCteiOfbPdMAYSZocoxO2R6A",
           "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
         }
       },
@@ -63,16 +63,16 @@
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
-          "facebook": "#stage-facebook",
-          "twitter": "#stage-twitter",
-          "instagram": "#stage-instagram",
-          "youtube": "#stage-youtube",
-          "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt",
-          "tbd":{
+          "tbd": {
             "googlePlay": "http://republicrec.co/SundayFinestGP",
             "amazon": "http://republicrec.co/SundayFinestAZ",
             "spotify": "http://republicrec.co/SundayFinestSP"
-          }
+          },
+          "facebook": "https://www.facebook.com/sirrosevelt/",
+          "twitter": "https://www.twitter.com/SirROSEVELT",
+          "instagram": "https://www.instagram.com/sirrosevelt/",
+          "youtube": "https://www.youtube.com/channel/UCteiOfbPdMAYSZocoxO2R6A",
+          "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
         }
       },
       "preprod": {
@@ -81,33 +81,33 @@
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
-          "tbd":{
+          "tbd": {
             "googlePlay": "http://republicrec.co/SundayFinestGP",
             "amazon": "http://republicrec.co/SundayFinestAZ",
             "spotify": "http://republicrec.co/SundayFinestSP"
           },
-          "facebook": "#preprod-facebook",
-          "twitter": "#preprod-twitter",
-          "instagram": "#preprod-instagram",
-          "youtube": "#preprod-yotube",
+          "facebook": "https://www.facebook.com/sirrosevelt/",
+          "twitter": "https://www.twitter.com/SirROSEVELT",
+          "instagram": "https://www.instagram.com/sirrosevelt/",
+          "youtube": "https://www.youtube.com/channel/UCteiOfbPdMAYSZocoxO2R6A",
           "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
         }
       },
       "prod": {
         "name": "prod",
-        "assetURL": "http://sirrosevelt.s3-website-us-east-1.amazonaws.com/",
+        "assetURL": "./",
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
-          "tbd":{
+          "tbd": {
             "googlePlay": "http://republicrec.co/SundayFinestGP",
             "amazon": "http://republicrec.co/SundayFinestAZ",
             "spotify": "http://republicrec.co/SundayFinestSP"
           },
-          "facebook": "#facebook",
-          "twitter": "#twitter",
-          "instagram": "#instagram",
-          "youtube": "#youtube",
+          "facebook": "https://www.facebook.com/sirrosevelt/",
+          "twitter": "https://www.twitter.com/SirROSEVELT",
+          "instagram": "https://www.instagram.com/sirrosevelt/",
+          "youtube": "https://www.youtube.com/channel/UCteiOfbPdMAYSZocoxO2R6A",
           "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
         }
       }
@@ -125,6 +125,7 @@
   },
   "version": "5.3.0",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "iphone-inline-video": "^1.9.3",
     "underscore": "^1.8.3"
   }
