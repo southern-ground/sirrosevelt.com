@@ -45,9 +45,11 @@
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
-          "googlePlay": "http://republicrec.co/SundayFinestGP",
-          "amazon": "http://republicrec.co/SundayFinestAZ",
-          "spotify": "http://republicrec.co/SundayFinestSP",
+          "tbd":{
+            "googlePlay": "http://republicrec.co/SundayFinestGP",
+            "amazon": "http://republicrec.co/SundayFinestAZ",
+            "spotify": "http://republicrec.co/SundayFinestSP"
+          },
           "facebook": "#dev-facebook",
           "twitter": "#dev-twitter",
           "instagram": "#dev-instagram",
@@ -61,14 +63,16 @@
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
-          "googlePlay": "http://republicrec.co/SundayFinestGP",
-          "amazon": "http://republicrec.co/SundayFinestAZ",
-          "spotify": "http://republicrec.co/SundayFinestSP",
           "facebook": "#stage-facebook",
           "twitter": "#stage-twitter",
           "instagram": "#stage-instagram",
           "youtube": "#stage-youtube",
-          "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
+          "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt",
+          "tbd":{
+            "googlePlay": "http://republicrec.co/SundayFinestGP",
+            "amazon": "http://republicrec.co/SundayFinestAZ",
+            "spotify": "http://republicrec.co/SundayFinestSP"
+          }
         }
       },
       "preprod": {
@@ -77,9 +81,11 @@
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
-          "googlePlay": "http://republicrec.co/SundayFinestGP",
-          "amazon": "http://republicrec.co/SundayFinestAZ",
-          "spotify": "http://republicrec.co/SundayFinestSP",
+          "tbd":{
+            "googlePlay": "http://republicrec.co/SundayFinestGP",
+            "amazon": "http://republicrec.co/SundayFinestAZ",
+            "spotify": "http://republicrec.co/SundayFinestSP"
+          },
           "facebook": "#preprod-facebook",
           "twitter": "#preprod-twitter",
           "instagram": "#preprod-instagram",
@@ -93,9 +99,11 @@
         "links": {
           "itunes": "http://republicrec.co/SundayFinest",
           "appleMusic": "http://republicrec.co/SundayFinestAM",
-          "googlePlay": "http://republicrec.co/SundayFinestGP",
-          "amazon": "http://republicrec.co/SundayFinestAZ",
-          "spotify": "http://republicrec.co/SundayFinestSP",
+          "tbd":{
+            "googlePlay": "http://republicrec.co/SundayFinestGP",
+            "amazon": "http://republicrec.co/SundayFinestAZ",
+            "spotify": "http://republicrec.co/SundayFinestSP"
+          },
           "facebook": "#facebook",
           "twitter": "#twitter",
           "instagram": "#instagram",
