@@ -6,6 +6,8 @@ var _ = window._;
 
     var app = window.com.sirrosevelt || {};
 
+    app.videoPlaying = false;
+
     app.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent);
 
     app.isIE = function () {
@@ -26,21 +28,49 @@ var _ = window._;
         $('.youtube').css('background-position', '-144px 0');
     };
 
+    app.showStaticImage = function(){
+        var $el = $('#ambient-video'),
+            $video = $('#ambient-video video');
+
+        $el.css('background-image', "url('"+$el.data('background-image')+"')");
+        $el.css('background-size', 'cover');
+        $el.css('background-position', 'center center');
+
+        $video.css('display', 'none');
+        $video.attr('src', '');
+    };
+
+    app.videoStarted = function(){
+        app.videoPlaying = true;
+        clearInterval(app.checkInterval);
+        (function(scope){
+            scope.video.removeEventListener('playing', scope.videoStarted);
+        })(app);
+    };
+
     app.initVideo = function () {
         console.log('app::initVideo');
 
         var $video = $('#ambient-video video');
+
+        this.video = $video.get(0);
+
+        this.checkInterval = setTimeout(function(){
+            console.warn('checkInterval');
+            // Clean up the listener:
+            app.video.removeEventListener('playing', app.videoPlaying);
+            if(!app.videoPlaying){
+                // We can guess that the video ain't playing.
+                // If it hasn't started yet, it probably won't.
+                app.showStaticImage();
+            }
+        }, 2000);
+
         $video.attr('poster', $video.data('poster'));
 
-        if (app.isMobile && !app.isiMobile) {
+        if (this.isMobile && !this.isiMobile) {
             console.warn('Suppressing video init');
-            // Suppress the video; probably either an unsupported iOS device
-            // or Android
-            var $el = $('#ambient-video');
-            $el.css('background-image', "url('"+$el.data('background-image')+"')");
-            $el.css('background-size', 'cover');
-            $el.css('background-position', 'center center');
-            $video.css('display', 'none');
+            this.showStaticImage();
             return;
         }
 
@@ -48,14 +78,14 @@ var _ = window._;
             .attr('autoplay', 'true')
             .attr('loop', 'true');
 
-        if(app.isMobile && app.isiMobile){
+        (function(scope){
+            scope.video.addEventListener('playing', scope.videoStarted);
+        })(this);
+
+        if(this.isMobile && this.isiMobile) {
             console.warn('Attempting video play on iOS');
             $video.attr('muted', 'true');
-            var video = $video.get(0);
-            makeVideoPlayableInline(video, false);
-            setTimeout(function () {
-                video.play();
-            }, 1000);
+            makeVideoPlayableInline(this.video, false);
         }
 
     };
@@ -69,28 +99,16 @@ var _ = window._;
             return;
         }
 
-        var w = window.innerWidth;
-        var h = window.innerHeight;
-
-        var VIDEO = {
+        var w = window.innerWidth,
+            h = window.innerHeight,
+            VIDEO = {
             width: 1920,
             height: 1080
-        };
-
-        var scale = (Math.max(w/VIDEO.width, h/VIDEO.height) * 10000|1)/10000;
-
-
-        if(w < VIDEO.width){
-            console.log('too wide');
-        }
-        if(h < VIDEO.height){
-            console.log('too tall');
-        }
-
-        var newW = VIDEO.width * scale,
-            newH = VIDEO.height * scale;
-
-        var $video = $('#ambient-video video');
+        },
+            scale = (Math.max(w/VIDEO.width, h/VIDEO.height) * 10000|1)/10000,
+            newW = VIDEO.width * scale,
+            newH = VIDEO.height * scale,
+            $video = $('#ambient-video video');
 
         // console.log(newH, h);
         // console.log(newW, w);
@@ -101,28 +119,6 @@ var _ = window._;
             width: newW + 'px',
             height: newH + 'px'
         });
-
-        /*var img = $('.ambient-video').data('poster'),
-         video = $('.ambient-video').data('video'),
-         noVideo = $('.ambient-video').data('src'),
-         el = '';
-
-         if(!app.isIEOld && !app.isiPad) {
-         console.log('ok to proceed');
-
-         el +=   '<video autoplay loop poster="' + img + '" muted>';
-         el +=       '<source src="' + video + '" type="video/mp4">';
-         el +=   '</video>';
-         } else {
-         console.log('no bueno');
-
-         el = '<div class="video-element" style="background-image: url(' + noVideo + ')"></div>';
-         }
-
-         $('.ambient-video').prepend(el);
-
-         $('#isMobile').append(app.isMobile ? "true" : "false");*/
-
 
     };
 
