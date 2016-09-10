@@ -157,6 +157,16 @@ var _ = window._;
 
         this.initVideo();
 
+        var $purchaseEl = $('.purchase-links');
+
+        $('#purchaseToggle').on('click', function(e){
+            e.preventDefault();
+            $(this).toggleClass('open');
+            $(this).hasClass('open') ? $purchaseEl.slideDown('slow') : $purchaseEl.slideUp('fast');
+        });
+
+        $('.purchase-links').css('display', 'none');
+
         window.addEventListener("resize", _.debounce(this.resizeVideo, 500));
 
     };
