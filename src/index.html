@@ -88,14 +88,14 @@
 
     </section>
 
-    <section id="lower">
+    <section id="lower" class="container">
 
         <h2>
             "Sunday Finest" <span class="small-wrap"><a href="#" class="drawer" id="purchaseToggle">now available</a></span>
         </h2>
 
-        <ul class="purchase-links">
-            <li>
+        <ul class="purchase-links row">
+            <li class="col-xs-6 col-md-2 col-md-offset-2">
                 <a href="{{data.links.itunes}}"
                    target="_blank">
                     <img
@@ -103,7 +103,7 @@
                             src="{{data.assetURL}}img/Get_it_on_iTunes_Badge_US_1114.svg"/>
                 </a>
             </li>
-            <li>
+            <li class="col-xs-6 col-md-2">
                 <a href="{{data.links.appleMusic}}"
                    target="_blank">
                     <img
@@ -111,20 +111,19 @@
                             src="{{data.assetURL}}img/US_Listen_on_Apple_Music_Badge.svg"/>
                 </a>
             </li>
-
-            <li>
+            <li class="col-xs-6 col-md-2">
                 <a href="{{data.links.googlePlay}}"
                    target="_blank">
                     <img class="store-button" src="{{data.assetURL}}img/googleplay.png"/>
                 </a>
             </li>
-            <li>
+            <li class="col-xs-6 col-md-2">
                 <a href="{{data.links.amazon}}"
                    target="_blank">
                     <img class="store-button" src="{{data.assetURL}}img/amazon.png"/>
                 </a>
             </li>
-            <!--<li>
+            <!--<li class="col-xs-6 col-md-3">
                 <a href="{{data.links.spotify}}"
                    target="_blank">
                     <img class="store-button" src="{{data.assetURL}}img/spotify.png"/>
@@ -133,26 +132,26 @@
 
         </ul>
 
-        <ul class="social-links">
-            <li>
+        <ul class="social-links row">
+            <li class="col-xs-3">
                 <a href="{{data.links.facebook}}"
                    class="social facebook"
                    target="_blank"
                    data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
             </li>
-            <li>
+            <li class="col-xs-3">
                 <a href="{{data.links.twitter}}"
                    class="social twitter"
                    target="_blank"
                    data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
             </li>
-            <li>
+            <li class="col-xs-3">
                 <a href="{{data.links.instagram}}"
                    class="social instagram"
                    target="_blank"
                    data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
             </li>
-            <li>
+            <li class="col-xs-3">
                 <a href="{{data.links.youtube}}"
                    class="social youtube"
                    target="_blank"
