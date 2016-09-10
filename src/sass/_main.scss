@@ -13,12 +13,14 @@ html {
     position: relative;
     font-family: 'Raleway';
     font-size: 1.25rem;
+
     header {
       display: none;
       h1 {
         font-size: 0;
       }
     }
+
     #ambient-video {
       position: fixed;
       top: 0;
@@ -103,48 +105,51 @@ html {
           text-align: center;
           letter-spacing: 4px;
           font-weight: 300;
-        }
 
-        .small-wrap {
-          position: relative;
-          a {
-            color: white;
-            text-decoration: none;
-            &:visited {
+          .small-wrap {
+            position: relative;
+            a {
               color: white;
-            }
-            &:active {
-              color: white;
-            }
-            &:hover{
-              text-decoration: underline;
-            }
-            &.drawer {
-              &:after {
-                -webkit-transition: all 300ms 0s ease-in-out;
-                transition: all 300ms 0s ease-in-out;
-                content: url('../img/drawer-icon.png');
-                display: inline-block;
-                position: absolute;
-                bottom: 4px;
+              text-decoration: none;
+              &:visited {
+                color: white;
               }
+              &:active {
+                color: white;
+              }
+              &:hover{
+                text-decoration: underline;
+              }
+              &.drawer {
+                &:after {
+                  -webkit-transition: all 300ms 0s ease-in-out;
+                  transition: all 300ms 0s ease-in-out;
+                  content: url('../img/drawer-icon.png');
+                  display: inline-block;
+                  position: absolute;
+                  bottom: 4px;
+                }
 
+              }
+              &.open {
+                &:after {
+                  -webkit-transform: rotate(90deg);
+                  transform: rotate(90deg);
+                  bottom: -1px;
+                }
+              }
             }
-            &.open {
-              &:after {
-                -webkit-transform: rotate(90deg);
-                transform: rotate(90deg);
+
+            @include extra-small {
+              a.drawer:after{
                 bottom: -1px;
               }
             }
           }
 
-          @include extra-small {
-            font-size: 80%;
-            display: block;
-            a.drawer:after{
-              bottom: -1px;
-            }
+          @include extra-small{
+            font-size:14px;
+            letter-spacing: 0;
           }
         }
 
@@ -249,7 +254,9 @@ html {
             }
           }
         }
+
       }
+
     }
 
     footer {
