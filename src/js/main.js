@@ -159,7 +159,8 @@ var _ = window._;
 
         var $purchaseEl = $('.purchase-links');
 
-        $('#purchaseToggle').on('click', function(){
+        $('#purchaseToggle').on('click', function(e){
+            e.preventDefault();
             $(this).toggleClass('open');
             $(this).hasClass('open') ? $purchaseEl.slideDown('slow') : $purchaseEl.slideUp('fast');
         });
