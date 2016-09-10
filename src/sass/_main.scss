@@ -47,7 +47,7 @@ html {
       right: 0;
       width: 100%;
 
-      @include extra-small{
+      @include extra-small {
         position: relative;
       }
 
@@ -58,8 +58,8 @@ html {
         align-items: center;
         flex-direction: column;
 
-        &#lower{
-          @include extra-small{
+        &#lower {
+          @include extra-small {
             margin-top: 50vh;
           }
         }
@@ -79,7 +79,7 @@ html {
           width: 100%;
           max-width: 135px;
           @include extra-small {
-            max-width:60px;
+            max-width: 60px;
             margin: 5px 0 0 0;
           }
 
@@ -95,10 +95,46 @@ html {
           font-weight: 300;
         }
 
-        .small-wrap{
-          @include extra-small{
-            font-size:80%;
-            display:block;
+        .small-wrap {
+          position: relative;
+          a {
+            color: white;
+            text-decoration: none;
+            &:visited {
+              color: white;
+            }
+            &:active {
+              color: white;
+            }
+            &:hover{
+              text-decoration: underline;
+            }
+            &.drawer {
+              &:after {
+                -webkit-transition: all 300ms 0s ease-in-out;
+                transition: all 300ms 0s ease-in-out;
+                content: url('../img/drawer-icon.png');
+                display: inline-block;
+                position: absolute;
+                bottom: 4px;
+              }
+
+            }
+            &.open {
+              &:after {
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+                bottom: -1px;
+              }
+            }
+          }
+
+          @include extra-small {
+            font-size: 80%;
+            display: block;
+            a.drawer:after{
+              bottom: -1px;
+            }
           }
         }
 
@@ -122,7 +158,7 @@ html {
           li {
             letter-spacing: 4px;
             margin-top: 20px;
-            &:not(:last-child){
+            &:not(:last-child) {
               margin-right: 20px;
             }
 
@@ -134,7 +170,7 @@ html {
               &:visited {
                 color: white;
               }
-              .store-button{
+              .store-button {
                 height: 40px;
                 width: auto;
               }
@@ -142,11 +178,11 @@ html {
 
             @include extra-small {
               width: 50%;
-              &:not(:last-child){
+              &:not(:last-child) {
                 margin-right: 0;
               }
-              text-align:center;
-              img{
+              text-align: center;
+              img {
                 display: inline-block;
               }
             }
@@ -165,13 +201,13 @@ html {
             }
           }
 
-          @include extra-small{
+          @include extra-small {
             width: 100%;
             align-items: center;
-            li{
+            li {
               margin: 0;
-              width:25%;
-              text-align:center;
+              width: 25%;
+              text-align: center;
             }
           }
         }
@@ -179,7 +215,7 @@ html {
         h3.hashtag {
           text-transform: uppercase;
           margin: 8px 0 20px;
-          @include extra-small{
+          @include extra-small {
             margin: 8px 0 10px 0;
           }
           padding: 0;
@@ -209,4 +245,5 @@ html {
       text-align: center;
     }
   }
+
 }
