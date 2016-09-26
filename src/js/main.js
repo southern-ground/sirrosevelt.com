@@ -99,6 +99,7 @@ var _ = window._;
         var $video = $('#ambient-video video');
 
         $video.attr('src', $video.data('src'));
+        $video.attr('muted', 'muted');
 
         this.video = $video.get(0);
 

@@ -5,8 +5,8 @@
   width: 5px;
 }
 
-.hidden-sm-up{
-  @include small{
+.hidden-sm-up {
+  @include small {
     display: none;
   }
 }
@@ -21,64 +21,66 @@ html {
     font-size: 1.25rem;
 
     header {
-      display: none;
+      background: rgba(0,0,0,0.6);
+      position: fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:50px;
+      z-index:10;
       h1 {
         font-size: 0;
       }
     }
 
-    #ambient-video {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      video {
-        position: absolute;
-      }
-    }
-
     #content {
+
       color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-direction: column;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      height: 100%;
-      left: 0;
-      right: 0;
-      width: 100%;
+
+      overflow-x: hidden;
 
       @include extra-small {
         position: relative;
       }
 
       section {
-
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         flex-direction: column;
-
-        &#lower {
-          @include extra-small {
-            margin-top: 40vh;
-          }
-          @include mobile {
-            margin-top: 50vh;
-          }
+        min-height: 100vh;
+        position: relative;
+        div.flexy{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
+      }
+
+      section.section-video{
+        overflow-y: hidden;
+      }
+
+      section.lyric{
+        justify-content: center;
+        &-one{
+          background-color: #ff00ff;
+        }
+        &-two{
+          background-color: #00ffff;
+        }
+      }
+
+      section#SundayVideo {
 
         #title {
           margin: 60px 0 0;
-          @include extra-small{
+          @include extra-small {
             margin: 20px 0 0 0;
             width: calc(100vw - 40px);
             max-width: 300px;
@@ -112,8 +114,8 @@ html {
           letter-spacing: 4px;
           font-weight: 300;
           position: relative;
-          @include extra-small{
-            font-size:1.5rem;
+          @include extra-small {
+            font-size: 1.5rem;
           }
           a {
             color: white;
@@ -155,7 +157,7 @@ html {
           padding: 0;
           li {
             padding: 0;
-            text-align:center;
+            text-align: center;
           }
 
         }
@@ -163,14 +165,14 @@ html {
         .purchase-links {
           font-size: 1.4rem;
 
-          @include extra-small{
+          @include extra-small {
             max-width: 330px;
           }
-          @include small{
+          @include small {
             max-width: 330px;
           }
 
-          @include medium{
+          @include medium {
             max-width: 920px;
           }
           li {
@@ -250,15 +252,44 @@ html {
           }
         }
 
+        div#ambient-video {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 1;
+          video {
+            position: absolute;
+          }
+        }
+
+        div#upper {
+          z-index: 2;
+        }
+
+        div#lower {
+          z-index: 3;
+          @include extra-small {
+            margin-top: 40vh;
+          }
+          @include mobile {
+            margin-top: 50vh;
+          }
+        }
+
       }
 
     }
 
     footer {
+      display: none;
       font-size: 0.625rem;
       opacity: 0.8;
       text-align: center;
     }
   }
-
 }
