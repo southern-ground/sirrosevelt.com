@@ -68,10 +68,20 @@ html {
 
       section.lyric{
         justify-content: center;
-        &-one{
+        h1{
+          text-transform: uppercase;
+        }
+        .glitch {
+            @include textGlitch("lyric-glitch-one", 17, white, rgba(0,0,0,0), red, blue, 450, 115);
+            &-two{
+              @include textGlitch("lyric-glitch-two", 17, white, rgba(0,0,0,0), red, blue, 425, 135);
+            }
+        }
+
+        &_one{
           background-color: #ff00ff;
         }
-        &-two{
+        &_two{
           background-color: #00ffff;
         }
       }
