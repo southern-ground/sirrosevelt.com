@@ -1,3 +1,6 @@
+
+$headerBackground: rgba(0,0,0,0.6);
+
 .IIV::-webkit-media-controls-play-button,
 .IIV::-webkit-media-controls-start-playback-button {
   opacity: 0;
@@ -21,15 +24,140 @@ html {
     font-size: 1.25rem;
 
     header {
-      background: rgba(0,0,0,0.6);
       position: fixed;
-      top:0;
-      left:0;
-      right:0;
-      height:50px;
-      z-index:10;
-      h1 {
-        font-size: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 95px;
+      z-index: 10;
+      .header-background{
+        position: relative;
+        background: $headerBackground;
+        width: 100%;
+        height: 100%;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      .wrapper {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1024px;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1 {
+          font-size: 0;
+          margin: 0;
+          padding: 0;
+        }
+
+        .inner-wrapper {
+          height: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        ul.header-nav {
+          display: inline-block;
+          list-style: none;
+          li.header-nav-item {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            a {
+              color: white;
+              border: 1px solid white;
+              padding: 2px 30px 2px 4px;
+              text-transform: uppercase;
+              text-decoration: none;
+              margin: 0 10px 0 0;
+              &:visited {
+                color: white;
+              }
+              &:active {
+                color: white;
+                text-decoration: none;
+              }
+              &:hover {
+                text-decoration: none;
+              }
+              &:after {
+                -webkit-transition: all 300ms 0s ease-in-out;
+                transition: all 300ms 0s ease-in-out;
+                content: url('../img/v2-header-chevron.png');
+                display: inline-block;
+                position: absolute;
+                bottom: -4px;
+              }
+              &.open {
+                &:after {
+                  -webkit-transform: rotate(90deg);
+                  transform: rotate(90deg);
+                  bottom: 2px;
+                }
+              }
+            }
+
+            &:last-child {
+              margin: 0 10px 0 0;
+            }
+
+          }
+        }
+
+        ul.social-links {
+          display: inline-block;
+          list-style: none;
+          line-height: 0;
+          font-size: 0;
+          li {
+            display: inline-block;
+            position: relative;
+            &:not(:last-child) {
+              margin: 0 10px 0 0;
+            }
+            a.social {
+              display: block;
+              font-size: 0;
+              width: 48px;
+              height: 48px;
+            }
+          }
+
+          @include extra-small {
+
+            margin: 0 auto;
+            align-items: center;
+            li {
+              margin: 0;
+              width: 25%;
+              text-align: center;
+            }
+          }
+        }
+
+      }
+    }
+
+    #SecondaryHeaderContent {
+      ul.purchase-links {
+        list-style: none;
+        background: $headerBackground;
+        width: 110px;
+        li {
+          display: block;
+          padding: 10px;
+          img{
+            width: 100%;
+            max-width: 100px;
+            height: auto;
+          }
+        }
       }
     }
 
@@ -170,71 +298,6 @@ html {
             text-align: center;
           }
 
-        }
-
-        .purchase-links {
-          font-size: 1.4rem;
-
-          @include extra-small {
-            max-width: 330px;
-          }
-          @include small {
-            max-width: 330px;
-          }
-
-          @include medium {
-            max-width: 920px;
-          }
-          li {
-            letter-spacing: 4px;
-            margin-top: 20px;
-
-            a {
-              color: white;
-              &:hover {
-                color: white;
-              }
-              &:visited {
-                color: white;
-              }
-              .store-button {
-                height: 40px;
-                width: auto;
-              }
-            }
-
-            @include extra-small {
-              width: 50%;
-
-              text-align: center;
-              img {
-                display: inline-block;
-              }
-            }
-          }
-        }
-
-        .social-links {
-          max-width: 348px;
-          li {
-            a.social {
-              display: inline-block;
-              font-size: 0;
-              width: 48px;
-              height: 48px;
-            }
-          }
-
-          @include extra-small {
-
-            margin: 0 auto;
-            align-items: center;
-            li {
-              margin: 0;
-              width: 25%;
-              text-align: center;
-            }
-          }
         }
 
         h3.hashtag {

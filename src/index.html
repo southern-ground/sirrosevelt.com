@@ -56,7 +56,96 @@
 <body>
 
 <header>
-    <h1 aria-live="polite" aria-hidden="false">Sir Rosevelt</h1>
+    <div class="header-background">
+        <div class="wrapper">
+            <h1 aria-live="polite" aria-hidden="false">
+                Sir Rosevelt
+                <img class="left" src="img/v2-sir-rosevelt-logo.png" />
+            </h1>
+            <div class="inner-wrapper right">
+                <ul class="header-nav ">
+                    <li class="header-nav-item">
+                        <a href="#" data-nav-action="join">Join</a>
+                    </li>
+                    <li class="header-nav-item">
+                        <a href="#" data-nav-action="listen">Listen</a>
+                    </li>
+                </ul>
+
+                <ul class="social-links">
+                    <li class="">
+                        <a href="{{data.links.facebook}}"
+                           class="social facebook"
+                           target="_blank"
+                           data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
+                    </li>
+                    <li class="">
+                        <a href="{{data.links.twitter}}"
+                           class="social twitter"
+                           target="_blank"
+                           data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
+                    </li>
+                    <li class="">
+                        <a href="{{data.links.instagram}}"
+                           class="social instagram"
+                           target="_blank"
+                           data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
+                    </li>
+                    <li class="">
+                        <a href="{{data.links.youtube}}"
+                           class="social youtube"
+                           target="_blank"
+                           data-asset-path="{{data.assetURL|safe}}img/social.png">YouTube</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="SecondaryHeaderContent">
+        <ul class="header-nav-option join-list" style="display:none;" data-nav-target="join">
+            <li>
+                <div>
+                    Some Copy Here!
+                </div>
+            </li>
+        </ul>
+        <ul class="header-nav-option purchase-links" style="display:none;" data-nav-target="listen">
+            <li>
+                <a href="{{data.links.itunes}}"
+                   target="_blank">
+                    <img
+                            class="store-button"
+                            src="{{data.assetURL}}img/Get_it_on_iTunes_Badge_US_1114.svg"/>
+                </a>
+            </li>
+            <li>
+                <a href="{{data.links.appleMusic}}"
+                   target="_blank">
+                    <img
+                            class="store-button"
+                            src="{{data.assetURL}}img/US_Listen_on_Apple_Music_Badge.svg"/>
+                </a>
+            </li>
+            <li>
+                <a href="{{data.links.googlePlay}}"
+                   target="_blank">
+                    <img class="store-button" src="{{data.assetURL}}img/googleplay.png"/>
+                </a>
+            </li>
+            <li>
+                <a href="{{data.links.amazon}}"
+                   target="_blank">
+                    <img class="store-button" src="{{data.assetURL}}img/amazon.png"/>
+                </a>
+            </li>
+            <li>
+                <a href="{{data.links.spotify}}"
+                   target="_blank">
+                    <img class="store-button" src="{{data.assetURL}}img/spotify.png"/>
+                </a>
+            </li>
+        </ul>
+    </div>
 </header>
 
 <div id="content">
@@ -98,70 +187,7 @@
                 "Sunday Finest" <br class="hidden-sm-up" /><a href="#" class="drawer" id="purchaseToggle">now available</a>
             </h2>
 
-            <ul class="purchase-links row">
-                <li class="col-xs-6 col-md-2 col-md-offset-1">
-                    <a href="{{data.links.itunes}}"
-                       target="_blank">
-                        <img
-                                class="store-button"
-                                src="{{data.assetURL}}img/Get_it_on_iTunes_Badge_US_1114.svg"/>
-                    </a>
-                </li>
-                <li class="col-xs-6 col-md-2">
-                    <a href="{{data.links.appleMusic}}"
-                       target="_blank">
-                        <img
-                                class="store-button"
-                                src="{{data.assetURL}}img/US_Listen_on_Apple_Music_Badge.svg"/>
-                    </a>
-                </li>
-                <li class="col-xs-6 col-md-2">
-                    <a href="{{data.links.googlePlay}}"
-                       target="_blank">
-                        <img class="store-button" src="{{data.assetURL}}img/googleplay.png"/>
-                    </a>
-                </li>
-                <li class="col-xs-6 col-md-2">
-                    <a href="{{data.links.amazon}}"
-                       target="_blank">
-                        <img class="store-button" src="{{data.assetURL}}img/amazon.png"/>
-                    </a>
-                </li>
-                <li class="col-xs-12 col-md-2">
-                    <a href="{{data.links.spotify}}"
-                       target="_blank">
-                        <img class="store-button" src="{{data.assetURL}}img/spotify.png"/>
-                    </a>
-                </li>
 
-            </ul>
-
-            <ul class="social-links row">
-                <li class="col-xs-3">
-                    <a href="{{data.links.facebook}}"
-                       class="social facebook"
-                       target="_blank"
-                       data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
-                </li>
-                <li class="col-xs-3">
-                    <a href="{{data.links.twitter}}"
-                       class="social twitter"
-                       target="_blank"
-                       data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
-                </li>
-                <li class="col-xs-3">
-                    <a href="{{data.links.instagram}}"
-                       class="social instagram"
-                       target="_blank"
-                       data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
-                </li>
-                <li class="col-xs-3">
-                    <a href="{{data.links.youtube}}"
-                       class="social youtube"
-                       target="_blank"
-                       data-asset-path="{{data.assetURL|safe}}img/social.png">YouTube</a>
-                </li>
-            </ul>
 
             <h3 class="hashtag">
                 <a href="{{data.links.twitterSearch}}"

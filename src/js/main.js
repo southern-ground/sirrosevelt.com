@@ -93,6 +93,49 @@ var _ = window._;
 
     };
 
+    app.initHeader = function(){
+
+        $('.header-nav-item > a').on('click', function(e){
+
+            e.preventDefault();
+
+            var $target = $(e.target),
+                targetAction = $target.data('nav-action');
+
+            $('.header-nav-item>a').filter(function(){
+                return $(this).data('nav-action') != targetAction;
+            }).removeClass('open');
+
+            $target.toggleClass('open');
+
+            // Close all:
+            $('.header-nav-option').slideUp('fast');
+
+            if($target.hasClass('open')){
+                // Open the target area:
+                console.log('opening', $target);
+                $('.header-nav-option[data-nav-target='+targetAction+']')
+                    .css({
+                        position: 'absolute',
+                        left: $target.offset().left,
+                        top: $('header').height(),
+                        zIndex:999
+                    })
+                    .slideDown('slow');
+            }
+
+        });
+        return this;
+    };
+
+    app.headerNavOpen = function(type){
+        console.log('headerNavOpen', type);
+    };
+
+    app.headerNavClose = function(type){
+        console.log('headerNavClose', type);
+    };
+
     app.initVideo = function () {
         console.log('app::initVideo');
 
@@ -152,10 +195,9 @@ var _ = window._;
 
         // Update the styles for the social icons:
 
+        this.initHeader();
         this.localizeSocial();
-
         this.resizeVideo();
-
         this.initVideo();
 
         var $purchaseEl = $('.purchase-links');
