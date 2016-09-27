@@ -98,17 +98,19 @@
                            data-asset-path="{{data.assetURL|safe}}img/social.png">YouTube</a>
                     </li>
                 </ul>
+
+                <a href="#" class="audio-control">Play/Pause</a>
             </div>
         </div>
     </div>
     <div id="SecondaryHeaderContent">
-        <ul class="header-nav-option join-list" style="display:none;" data-nav-target="join">
-            <li>
-                <div>
-                    Some Copy Here!
-                </div>
-            </li>
-        </ul>
+        <div class="header-nav-option join-list" style="display:none;" data-nav-target="join">
+            Be in the know about Sir Rosevelt and future launches:
+            <form>
+                <input type="email" placeholder="Email Address" />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
         <ul class="header-nav-option purchase-links" style="display:none;" data-nav-target="listen">
             <li>
                 <a href="{{data.links.itunes}}"
@@ -170,48 +172,80 @@
 
         <div id="upper" class="flexy">
 
-            <img
-                    id="title"
-                    alt="Sir Rosevelt"
-                    title="Sir Rosevelt"
-                    src="{{data.assetURL}}img/sir-rosevelt-top.png"
-                    aria-hidden="true"/>
-
-            <img id="logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sir-rosevelt-logo.png"/>
+            <img id="logo" class="b-w-logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sir-rosevelt-logo.png"/>
 
         </div>
 
-        <div id="lower" class="container flexy">
+        <div id="lower" class="flexy">
 
             <h2>
-                "Sunday Finest" <br class="hidden-sm-up" /><a href="#" class="drawer" id="purchaseToggle">now available</a>
+                Exlusive World Premiere on Twitter
             </h2>
 
-
-
-            <h3 class="hashtag">
-                <a href="{{data.links.twitterSearch}}"
-                   class="hash"
-                   target="_blank">
-                    #whoissirrosevelt
-                </a>
-            </h3>
+            <div class="scroll scroll-first">
+                Scroll
+                <img class="scroll-icon" />
+            </div>
 
         </div>
 
     </section>
 
-    <section id="SundayLyric" class="lyric lyric_one">
+    <section id="SundayLyric" class="section-lyric lyric_one">
         <h1 class="glitch" data-text="{{data.lyrics.lyricOne}}">{{data.lyrics.lyricOne}}</h1>
     </section>
 
-    <section id="OtherItem" class="section-video">
-        <h1>Second Video</h1>
+    <section id="SecondVideo" class="section-video" style="background:url(img/v2-video-2-fpo.jpg);background-size:cover;background-position: 50% 50%">
+        <h1>Second Video (Costume)</h1>
     </section>
 
-    <section id="SundayLyric" class="lyric lyric_two">
+    <section id="SecondVideoLyric" class="section-lyric lyric_two">
         <h1 class="glitch glitch-two" data-text="{{data.lyrics.lyricTwo}}">{{data.lyrics.lyricTwo}}</h1>
     </section>
+
+    <section id="ThirdVideo" class="section-video" style="background:url(img/v2-video-3-fpo.jpg);background-size: cover;background-position:50% 50%;">
+        <h1>Third Video (Makeup)</h1>
+    </section>
+
+    <section id="ThirdVideoLyric" class="section-lyric lyric_three">
+        <h1 class="glitch glitch-two" data-text="{{data.lyrics.lyricThree}}">{{data.lyrics.lyricThree}}</h1>
+    </section>
+
+    <section id="OtherItem" class="section-video" style="background:url(img/v2-video-4-fpo.jpg);background-size:cover;background-position: 50% 50%">
+        <h1>Forth Video (Doorway)</h1>
+    </section>
+
+    <section id="SundayLyric" class="section-lyric lyric_four">
+        <h1 class="glitch glitch-two" data-text="{{data.lyrics.lyricFour}}">{{data.lyrics.lyricFour}}</h1>
+    </section>
+
+    <section style="background:url(img/v2-triptic-fpo.png);background-size:cover;background-position: 50% 50%">
+
+    </section>
+
+    <section id="EndCard" class="section-end-card">
+        <h2>
+            Put On Your Sunday Finest.
+        </h2>
+
+        <h3>
+            Exclusive World Premiere on Twitter
+        </h3>
+
+        <img id="EndCardLogo" class="b-w-logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sir-rosevelt-logo.png"/>
+
+        <div class="scroll scroll-to-top">
+            Back to Top
+            <div class="scroll-icon scroll-icon-inverse">
+
+            </div>
+        </div>
+    </section>
+
+    <div class="scroll scroll-next" style="display:none;">
+        Scroll
+        <img class="scroll-icon" />
+    </div>
 
 </div>
 

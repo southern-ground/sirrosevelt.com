@@ -4,6 +4,38 @@ var _ = window._;
 
     window.com = window.com || {};
 
+    var elementInViewport = function(el) {
+        var top = el.offsetTop;
+        var left = el.offsetLeft;
+        var width = el.offsetWidth;
+        var height = el.offsetHeight;
+
+        while(el.offsetParent) {
+            el = el.offsetParent;
+            top += el.offsetTop;
+            left += el.offsetLeft;
+        }
+
+        return (
+            top < (window.pageYOffset + window.innerHeight) &&
+            left < (window.pageXOffset + window.innerWidth) &&
+            (top + height) > window.pageYOffset &&
+            (left + width) > window.pageXOffset
+        );
+    }
+
+    var updateScroll = function(e){
+        var doc = document.documentElement,
+            top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+
+        if(elementInViewport(document.getElementById('SundayVideo')) || elementInViewport(document.getElementById('EndCard'))){
+            // At the top or bottom; hide the scroll control on the side.
+            app.$scrollNext.clearQueue().fadeOut();
+        }else{
+            app.$scrollNext.clearQueue().delay(1500).fadeIn();
+        }
+    };
+
     var app = window.com.sirrosevelt || {};
 
     app.videoPlaying = false;
@@ -93,34 +125,43 @@ var _ = window._;
 
     };
 
+    app.closeHeader = function(){
+        $('.header-nav-item > a').removeClass('open');
+        $('.header-nav-option').css('display', 'none');
+    };
+
     app.initHeader = function(){
 
         $('.header-nav-item > a').on('click', function(e){
 
             e.preventDefault();
 
-            var $target = $(e.target),
-                targetAction = $target.data('nav-action');
+            var $eventTarget = $(e.target),
+                leftEdge = $eventTarget.offset().left,
+                targetAction = $eventTarget.data('nav-action');
 
             $('.header-nav-item>a').filter(function(){
                 return $(this).data('nav-action') != targetAction;
             }).removeClass('open');
 
-            $target.toggleClass('open');
+            $eventTarget.toggleClass('open');
 
             // Close all:
             $('.header-nav-option').slideUp('fast');
 
-            if($target.hasClass('open')){
+            if($eventTarget.hasClass('open')){
+
                 // Open the target area:
-                console.log('opening', $target);
-                $('.header-nav-option[data-nav-target='+targetAction+']')
-                    .css({
-                        position: 'absolute',
-                        left: $target.offset().left,
-                        top: $('header').height(),
-                        zIndex:999
-                    })
+                var $targetEl = $('.header-nav-option[data-nav-target='+targetAction+']');
+
+                var newCSS = {
+                    position: 'absolute',
+                    left: targetAction === "join" ? leftEdge - (($targetEl.width() - ($eventTarget.width() * 0.5)) * 0.5) : leftEdge,
+                    top: $('header').height(),
+                    zIndex:999
+                };
+
+                $targetEl.css(newCSS)
                     .slideDown('slow');
             }
 
@@ -128,12 +169,55 @@ var _ = window._;
         return this;
     };
 
-    app.headerNavOpen = function(type){
-        console.log('headerNavOpen', type);
+    app.initPurchaseLinks = function(){
+
+        var $purchaseEl = $('.purchase-links');
+
+        $('#purchaseToggle').on('click', function(e){
+            e.preventDefault();
+            $(this).toggleClass('open');
+            $(this).hasClass('open') ? $purchaseEl.slideDown('slow') : $purchaseEl.slideUp('fast');
+        });
+
+        $('.purchase-links').css('display', 'none');
+
+        return this;
     };
 
-    app.headerNavClose = function(type){
-        console.log('headerNavClose', type);
+    app.initScroll = function(){
+
+        this.$scrollNext = $('.scroll-next');
+
+        var _this = this;
+
+        $('.scroll-first').click(function(e){
+            $('html,body').animate({ scrollTop: $(e.target).closest('section').next().offset().top }, 'slow');
+            return false;
+        });
+
+        $('.scroll-next').click(function(e){
+            // $('html,body').animate({ scrollTop: $(e.target).closest('section').next().offset().top }, 'slow');
+            var scrollTop = $(window).scrollTop();
+            $('section').each(function(){
+                if($(this).offset().top > scrollTop){
+                    $('html,body').animate({ scrollTop: $(this).offset().top }, 'slow');
+                    app.$scrollNext.fadeOut();
+                    return false;
+                }
+            });
+            return false;
+        });
+
+        $('.scroll-to-top').click(function(e){
+            $('.scroll-next').fadeOut();
+            $('html,body').animate({ scrollTop: 0 }, 'slow');
+            return false;
+        });
+
+        window.addEventListener("scroll", _.debounce(updateScroll, 25));
+
+        updateScroll();
+
     };
 
     app.initVideo = function () {
@@ -177,15 +261,21 @@ var _ = window._;
             newH = VIDEO.height * scale | 1,
             $video = $('#ambient-video video');
 
-        // console.log(newH, h);
-        // console.log(newW, w);
+        // Top-most video
 
         $video.css({
-            top: ((h - newH) * 0.5) | 1 + "px",
+            top: 0,
             left: ((w - newW) * 0.5) | 1 + 'px',
             width: newW + 'px',
             height: newH + 'px'
         });
+
+        /*$video.css({
+            top: ((h - newH) * 0.5) | 1 + "px",
+            left: ((w - newW) * 0.5) | 1 + 'px',
+            width: newW + 'px',
+            height: newH + 'px'
+        });*/
 
     };
 
@@ -199,18 +289,11 @@ var _ = window._;
         this.localizeSocial();
         this.resizeVideo();
         this.initVideo();
-
-        var $purchaseEl = $('.purchase-links');
-
-        $('#purchaseToggle').on('click', function(e){
-            e.preventDefault();
-            $(this).toggleClass('open');
-            $(this).hasClass('open') ? $purchaseEl.slideDown('slow') : $purchaseEl.slideUp('fast');
-        });
-
-        $('.purchase-links').css('display', 'none');
+        this.initPurchaseLinks();
+        this.initScroll();
 
         window.addEventListener("resize", _.debounce(this.resizeVideo, 500));
+        window.addEventListener("resize", _.debounce(this.closeHeader, 10));
 
     };
 
