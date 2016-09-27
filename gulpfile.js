@@ -13,9 +13,19 @@ var gulp = require('gulp'),
     data = require('gulp-data');
 
 var getData = function(argv){
-    var server = argv.build || "stage";
+
+    var server = argv.build || "stage",
+        data = pkg['sir-rosevelt-configs'].servers[server];
+
+    // Append the lyrics info:
+    data.lyrics = pkg['sir-rosevelt-configs'].lyrics;
+    // Append the external links:
+    data.links = pkg['sir-rosevelt-configs'].externalLinks;
+
+    console.log(data);
+
     return {
-        data: pkg['sir-rosevelt-configs'].servers[server]
+        data: data
     };
 };
 
