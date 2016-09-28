@@ -28,12 +28,19 @@ var _ = window._;
         var doc = document.documentElement,
             top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
 
+        // Update the scroll nag position if necessary:
         if(elementInViewport(document.getElementById('SundayVideo')) || elementInViewport(document.getElementById('EndCard'))){
             // At the top or bottom; hide the scroll control on the side.
             app.$scrollNext.clearQueue().fadeOut();
         }else{
             app.$scrollNext.clearQueue().delay(1500).fadeIn();
         }
+
+        // Check all the videos and pause as necessary:
+        document.getElements
+        $('video').each(function(){
+
+        });
     };
 
     var app = window.com.sirrosevelt || {};
@@ -69,20 +76,27 @@ var _ = window._;
     };
 
     app.showStaticImage = function () {
-        var $el = $('#ambient-video'),
-            $video = $('#ambient-video video');
 
-        $el.css('background-image', "url('" + $el.data('background-image') + "')");
-        $el.css('background-size', 'cover');
-        $el.css('background-position', 'center center');
+        var $el, $v;
 
-        $video.css('display', 'none');
-        $video.attr('src', '');
+        $('.videoWrapper').each(function(){
+            $el = $(this);
+            $v = $(this).find('.ambientVideo');
+
+            $el.css('background-image', "url('" + $el.data('background-image') + "')");
+            $el.css('background-size', 'cover');
+            $el.css('background-position', 'center center');
+
+            $video.css('display', 'none');
+            $video.attr('src', '');
+
+        });
+
     };
 
     app.checkVideoPlaying = function () {
 
-        this.videoState.currentPlayPos = this.video.currentTime;
+        this.videoState.currentPlayPos = this.videos[0].currentTime;
 
         var offset = 1 / this.videoState.interval;
 
@@ -223,22 +237,34 @@ var _ = window._;
     app.initVideo = function () {
         console.log('app::initVideo');
 
-        var $video = $('#ambient-video video');
+        console.log(this);
 
-        $video.attr('src', $video.data('src'));
-        $video.attr('muted', 'muted');
+        this.videos = [];
 
-        this.video = $video.get(0);
+        var $v, videoEl;
 
-        if(this.isMobile){
-            console.warn('Attempting to play video on mobile');
-            makeVideoPlayableInline(this.video, false);
-        }
+        $('.ambientVideo').each(function(){
+
+            $v = $(this);
+            $v.attr('src', $v.data('src'));
+            $v.attr('muted', 'muted'); // Most videos shouldn't have audio.
+
+            videoEl = $v.get(0);
+
+            if(this.isMobile){
+                console.warn('Attempting to play video on mobile');
+                makeVideoPlayableInline(videoEl, false);
+            }
+
+            app.videos.push(videoEl);
+
+        });
 
         // Monitor Progress:
         this.checkPlayingInterval = setInterval(function () {
             app.checkVideoPlaying();
         }, this.videoState.interval);
+
     };
 
     app.resizeVideo = function () {
@@ -252,30 +278,27 @@ var _ = window._;
 
         var w = window.innerWidth,
             h = window.innerHeight,
-            VIDEO = {
-                width: 1920,
-                height: 1080
-            },
-            scale = (Math.max(w / VIDEO.width, h / VIDEO.height) * 10000 | 1) / 10000,
-            newW = VIDEO.width * scale | 1,
-            newH = VIDEO.height * scale | 1,
-            $video = $('#ambient-video video');
+            videoW, videoH, scale, newW, newH,
+            $v;
 
-        // Top-most video
+        $('.ambientVideo').each(function(){
 
-        $video.css({
-            top: 0,
-            left: ((w - newW) * 0.5) | 1 + 'px',
-            width: newW + 'px',
-            height: newH + 'px'
+            $v = $(this);
+
+            videoW = $v.data('src-width') || 1920;
+            videoH = $v.data('src-height') || 1080;
+
+            scale = (Math.max(w / videoW, h / videoH) * 10000 | 1) / 10000,
+                newW = videoW * scale | 1,
+                newH = videoH * scale | 1;
+
+            $(this).css({
+                top: 0,
+                left: ((w - newW) * 0.5) | 1 + 'px',
+                width: newW + 'px',
+                height: newH + 'px'
+            });
         });
-
-        /*$video.css({
-            top: ((h - newH) * 0.5) | 1 + "px",
-            left: ((w - newW) * 0.5) | 1 + 'px',
-            width: newW + 'px',
-            height: newH + 'px'
-        });*/
 
     };
 
