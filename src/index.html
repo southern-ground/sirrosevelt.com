@@ -62,7 +62,7 @@
                 Sir Rosevelt
                 <img class="left" src="img/v2-sir-rosevelt-logo.png" />
             </h1>
-            <div class="inner-wrapper right">
+            <div class="innerWrapper right">
                 <ul class="header-nav ">
                     <li class="header-nav-item">
                         <a href="#" data-nav-action="join">Join</a>
@@ -99,7 +99,7 @@
                     </li>
                 </ul>
 
-                <a href="#" class="audio-control">Play/Pause</a>
+                <a href="#" class="header-audioControl">Play/Pause</a>
             </div>
         </div>
     </div>
@@ -154,18 +154,16 @@
 
     <section id="SundayVideo" class="section-video">
 
-        <div id="ambient-video"
+        <div class="videoWrapper"
              data-background-image="{{data.assetURL}}img/mobile-background.jpg"
              data-animated-image="{{data.assetURL}}img/SRVT.gif">
 
-            <video
-                    class="ambient-video"
-                    data-src="{{data.assetURL}}video/sir-rosevelt-v3-2000kbps.mp4"
-                    data-poster="{{data.assetURL}}img/video-poster.jpg"
-                    autoplay
-                    loop
-                    muted
-                    webkit-playsinline>
+            <video class="ambientVideo"
+                   data-src="{{data.assetURL}}video/sir-rosevelt-v3-2000kbps.mp4"
+                   data-poster="{{data.assetURL}}img/video-poster.jpg"
+                   data-src-width="1920"
+                   data-src-height="1080"
+                   autoplay loop muted webkit-playsinline>
             </video>
 
         </div>
@@ -190,32 +188,63 @@
         </div>
 
     </section>
-
     <section id="SundayLyric" class="section-lyric lyric_one">
         <h1 class="glitch" data-text="{{data.lyrics.lyricOne}}">{{data.lyrics.lyricOne}}</h1>
     </section>
 
-    <section id="SecondVideo" class="section-video" style="background:url(img/v2-video-2-fpo.jpg);background-size:cover;background-position: 50% 50%">
-        <h1>Second Video (Costume)</h1>
-    </section>
+    <section id="GroundhogVideo" class="section-video">
 
-    <section id="SecondVideoLyric" class="section-lyric lyric_two">
+        <div class="videoWrapper"
+             data-background-image="{{data.assetURL}}img/mobile-background.jpg">
+
+            <video class="ambientVideo"
+                   data-src="{{data.assetURL}}video/groundhog-2000kbps.mp4"
+                   data-poster="{{data.assetURL}}img/video-poster.jpg"
+                   data-src-width="1920"
+                   data-src-height="804"
+                   autoplay loop muted webkit-playsinline>
+            </video>
+
+        </div>
+
+    </section>
+    <section id="GroundhogLyric" class="section-lyric lyric_two">
         <h1 class="glitch glitch-two" data-text="{{data.lyrics.lyricTwo}}">{{data.lyrics.lyricTwo}}</h1>
     </section>
 
-    <section id="ThirdVideo" class="section-video" style="background:url(img/v2-video-3-fpo.jpg);background-size: cover;background-position:50% 50%;">
-        <h1>Third Video (Makeup)</h1>
+    <section id="MakeupVideo" class="section-video">
+        <div class="videoWrapper"
+             data-background-image="{{data.assetURL}}img/mobile-background.jpg">
+
+            <video class="ambientVideo"
+                   data-src="{{data.assetURL}}video/girls-makeup-2000kbps.mp4"
+                   data-poster="{{data.assetURL}}img/video-poster.jpg"
+                   data-src-width="1920"
+                   data-src-height="804"
+                   autoplay loop muted webkit-playsinline>
+            </video>
+
+        </div>
+    </section>
+    <section id="MakeupLyric" class="section-lyric lyric_three">
+        <h1 class="glitch" data-text="{{data.lyrics.lyricThree}}">{{data.lyrics.lyricThree}}</h1>
     </section>
 
-    <section id="ThirdVideoLyric" class="section-lyric lyric_three">
-        <h1 class="glitch glitch-two" data-text="{{data.lyrics.lyricThree}}">{{data.lyrics.lyricThree}}</h1>
-    </section>
+    <section id="EdsaDoorVideo" class="section-video">
+        <div class="videoWrapper"
+             data-background-image="{{data.assetURL}}img/mobile-background.jpg">
 
-    <section id="OtherItem" class="section-video" style="background:url(img/v2-video-4-fpo.jpg);background-size:cover;background-position: 50% 50%">
-        <h1>Forth Video (Doorway)</h1>
-    </section>
+            <video class="ambientVideo"
+                   data-src="{{data.assetURL}}video/edsa-door-2000kbps.mp4"
+                   data-poster="{{data.assetURL}}img/video-poster.jpg"
+                   data-src-width="1754"
+                   data-src-height="804"
+                   autoplay loop muted webkit-playsinline>
+            </video>
 
-    <section id="SundayLyric" class="section-lyric lyric_four">
+        </div>
+    </section>
+    <section id="EdsaDoorLyric" class="section-lyric lyric_four">
         <h1 class="glitch glitch-two" data-text="{{data.lyrics.lyricFour}}">{{data.lyrics.lyricFour}}</h1>
     </section>
 
@@ -223,7 +252,7 @@
 
     </section>
 
-    <section id="EndCard" class="section-end-card">
+    <section id="EndCard" class="section-endCard">
         <h2>
             Put On Your Sunday Finest.
         </h2>
