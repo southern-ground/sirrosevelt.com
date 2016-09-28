@@ -57,7 +57,7 @@ html {
           padding: 0;
         }
 
-        .inner-wrapper {
+        .innerWrapper {
           height: 100%;
           display: flex;
           justify-content: space-between;
@@ -146,7 +146,7 @@ html {
           }
         }
 
-        a.audio-control{
+        .header-audioControl{
           display: block;
           width: 48px;
           height: 48px;
@@ -249,6 +249,20 @@ html {
           h1{
             text-transform: uppercase;
           }
+          .videoWrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            video.ambientVideo {
+              position: absolute;
+            }
+          }
         }
 
         &.section-lyric{
@@ -279,7 +293,7 @@ html {
           }
         }
 
-        &.section-end-card{
+        &.section-endCard{
           @include linearGradient(#dd208f,#c02bde);
         }
 
@@ -343,21 +357,6 @@ html {
                   bottom: -1px;
                 }
               }
-            }
-          }
-
-          div#ambient-video {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            video {
-              position: absolute;
             }
           }
 
