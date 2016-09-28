@@ -30,6 +30,10 @@ html {
       right: 0;
       height: 95px;
       z-index: 10;
+      .logo{
+        width: 100%;
+        max-width: 320px;
+      }
       .header-background{
         position: relative;
         background: $headerBackground;
@@ -279,22 +283,31 @@ html {
         }
 
         &.lyric{
+
+          background-size: 100% 100%;
+
           &_one{
-            @include linearGradient(#000000,#161130);
+            background-image: url('../img/grandients/background-000000-130f29.svg');
+
+            // @include linearGradient(#000000,#161130);
           }
           &_two{
-            @include linearGradient(#281f56,#372058);
+            background-image: url('../img/grandients/background-281f56-372058.svg');
+            // @include linearGradient(#281f56,#372058);
           }
           &_three{
-            @include linearGradient(#611e5a,#8e1d5d);
+            background-image: url('../img/grandients/background-611e5a-8e1d5d.svg');
+            // @include linearGradient(#611e5a,#8e1d5d);
           }
           &_four{
-            @include linearGradient(#b81c5f,#e51a62);
+            background-image: url('../img/grandients/background-b81c5f-e51a62.svg');
+            // @include linearGradient(#b81c5f,#e51a62);
           }
         }
 
         &.section-endCard{
-          @include linearGradient(#dd208f,#c02bde);
+          background-image: url('../img/grandients/background-dd208f-c02bde.svg');
+          // @include linearGradient(#dd208f,#c02bde);
         }
 
         &#SundayVideo {

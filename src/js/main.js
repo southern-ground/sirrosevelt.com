@@ -36,11 +36,34 @@ var _ = window._;
             app.$scrollNext.clearQueue().delay(1500).fadeIn();
         }
 
+        var $video, video;
+
         // Check all the videos and pause as necessary:
-        document.getElements
-        $('video').each(function(){
+
+        $('.ambientVideo').each(function(){
+
+            $videoRef = $(this);
+            videoElement = $(this).get(0);
+
+            if(elementInViewport(videoElement)){
+                // Video is on-screen.
+                if($videoRef.data('started')) {
+                    // Video has previously been started before
+                    if (videoElement.paused) {
+                        videoElement.play();
+                    }
+                }else{
+                    // Video hasn't played yet:
+                    app.startVideo($videoRef);
+                }
+            }else{
+                if($videoRef.data('started') && !videoElement.paused){
+                    videoElement.pause();
+                }
+            }
 
         });
+
     };
 
     var app = window.com.sirrosevelt || {};
@@ -87,8 +110,8 @@ var _ = window._;
             $el.css('background-size', 'cover');
             $el.css('background-position', 'center center');
 
-            $video.css('display', 'none');
-            $video.attr('src', '');
+            $v.css('display', 'none');
+            $v.attr('src', '');
 
         });
 
@@ -96,14 +119,14 @@ var _ = window._;
 
     app.checkVideoPlaying = function () {
 
-        this.videoState.currentPlayPos = this.videos[0].currentTime;
+        this.videoState.currentPlayPos = this.currentVideo.currentTime;
 
         var offset = 1 / this.videoState.interval;
 
         if (
             !this.videoState.bufferingDetected
             && this.videoState.currentPlayPos < (this.videoState.lastPlayPos + offset)
-            && !this.video.paused
+            && !this.currentVideo.paused
         ) {
             console.warn('ambient video is buffering');
             this.videoState.bufferingDetected = true;
@@ -112,7 +135,7 @@ var _ = window._;
         if (
             this.videoState.bufferingDetected
             && this.videoState.currentPlayPos > (this.videoState.lastPlayPos + offset)
-            && !this.video.paused
+            && !this.currentVideo.paused
         ) {
             this.videoState.bufferingDetected = false;
         }
@@ -215,7 +238,6 @@ var _ = window._;
             $('section').each(function(){
                 if($(this).offset().top > scrollTop){
                     $('html,body').animate({ scrollTop: $(this).offset().top }, 'slow');
-                    app.$scrollNext.fadeOut();
                     return false;
                 }
             });
@@ -234,9 +256,33 @@ var _ = window._;
 
     };
 
-    app.initVideo = function () {
-        console.log('app::initVideo');
+    app.startVideo = function($video){
 
+        $video.attr('src', $video.data('src'));
+        $video.attr('muted', 'muted'); // Most videos shouldn't have audio.
+        $video.data('started', true);
+
+        var videoEl = $video.get(0);
+
+        if(this.isMobile){
+            console.warn('Attempting to play video on mobile');
+            makeVideoPlayableInline(videoEl, false);
+
+            app.currentVideo = videoEl;
+            app.videos.push(videoEl);
+
+            // Only try and monitor progress on mobile devices:
+            clearInterval(app.checkPlayingInterval);
+            app.checkPlayingInterval = setInterval(function () {
+                app.checkVideoPlaying();
+            }, app.videoState.interval);
+        }
+
+    };
+
+    app.initVideo = function () {
+
+        console.log('app::initVideo');
         console.log(this);
 
         this.videos = [];
@@ -246,24 +292,12 @@ var _ = window._;
         $('.ambientVideo').each(function(){
 
             $v = $(this);
-            $v.attr('src', $v.data('src'));
-            $v.attr('muted', 'muted'); // Most videos shouldn't have audio.
 
-            videoEl = $v.get(0);
-
-            if(this.isMobile){
-                console.warn('Attempting to play video on mobile');
-                makeVideoPlayableInline(videoEl, false);
+            if(elementInViewport($v.get(0))){
+                app.startVideo($v);
             }
 
-            app.videos.push(videoEl);
-
         });
-
-        // Monitor Progress:
-        this.checkPlayingInterval = setInterval(function () {
-            app.checkVideoPlaying();
-        }, this.videoState.interval);
 
     };
 
