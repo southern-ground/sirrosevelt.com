@@ -22,19 +22,19 @@ var _ = window._;
             (top + height) > window.pageYOffset &&
             (left + width) > window.pageXOffset
         );
-    }
+    };
+
+    var prevScrollTop = 0,
+        scrollDelta = 0,
+        scrollToTimeout;
 
     var updateScroll = function(e){
+
         var doc = document.documentElement,
             top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
 
-        // Update the scroll nag position if necessary:
-        if(elementInViewport(document.getElementById('SundayVideo')) || elementInViewport(document.getElementById('EndCard'))){
-            // At the top or bottom; hide the scroll control on the side.
-            app.$scrollNext.clearQueue().fadeOut();
-        }else{
-            app.$scrollNext.clearQueue().delay(1500).fadeIn();
-        }
+        scrollDelta = prevScrollTop - top;
+        prevScrollTop = top;
 
         var $video, video;
 
@@ -64,6 +64,41 @@ var _ = window._;
 
         });
 
+        // Update the scroll nag position if necessary:
+        if(elementInViewport(document.getElementById('SundayVideo')) || elementInViewport(document.getElementById('EndCard'))){
+            // At the top or bottom; hide the scroll control on the side.
+            app.$scrollNext.clearQueue().fadeOut();
+        }else{
+            app.$scrollNext.clearQueue().delay(1500).fadeIn();
+        }
+
+        clearTimeout(scrollToTimeout);
+        scrollToTimeout = setTimeout(function(){
+
+            if(scrollDelta === 0){
+                return;
+            }
+
+            // Stop any animations running or queued.
+            $('html,body').clearQueue();
+
+            // Gather a list of all items in view:
+            var inView = [];
+            $('section').each(function(){
+                if(elementInViewport($(this).get(0))){
+                    inView.push($(this));
+                }
+            });
+
+            if(scrollDelta < 0){
+                // If scrolling down, gravitate to teh next one.
+                $('html,body').animate({ scrollTop: inView[inView.length - 1].offset().top }, 'slow', 'easeOutBounce');
+            }else{
+                // ... Otherwise go the other way.
+                $('html,body').animate({ scrollTop: inView[0].offset().top }, 'slow', 'easeOutBounce');
+            }
+
+        }, 1250);
     };
 
     var app = window.com.sirrosevelt || {};
