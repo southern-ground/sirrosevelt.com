@@ -362,7 +362,7 @@ var _ = window._;
                 newH = videoH * scale | 1;
 
             $(this).css({
-                top: 0,
+                top: ((h - newH) * 0.5) | 1 + "px", //top: 0,
                 left: ((w - newW) * 0.5) | 1 + 'px',
                 width: newW + 'px',
                 height: newH + 'px'
