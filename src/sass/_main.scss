@@ -308,6 +308,35 @@ html {
         &.section-endCard{
           background-image: url('../img/grandients/background-dd208f-c02bde.svg');
           // @include linearGradient(#dd208f,#c02bde);
+          padding: 0 20px;
+            img#EndCardLogo{
+              height: 200px;
+              width: auto;
+            }
+            h2, h3{
+              text-transform: uppercase;
+              font-weight: bold;
+              text-align:center;
+            }
+            h2{
+              font-size:6.1vh;
+              margin-top: 30vh;
+            }
+            h3{
+              border: 2px solid white;
+              font-size: 3.7vh;
+              padding: 16px 40px;
+              font-weight: bold;
+              margin: 0 20px;
+              @include extra-small{
+                font-size: 16px;
+              }
+            }
+            .endCard{
+              &-logo{
+                max-width: 20vh;
+              }
+            }
         }
 
         &#SundayVideo {
@@ -373,57 +402,42 @@ html {
             }
           }
 
-          div#upper {
-            z-index: 2;
-            margin-top: 200px;
-            #logo {
-              width: 100%;
+          .headGroup{
+
+            position: absolute;
+
+            &_top{
+              z-index: 2;
               max-width: 210px;
+              top: 18vh;
+              width: 18vh;
+              @include extra-small {
+
+                }
+            }
+
+            &_bottom{
+              z-index: 3;
+              bottom: 0;
+              h2{
+                border: 2px solid white;
+                font-size: 6vh;
+                padding: 16px 40px;
+                font-weight: bold;
+                margin: 0 20px;
+                @include extra-small{
+                  font-size: 16px;
+                }
+              }
               @include extra-small {
 
               }
+              @include mobile {
 
+              }
             }
           }
 
-          div#lower {
-            z-index: 3;
-            h2{
-              border: 2px solid white;
-              font-size: 6vh;
-              padding: 16px 40px;
-              font-weight: bold;
-            }
-            @include extra-small {
-
-            }
-            @include mobile {
-
-            }
-          }
-
-        }
-
-        &#EndCard{
-          padding: 0 20px;
-          img#EndCardLogo{
-            height: 200px;
-            width: auto;
-          }
-          h2, h3{
-            text-transform: uppercase;
-            font-weight: bold;
-            text-align:center;
-          }
-          h2{
-            font-size:10.3vh;
-            margin-top: 30vh;
-          }
-          h3{
-            font-size: 6.4vh;
-            border: 1px solid white;
-            padding: 20px 30px;
-          }
         }
 
       }
@@ -442,11 +456,26 @@ html {
           bottom: 20px;
           z-index:1000;
         }
+        &.scroll-to-top{
+          .scroll-icon{
+            -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
+            -moz-transform: rotate(180deg);        /* FF */
+            -o-transform: rotate(180deg);          /* Opera */
+            -ms-transform: rotate(180deg);         /* IE9 */
+            transform: rotate(180deg);             /* W3C compliant browsers */
+
+            /* IE8 and below */
+            filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand');
+
+          }
+        }
         &-icon{
           margin: 14px 0 0 0;
-          border:2px solid white;
           height: 60px;
           width: 60px;
+        }
+        @include extra-small{
+          zoom: 0.6;
         }
       }
     }
