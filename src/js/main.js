@@ -69,19 +69,26 @@ var _ = window._;
         // Adjust the opacity on any lyric text on the screen:
 
         $('.section-lyric').each(function(){
+
             if(elementInViewport($(this).get(0))){
-                $(this).find('h1.glitch').delay(1500).fadeIn('slow');
-                /*
+
+                // $(this).find('h1.glitch').delay(1500).fadeIn('slow', 'easeOutBounce');
+
                 var opacity = 1 - (($(this).offset().top - top) / ($(window).height() * 0.3));
+
                 if(opacity > 1){
                     opacity -= 2;
                     opacity *= -1;
                 }
+
                 $(this).find('h1.glitch').css('opacity', opacity);
-                 */
+
             }else{
-                $(this).find('h1.glitch').fadeOut();
-                // $(this).find('.glitch').css('opacity', 0);
+
+                // $(this).find('h1.glitch').fadeOut();
+
+                $(this).find('.glitch').css('opacity', 0);
+
             }
         });
 
@@ -325,7 +332,15 @@ var _ = window._;
         var _this = this;
 
         $('.scroll-first').click(function(e){
-            $('html,body').animate({ scrollTop: $(e.target).closest('section').next().offset().top }, 'slow');
+            clearTimeout(scrollToTimeout);
+            $('html,body')
+                .clearQueue()
+                .animate({
+                    scrollTop: $(e.target)
+                        .closest('section')
+                        .next()
+                        .offset().top
+                }, 'slow');
             return false;
         });
 
@@ -334,7 +349,14 @@ var _ = window._;
             var scrollTop = $(window).scrollTop();
             $('section').each(function(){
                 if($(this).offset().top > scrollTop){
-                    $('html,body').animate({ scrollTop: $(this).offset().top }, 'slow');
+                    clearTimeout(scrollToTimeout);
+                    $('html,body')
+                        .clearQueue()
+                        .animate({
+                            scrollTop: $(this)
+                                .offset()
+                                .top
+                        }, 'slow');
                     return false;
                 }
             });
@@ -343,11 +365,16 @@ var _ = window._;
 
         $('.scroll-to-top').click(function(e){
             $('.scroll-next').fadeOut();
-            $('html,body').animate({ scrollTop: 0 }, 'slow');
+            clearTimeout(scrollToTimeout);
+            $('html,body')
+                .clearQueue()
+                .animate({
+                    scrollTop: 0
+                }, 'slow');
             return false;
         });
 
-        window.addEventListener("scroll", _.debounce(updateScroll, 25));
+        window.addEventListener("scroll", updateScroll); // _.debounce(updateScroll, 25));
 
         updateScroll();
 
