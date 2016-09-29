@@ -80,6 +80,8 @@ gulp.task('copy:sundry', function () {
         // (other tasks will handle the copying of these files)
         '!' + dirs.src + '/sass/**/*.scss',
         '!' + dirs.src + '/sass',
+        '!' + dirs.src + '/doc/**/*.*',
+        '!' + dirs.src + '/doc',
         '!' + dirs.src + '/**/*.html'
     ], {
         // Include hidden files by default
