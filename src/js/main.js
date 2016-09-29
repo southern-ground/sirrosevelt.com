@@ -31,12 +31,14 @@ var _ = window._;
     var updateScroll = function(e){
 
         var doc = document.documentElement,
-            top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+            top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0),
+            winH = $(window).height();
 
         scrollDelta = prevScrollTop - top;
         prevScrollTop = top;
 
-        var $video, video;
+        // Clear any possible scrollToTimeouts
+        clearTimeout(scrollToTimeout);
 
         // Check all the videos and pause as necessary:
 
@@ -65,55 +67,96 @@ var _ = window._;
         });
 
         // Adjust the opacity on any lyric text on the screen:
+
         $('.section-lyric').each(function(){
             if(elementInViewport($(this).get(0))){
-                var opacity = 1 - (($(this).offset().top - top) / ($(window).height() * 0.75));
-
+                $(this).find('h1.glitch').delay(1500).fadeIn('slow');
+                /*
+                var opacity = 1 - (($(this).offset().top - top) / ($(window).height() * 0.3));
                 if(opacity > 1){
                     opacity -= 2;
                     opacity *= -1;
                 }
-
-                $(this).find('.glitch').css('opacity', opacity);
+                $(this).find('h1.glitch').css('opacity', opacity);
+                 */
+            }else{
+                $(this).find('h1.glitch').fadeOut();
+                // $(this).find('.glitch').css('opacity', 0);
             }
         });
 
         // Update the scroll nag position if necessary:
-        if(elementInViewport(document.getElementById('SundayVideo')) || elementInViewport(document.getElementById('EndCard'))){
+
+        if(elementInViewport(document.getElementById('SundayVideo'))
+            || elementInViewport(document.getElementById('Members'))
+            || elementInViewport(document.getElementById('EndCard'))){
             // At the top or bottom; hide the scroll control on the side.
             app.$scrollNext.clearQueue().fadeOut();
         }else{
             app.$scrollNext.clearQueue().delay(1500).fadeIn();
         }
 
-        clearTimeout(scrollToTimeout);
+        // If an element is more than 20% from the top of the page, snap to it.
+        if(!elementInViewport(document.getElementById('Members')) &&
+            !elementInViewport(document.getElementById('EndCard'))){
 
-        scrollToTimeout = setTimeout(function(){
-
-            if(scrollDelta === 0){
-                return;
-            }
-
-            // Stop any animations running or queued.
-            $('html,body').clearQueue();
-
-            // Gather a list of all items in view:
-            var inView = [];
-            $('section').each(function(){
+            $('.sticky').each(function(){
                 if(elementInViewport($(this).get(0))){
-                    inView.push($(this));
+                    console.log($(this));
+                    var myTop = $(this).offset().top;
+                    var percFromTopOfViewport = 1 - (Math.abs(top - myTop));
+                    if(percFromTopOfViewport < 0.25){
+
+                        // Snap to!
+
+                        // Doubly clear any timeouts:
+                        clearTimeout(scrollToTimeout);
+
+                        // Stop any animations running or queued.
+                        $('html,body').clearQueue();
+
+                        scrollToTimeout = setTimeout(function(){
+                            $('html,body').animate({ scrollTop: myTop }, 'slow', 'easeOutBounce');
+                        }, 500);
+
+                        return;
+                    }
                 }
             });
 
-            if(scrollDelta < 0){
-                // If scrolling down, gravitate to teh next one.
-                $('html,body').animate({ scrollTop: inView[inView.length - 1].offset().top }, 'slow', 'easeOutBounce');
-            }else{
-                // ... Otherwise go the other way.
-                $('html,body').animate({ scrollTop: inView[0].offset().top }, 'slow', 'easeOutBounce');
-            }
 
-        }, 2500);
+            /*
+            scrollToTimeout = setTimeout(function(){
+
+                console.warn('Scroll To Timeout');
+
+                // Stop any animations running or queued.
+                $('html,body').clearQueue();
+
+                if(scrollDelta === 0){
+                    return;
+                }
+
+                // Gather a list of all items in view:
+                var inView = [];
+                $('section').each(function(){
+                    if(elementInViewport($(this).get(0))){
+                        console.log('top:', top, 'section:', (top - $(this).offset().top));
+                        inView.push($(this));
+                    }
+                });
+
+                if(scrollDelta < 0){
+                    // If scrolling down, gravitate to teh next one.
+                    $('html,body').animate({ scrollTop: inView[inView.length - 1].offset().top }, 'slow', 'easeOutBounce');
+                }else{
+                    // ... Otherwise go the other way.
+                    $('html,body').animate({ scrollTop: inView[0].offset().top }, 'slow', 'easeOutBounce');
+                }
+
+            }, 500);
+            */
+        }
 
     };
 
@@ -391,8 +434,6 @@ var _ = window._;
 
         console.log('app::init');
 
-        $('.glitch').css('opacity', 0.0);
-
         // Update the styles for the social icons:
 
         this.initHeader();
@@ -403,7 +444,7 @@ var _ = window._;
         this.initScroll();
 
         window.addEventListener("resize", _.debounce(this.resizeVideo, 500));
-        window.addEventListener("resize", _.debounce(this.closeHeader, 10));
+        // window.addEventListener("resize", _.debounce(this.closeHeader, 10));
 
     };
 

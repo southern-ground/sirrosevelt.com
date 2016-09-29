@@ -1,6 +1,17 @@
 
 $headerBackground: rgba(0,0,0,0.6);
 
+@font-face {
+  font-family: "Neutraface Text";
+  src: url('../fonts/NeutrafaceTextBook.eot');
+  src: url("../fonts/NeutrafaceTextBook.eot?#iefix") format("embedded-opentype"),
+  url("../fonts/NeutrafaceTextBook.woff2") format("woff2"),
+  url("../fonts/NeutrafaceTextBook.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
 .IIV::-webkit-media-controls-play-button,
 .IIV::-webkit-media-controls-start-playback-button {
   opacity: 0;
@@ -14,16 +25,32 @@ $headerBackground: rgba(0,0,0,0.6);
   }
 }
 
+.no-gutter > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
 html {
   body {
+
+    font-family: "Neutraface Text", sans-serif;
+    text-rendering: optimizeLegibility;
+    font-weight: normal;
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures, contextual;
+    -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+    -ms-font-feature-settings: "kern", "liga", "clig", "alt";
+    -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+    font-feature-settings: "kern", "liga", "clig", "calt";
+
     margin: 0;
     padding: 0;
     background: black;
     position: relative;
-    font-family: 'Raleway';
     font-size: 1.25rem;
 
     header {
+      display:none;
       position: fixed;
       top: 0;
       left: 0;
@@ -269,76 +296,6 @@ html {
           }
         }
 
-        &.section-lyric{
-          justify-content: center;
-          h1{
-            text-transform: uppercase;
-          }
-          .glitch {
-            @include textGlitch("lyric-glitch-one", 17, white, rgba(0,0,0,0), red, blue, 1200, 115);
-            &-two{
-              @include textGlitch("lyric-glitch-two", 17, white, rgba(0,0,0,0), red, blue, 1200, 135);
-            }
-          }
-        }
-
-        &.lyric{
-
-          background-size: 100% 100%;
-
-          &_one{
-            background-image: url('../img/grandients/background-000000-130f29.svg');
-
-            // @include linearGradient(#000000,#161130);
-          }
-          &_two{
-            background-image: url('../img/grandients/background-281f56-372058.svg');
-            // @include linearGradient(#281f56,#372058);
-          }
-          &_three{
-            background-image: url('../img/grandients/background-611e5a-8e1d5d.svg');
-            // @include linearGradient(#611e5a,#8e1d5d);
-          }
-          &_four{
-            background-image: url('../img/grandients/background-b81c5f-e51a62.svg');
-            // @include linearGradient(#b81c5f,#e51a62);
-          }
-        }
-
-        &.section-endCard{
-          background-image: url('../img/grandients/background-dd208f-c02bde.svg');
-          // @include linearGradient(#dd208f,#c02bde);
-          padding: 0 20px;
-            img#EndCardLogo{
-              height: 200px;
-              width: auto;
-            }
-            h2, h3{
-              text-transform: uppercase;
-              font-weight: bold;
-              text-align:center;
-            }
-            h2{
-              font-size:6.1vh;
-              margin-top: 30vh;
-            }
-            h3{
-              border: 2px solid white;
-              font-size: 3.7vh;
-              padding: 16px 40px;
-              font-weight: bold;
-              margin: 0 20px;
-              @include extra-small{
-                font-size: 16px;
-              }
-            }
-            .endCard{
-              &-logo{
-                max-width: 20vh;
-              }
-            }
-        }
-
         &#SundayVideo {
 
           #title {
@@ -413,7 +370,7 @@ html {
               width: 18vh;
               @include extra-small {
 
-                }
+              }
             }
 
             &_bottom{
@@ -438,6 +395,149 @@ html {
             }
           }
 
+        }
+
+        &.section-lyric{
+          justify-content: center;
+
+          transition: background .25s ease-in-out;
+          -moz-transition: background .25s ease-in-out;
+          -webkit-transition: background .25s ease-in-out;
+
+          h1{
+            text-transform: uppercase;
+            // font-size: 5.3vh;
+            // font-size: calc(4vw + 4vh + 2vmin);  <!-- Not bad -->
+
+            @include responsiveFont(10,900,20,50);
+
+            @include responsiveFont(901,10000,50.1,100);
+
+            text-align:center;
+
+            margin: 0 20px;
+
+          }
+
+          .glitch {
+            @include textGlitch("lyric-glitch-one", 17, white, rgba(0,0,0,0), red, blue, 1200, 115);
+            &-two{
+              @include textGlitch("lyric-glitch-two", 17, white, rgba(0,0,0,0), red, blue, 1200, 135);
+            }
+          }
+
+        }
+
+        &.lyric{
+
+          background-size: 100% 100%;
+
+          &_one{
+            background-image: url('../img/grandients/background-000000-130f29.svg');
+            // @include linearGradient(#000000,#161130);
+          }
+          &_two{
+            background-image: url('../img/grandients/background-281f56-372058.svg');
+            // @include linearGradient(#281f56,#372058);
+          }
+          &_three{
+            background-image: url('../img/grandients/background-611e5a-8e1d5d.svg');
+            // @include linearGradient(#611e5a,#8e1d5d);
+          }
+          &_four{
+            background-image: url('../img/grandients/background-b81c5f-e51a62.svg');
+            // @include linearGradient(#b81c5f,#e51a62);
+          }
+        }
+
+        &.section-band{
+          flex-direction: row;
+          .band{
+            &-member{
+              position:relative;
+              width: 33.33333%;
+              height: 100vh;
+              background-size:cover;
+              background-position-y: 100%;
+
+              h2{
+                text-transform: uppercase;
+                text-align: center;
+                position: absolute;
+                bottom: 20px;
+                width: 100%;
+
+                font-size: calc(4vw + 4vh + 2vmin);
+
+              }
+
+
+              &_niko{
+                background-image:url(../img/niko.png);
+                background-position-x: 72%;
+              }
+              &_zac{
+                background-image:url(../img/zac.png);
+                background-position-x: 84%;
+              }
+              &_ben{
+                background-image:url(../img/ben.png);
+                background-position-x: 80%;
+              }
+              @include medium{
+                background-position-x: 100%;
+              }
+            }
+          }
+
+          @include extra-small{
+            flex-direction: column;
+            width: 100%;
+            .band-member{
+              width: 100%;
+              background-position-y: 20px;
+              h2{
+                font-size: calc(4vw + 15vh + 2vmin);
+              }
+              &_zac{
+                order:-1;
+              }
+            }
+          }
+        }
+
+        &.section-endCard{
+          background-image: url('../img/grandients/background-dd208f-c02bde.svg');
+          // @include linearGradient(#dd208f,#c02bde);
+          padding: 0 20px;
+            img#EndCardLogo{
+              height: 200px;
+              width: auto;
+            }
+            h2, h3{
+              text-transform: uppercase;
+              font-weight: bold;
+              text-align:center;
+            }
+            h2{
+              font-size:6.1vh;
+              margin-top: 30vh;
+            }
+            h3{
+              border: 2px solid white;
+              font-size: 3.7vh;
+              padding: 16px 40px;
+              font-weight: bold;
+              margin: 0 20px;
+              @include extra-small{
+                font-size: 16px;
+              }
+            }
+            .endCard{
+              &-logo{
+                max-width: 20vh;
+              }
+            }
         }
 
       }
