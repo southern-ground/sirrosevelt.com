@@ -392,7 +392,7 @@ var _ = window._;
         console.log('app::init');
 
         $('.glitch').css('opacity', 0.0);
-        
+
         // Update the styles for the social icons:
 
         this.initHeader();
