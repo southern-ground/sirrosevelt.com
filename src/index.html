@@ -62,46 +62,49 @@
                 Sir Rosevelt
                 <img class="logo" src="img/sirrosevelt-header-title.svg" />
             </h1>
-            <div class="innerWrapper right">
+            <div class="innerWrapper">
+                <div class="flexy">
+                    <ul class="header-nav ">
+                        <li class="header-nav-item">
+                            <a href="#" data-nav-action="join">Join</a>
+                        </li>
+                        <li class="header-nav-item">
+                            <a href="#" data-nav-action="listen">Listen</a>
+                        </li>
+                    </ul>
 
-                <ul class="header-nav ">
-                    <li class="header-nav-item">
-                        <a href="#" data-nav-action="join">Join</a>
-                    </li>
-                    <li class="header-nav-item">
-                        <a href="#" data-nav-action="listen">Listen</a>
-                    </li>
-                </ul>
+                    <ul class="social-links">
+                        <li class="">
+                            <a href="{{data.links.facebook}}"
+                               class="social facebook"
+                               target="_blank"
+                               data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
+                        </li>
+                        <li class="">
+                            <a href="{{data.links.twitter}}"
+                               class="social twitter"
+                               target="_blank"
+                               data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
+                        </li>
+                        <li class="">
+                            <a href="{{data.links.instagram}}"
+                               class="social instagram"
+                               target="_blank"
+                               data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
+                        </li>
+                        <li class="">
+                            <a href="{{data.links.youtube}}"
+                               class="social youtube"
+                               target="_blank"
+                               data-asset-path="{{data.assetURL|safe}}img/social.png">YouTube</a>
+                        </li>
+                    </ul>
 
-                <ul class="social-links">
-                    <li class="">
-                        <a href="{{data.links.facebook}}"
-                           class="social facebook"
-                           target="_blank"
-                           data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
-                    </li>
-                    <li class="">
-                        <a href="{{data.links.twitter}}"
-                           class="social twitter"
-                           target="_blank"
-                           data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
-                    </li>
-                    <li class="">
-                        <a href="{{data.links.instagram}}"
-                           class="social instagram"
-                           target="_blank"
-                           data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
-                    </li>
-                    <li class="">
-                        <a href="{{data.links.youtube}}"
-                           class="social youtube"
-                           target="_blank"
-                           data-asset-path="{{data.assetURL|safe}}img/social.png">YouTube</a>
-                    </li>
-                </ul>
-
-                <a href="#" class="header-audioControl">Play/Pause</a>
-
+                    <a href="#" class="header-audioControl">Play/Pause</a>
+                </div>
+            </div>
+            <div class="hamburger">
+                <a href="#" class="hamburger-button">Menu</a>
             </div>
         </div>
     </div>

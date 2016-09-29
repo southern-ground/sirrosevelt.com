@@ -269,6 +269,8 @@ var _ = window._;
     app.closeHeader = function(){
         $('.header-nav-item > a').removeClass('open');
         $('.header-nav-option').css('display', 'none');
+        $('header .innerWrapper').css('display', '');
+        $('.hamburger-button').removeClass('open');
     };
 
     app.initHeader = function(){
@@ -304,6 +306,18 @@ var _ = window._;
 
                 $targetEl.css(newCSS)
                     .slideDown('slow');
+            }
+
+        });
+
+        $('.hamburger-button').on('click', function(e){
+            var $el = $(e.target);
+            $el.toggleClass('open');
+            if($el.hasClass('open')){
+                $('header .innerWrapper').slideDown();
+
+            }else{
+                $('header .innerWrapper').slideUp();
             }
 
         });
@@ -474,7 +488,7 @@ var _ = window._;
         this.initScroll();
 
         window.addEventListener("resize", _.debounce(this.resizeVideo, 500));
-        // window.addEventListener("resize", _.debounce(this.closeHeader, 10));
+        window.addEventListener("resize", _.debounce(this.closeHeader, 10));
 
     };
 

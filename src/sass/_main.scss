@@ -30,6 +30,12 @@ $headerBackground: rgba(0,0,0,0.6);
   padding-left:0;
 }
 
+.flexy{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 html {
   body {
 
@@ -50,13 +56,27 @@ html {
     font-size: 1.25rem;
 
     header {
-      display:none;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       height: 95px;
       z-index: 10;
+      .hamburger{
+        display:none;
+        &-button{
+          width: 40px;
+          height: 40px;
+          background: url(../img/hamburger.svg);
+          background-size:200%;
+          background-position: 0 0;
+          text-indent: 9999px;
+          display: block;
+          &.open{
+            background-position: 100% 0;
+          }
+        }
+      }
       .logo{
         width: 100%;
         max-width: 320px;
@@ -74,9 +94,7 @@ html {
       .wrapper {
         margin: 0 auto;
         width: 100%;
-
         max-width: 1640px;
-
         height: 100%;
         display: flex;
         justify-content: space-between;
@@ -90,9 +108,11 @@ html {
 
         .innerWrapper {
           height: 100%;
-          display: flex;
           justify-content: space-between;
           align-items: center;
+          .flexy{
+            flex-direction: row;
+          }
         }
 
         ul.header-nav {
@@ -192,9 +212,6 @@ html {
           justify-content: space-around;
         }
 
-        @media only screen and (max-width: 1024px){
-          flex-direction: column;
-        }
       }
       #SecondaryHeaderContent {
         div.join-list, ul.purchase-links{
@@ -243,6 +260,41 @@ html {
           }
         }
       }
+
+      @media only screen and (max-width: 1023px){
+        .hamburger{
+          display: block;
+        }
+        .innerWrapper{
+          display: none;
+          position:fixed;
+          left:0;
+          right:0;
+          top:90px;
+          border:1px solid red;
+          flex-direction: column !important;
+          justify-content: flex-start !important;
+          .social-links{
+            order: -2;
+            margin: 0 0 20px 0 !important;
+            li{
+              width: auto !important;
+            }
+          }
+          .header-audioControl{
+            order:-1;
+          }
+
+        }
+      }
+      @media only screen and (min-width: 1024px){
+        .hamburger{
+          display:none;
+        }
+        .innerWrapper{
+          display: flex;
+        }
+      }
     }
 
     #content {
@@ -252,7 +304,6 @@ html {
       justify-content: space-between;
       align-items: center;
       flex-direction: column;
-      overflow-x: hidden;
 
       @include extra-small {
         position: relative;
@@ -267,13 +318,8 @@ html {
         min-height: 100vh;
         position: relative;
 
-        .flexy{
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
         &.section-video{
+          overflow-x: hidden;
           overflow-y: hidden;
           display: flex;
           justify-content:center;
