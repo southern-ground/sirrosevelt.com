@@ -471,7 +471,6 @@ html {
 
               }
 
-
               &_niko{
                 background-image:url(../img/niko.png);
                 background-position-x: 72%;
@@ -484,9 +483,11 @@ html {
                 background-image:url(../img/ben.png);
                 background-position-x: 80%;
               }
+
               @include medium{
                 background-position-x: 100%;
               }
+
             }
           }
 

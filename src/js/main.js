@@ -101,11 +101,14 @@ var _ = window._;
             !elementInViewport(document.getElementById('EndCard'))){
 
             $('.sticky').each(function(){
+
                 if(elementInViewport($(this).get(0))){
-                    console.log($(this));
+
                     var myTop = $(this).offset().top;
-                    var percFromTopOfViewport = 1 - (Math.abs(top - myTop));
-                    if(percFromTopOfViewport < 0.25){
+
+                    var percFromTopOfViewport = Math.abs(top - myTop) / winH;
+
+                    if(percFromTopOfViewport < 0.45){
 
                         // Snap to!
 
@@ -117,7 +120,7 @@ var _ = window._;
 
                         scrollToTimeout = setTimeout(function(){
                             $('html,body').animate({ scrollTop: myTop }, 'slow', 'easeOutBounce');
-                        }, 500);
+                        }, 750);
 
                         return;
                     }
