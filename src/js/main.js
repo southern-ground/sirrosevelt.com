@@ -64,6 +64,20 @@ var _ = window._;
 
         });
 
+        // Adjust the opacity on any lyric text on the screen:
+        $('.section-lyric').each(function(){
+            if(elementInViewport($(this).get(0))){
+                var opacity = 1 - (($(this).offset().top - top) / ($(window).height() * 0.75));
+
+                if(opacity > 1){
+                    opacity -= 2;
+                    opacity *= -1;
+                }
+
+                $(this).find('.glitch').css('opacity', opacity);
+            }
+        });
+
         // Update the scroll nag position if necessary:
         if(elementInViewport(document.getElementById('SundayVideo')) || elementInViewport(document.getElementById('EndCard'))){
             // At the top or bottom; hide the scroll control on the side.
@@ -73,6 +87,7 @@ var _ = window._;
         }
 
         clearTimeout(scrollToTimeout);
+
         scrollToTimeout = setTimeout(function(){
 
             if(scrollDelta === 0){
@@ -98,7 +113,8 @@ var _ = window._;
                 $('html,body').animate({ scrollTop: inView[0].offset().top }, 'slow', 'easeOutBounce');
             }
 
-        }, 1250);
+        }, 2500);
+
     };
 
     var app = window.com.sirrosevelt || {};
@@ -375,6 +391,8 @@ var _ = window._;
 
         console.log('app::init');
 
+        $('.glitch').css('opacity', 0.0);
+        
         // Update the styles for the social icons:
 
         this.initHeader();
