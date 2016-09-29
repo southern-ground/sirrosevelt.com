@@ -1,5 +1,5 @@
-
-$headerBackground: rgba(0,0,0,0.6);
+$headerBackground: rgba(0, 0, 0, 0.6);
+$headerHeight: 95px;
 
 @font-face {
   font-family: "Neutraface Text";
@@ -26,11 +26,11 @@ $headerBackground: rgba(0,0,0,0.6);
 }
 
 .no-gutter > [class*='col-'] {
-  padding-right:0;
-  padding-left:0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
-.flexy{
+.flexy {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,28 +60,28 @@ html {
       top: 0;
       left: 0;
       right: 0;
-      height: 95px;
+      height: $headerHeight;
       z-index: 10;
-      .hamburger{
-        display:none;
-        &-button{
+      .hamburger {
+        display: none;
+        &-button {
           width: 40px;
           height: 40px;
           background: url(../img/hamburger.svg);
-          background-size:200%;
+          background-size: 200%;
           background-position: 0 0;
           text-indent: 9999px;
           display: block;
-          &.open{
+          &.open {
             background-position: 100% 0;
           }
         }
       }
-      .logo{
+      .logo {
         width: 100%;
         max-width: 320px;
       }
-      .header-background{
+      .header-background {
         position: relative;
         background: $headerBackground;
         width: 100%;
@@ -107,10 +107,10 @@ html {
         }
 
         .innerWrapper {
-          height: 100%;
+
           justify-content: space-between;
           align-items: center;
-          .flexy{
+          .flexy {
             flex-direction: row;
           }
         }
@@ -147,7 +147,7 @@ html {
                 content: url('../img/v2-header-chevron.png');
                 display: inline-block;
                 position: absolute;
-                right:22px;
+                right: 22px;
                 bottom: -2px;
               }
               &.open {
@@ -197,35 +197,35 @@ html {
           }
         }
 
-        .header-audioControl{
+        .header-audioControl {
           display: block;
           width: 48px;
           height: 48px;
-          background:url('../img/player-control.png');
-          text-indent:99999px;
-          border:1px solid white;
+          background: url('../img/player-control.png');
+          text-indent: 99999px;
+          border: 1px solid white;
           margin: 0 0 0 20px;
         }
 
-        @media only screen and (max-width: 1660px){
+        @media only screen and (max-width: 1660px) {
           max-width: none;
           justify-content: space-around;
         }
 
       }
       #SecondaryHeaderContent {
-        div.join-list, ul.purchase-links{
+        div.join-list, ul.purchase-links {
           background: $headerBackground;
           color: white;
           text-transform: uppercase;
-          text-align:center;
+          text-align: center;
           width: 518px;
           padding: 36px 20px 0 20px;
-          form{
+          form {
             text-align: center;
             width: 100%;
             margin: 20px 0;
-            input, button{
+            input, button {
               display: block;
               text-align: center;
               border: 0;
@@ -235,13 +235,13 @@ html {
               text-transform: uppercase;
 
             }
-            input{
+            input {
               border-bottom: 2px solid white;
               font-size: 1.125rem;
               width: 80%;
               margin: 0 auto;
             }
-            button{
+            button {
               border: 1px solid white;
               margin: 10px auto 0 auto;
             }
@@ -253,7 +253,7 @@ html {
           li {
             display: block;
             padding: 10px;
-            img{
+            img {
               width: 100%;
               height: auto;
             }
@@ -261,37 +261,62 @@ html {
         }
       }
 
-      @media only screen and (max-width: 1023px){
-        .hamburger{
+      @media only screen and (max-width: 1023px) {
+        .hamburger {
           display: block;
         }
-        .innerWrapper{
+        .innerWrapper {
+          background: $headerBackground;
           display: none;
-          position:fixed;
-          left:0;
-          right:0;
-          top:90px;
-          border:1px solid red;
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: $headerHeight;
           flex-direction: column !important;
           justify-content: flex-start !important;
-          .social-links{
+
+          -webkit-box-shadow: inset 4px 0px 81px -5px rgba(0,0,0,0.62);
+          -moz-box-shadow: inset 4px 0px 81px -5px rgba(0,0,0,0.62);
+          box-shadow: inset 4px 0px 81px -5px rgba(0,0,0,0.62);
+
+          .header-nav {
+            li {
+              display: block !important;
+              margin-bottom: 20px !important;
+              &:last-child{
+                margin: 0 0 20px 0 !important;
+              }
+              a{
+                display: inline-block;
+                margin: 0;
+                width: 100%;
+              }
+            }
+          }
+          .social-links {
             order: -2;
             margin: 0 0 20px 0 !important;
-            li{
+            li {
               width: auto !important;
             }
           }
-          .header-audioControl{
-            order:-1;
+          .flexy {
+            flex-direction: column !important;
+            .header-audioControl{
+              display: none;
+            }
+          }
+          .header-audioControl {
+            order: -1;
           }
 
         }
       }
-      @media only screen and (min-width: 1024px){
-        .hamburger{
-          display:none;
+      @media only screen and (min-width: 1024px) {
+        .hamburger {
+          display: none;
         }
-        .innerWrapper{
+        .innerWrapper {
           display: flex;
         }
       }
@@ -318,12 +343,12 @@ html {
         min-height: 100vh;
         position: relative;
 
-        &.section-video{
+        &.section-video {
           overflow-x: hidden;
           overflow-y: hidden;
           display: flex;
-          justify-content:center;
-          h1{
+          justify-content: center;
+          h1 {
             text-transform: uppercase;
           }
           .videoWrapper {
@@ -363,7 +388,6 @@ html {
           h2 {
             text-transform: uppercase;
             font-size: 1.875rem;
-            font-weight: normal;
             margin: 15px 0 0;
             text-align: center;
             letter-spacing: 4px;
@@ -405,11 +429,11 @@ html {
             }
           }
 
-          .headGroup{
+          .headGroup {
 
             position: absolute;
 
-            &_top{
+            &_top {
               z-index: 2;
               max-width: 210px;
               top: 18vh;
@@ -419,16 +443,23 @@ html {
               }
             }
 
-            &_bottom{
+            &_bottom {
               z-index: 3;
               bottom: 0;
-              h2{
-                border: 2px solid white;
+              h2 {
+                a{
+                  border: 2px solid white;
+                  padding: 16px 40px;
+                  &:hover{
+                    background: rgba(0,0,0,0.8);
+                    color: white;
+                    text-decoration: none;
+                  }
+                }
                 font-size: 6vh;
-                padding: 16px 40px;
                 font-weight: bold;
                 margin: 0 20px;
-                @include extra-small{
+                @include extra-small {
                   font-size: 16px;
                 }
               }
@@ -443,70 +474,70 @@ html {
 
         }
 
-        &.section-lyric{
+        &.section-lyric {
           justify-content: center;
 
           transition: background .25s ease-in-out;
           -moz-transition: background .25s ease-in-out;
           -webkit-transition: background .25s ease-in-out;
 
-          h1{
+          h1 {
             text-transform: uppercase;
             // font-size: 5.3vh;
             // font-size: calc(4vw + 4vh + 2vmin);  <!-- Not bad -->
 
-            @include responsiveFont(10,900,20,50);
+            @include responsiveFont(10, 900, 20, 50);
 
-            @include responsiveFont(901,10000,50.1,100);
+            @include responsiveFont(901, 10000, 50.1, 100);
 
-            text-align:center;
+            text-align: center;
 
             margin: 0 20px;
 
           }
 
           .glitch {
-            @include textGlitch("lyric-glitch-one", 17, white, rgba(0,0,0,0), red, blue, 1200, 115);
-            &-two{
-              @include textGlitch("lyric-glitch-two", 17, white, rgba(0,0,0,0), red, blue, 1200, 135);
+            @include textGlitch("lyric-glitch-one", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 115);
+            &-two {
+              @include textGlitch("lyric-glitch-two", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 135);
             }
           }
 
         }
 
-        &.lyric{
+        &.lyric {
 
           background-size: 100% 100%;
 
-          &_one{
+          &_one {
             background-image: url('../img/grandients/background-000000-130f29.svg');
             // @include linearGradient(#000000,#161130);
           }
-          &_two{
+          &_two {
             background-image: url('../img/grandients/background-281f56-372058.svg');
             // @include linearGradient(#281f56,#372058);
           }
-          &_three{
+          &_three {
             background-image: url('../img/grandients/background-611e5a-8e1d5d.svg');
             // @include linearGradient(#611e5a,#8e1d5d);
           }
-          &_four{
+          &_four {
             background-image: url('../img/grandients/background-b81c5f-e51a62.svg');
             // @include linearGradient(#b81c5f,#e51a62);
           }
         }
 
-        &.section-band{
+        &.section-band {
           flex-direction: row;
-          .band{
-            &-member{
-              position:relative;
+          .band {
+            &-member {
+              position: relative;
               width: 33.33333%;
               height: 100vh;
-              background-size:cover;
+              background-size: cover;
               background-position-y: 100%;
 
-              h2{
+              h2 {
                 text-transform: uppercase;
                 text-align: center;
                 position: absolute;
@@ -517,111 +548,136 @@ html {
 
               }
 
-              &_niko{
-                background-image:url(../img/niko.png);
+              &_niko {
+                background-image: url(../img/niko.png);
                 background-position-x: 72%;
               }
-              &_zac{
-                background-image:url(../img/zac.png);
+              &_zac {
+                background-image: url(../img/zac.png);
                 background-position-x: 84%;
               }
-              &_ben{
-                background-image:url(../img/ben.png);
+              &_ben {
+                background-image: url(../img/ben.png);
                 background-position-x: 80%;
               }
 
-              @include medium{
+              @include medium {
                 background-position-x: 100%;
               }
 
             }
           }
 
-          @include extra-small{
+          @include extra-small {
             flex-direction: column;
             width: 100%;
-            .band-member{
+            .band-member {
               width: 100%;
               background-position-y: 20px;
-              h2{
+              h2 {
                 font-size: calc(4vw + 15vh + 2vmin);
               }
-              &_zac{
-                order:-1;
+              &_zac {
+                order: -1;
               }
             }
           }
         }
 
-        &.section-endCard{
+        &.section-endCard {
           background-image: url('../img/grandients/background-dd208f-c02bde.svg');
           // @include linearGradient(#dd208f,#c02bde);
           padding: 0 20px;
-            img#EndCardLogo{
-              height: 200px;
-              width: auto;
-            }
-            h2, h3{
-              text-transform: uppercase;
-              font-weight: bold;
-              text-align:center;
-            }
-            h2{
-              font-size:6.1vh;
-              margin-top: 30vh;
-            }
-            h3{
+          img#EndCardLogo {
+            height: 200px;
+            width: auto;
+          }
+          h1, h2 {
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+          }
+          h1 {
+            font-size: 6.1vh;
+            margin-top: 30vh;
+          }
+          h2 {
+            a{
+              color: white;
               border: 2px solid white;
-              font-size: 3.7vh;
-              padding: 16px 40px;
-              font-weight: bold;
-              margin: 0 20px;
-              @include extra-small{
-                font-size: 16px;
+              padding: 16px 40px 10px 40px;
+              text-decoration: none;
+              &:visited{
+                text-decoration:none;
+              }
+              &:active{
+                text-decoration: none;
+              }
+              &:hover{
+                background: white;
+                color: #D423A7;
+                text-decoration: none;
               }
             }
-            .endCard{
-              &-logo{
-                max-width: 20vh;
-              }
+            font-size: 6vh;
+            font-weight: bold;
+            margin: 0 20px;
+            @include extra-small {
+              font-size: 16px;
             }
+            /*
+            border: 2px solid white;
+            font-size: 3.7vh;
+            padding: 16px 40px;
+            font-weight: bold;
+            margin: 0 20px;
+            @include extra-small {
+              font-size: 16px;
+            }
+            */
+          }
+          .endCard {
+            &-logo {
+              max-width: 20vh;
+            }
+          }
         }
 
       }
 
-      .scroll{
+      .scroll {
         margin: 30px 0;
         display: flex;
-        flex-direction:column;
-        justify-content:space-around;
-        align-items:center;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
         text-transform: uppercase;
         cursor: pointer;
-        &.scroll-next{
+        &.scroll-next {
           position: fixed;
           right: 20px;
           bottom: 20px;
-          z-index:1000;
+          z-index: 1000;
         }
-        &.scroll-to-top{
-          .scroll-icon{
-            -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
-            -moz-transform: rotate(180deg);        /* FF */
-            -o-transform: rotate(180deg);          /* Opera */
-            -ms-transform: rotate(180deg);         /* IE9 */
-            transform: rotate(180deg);             /* W3C compliant browsers */
+        &.scroll-to-top {
+          .scroll-icon {
+            -webkit-transform: rotate(180deg); /* Chrome and other webkit browsers */
+            -moz-transform: rotate(180deg); /* FF */
+            -o-transform: rotate(180deg); /* Opera */
+            -ms-transform: rotate(180deg); /* IE9 */
+            transform: rotate(180deg); /* W3C compliant browsers */
 
             /* IE8 and below */
             filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand');
 
           }
         }
-        &-icon{
+        &-icon {
           margin: 14px 0 0 0;
           height: 60px;
           width: 60px;
         }
-        @include extra-small{
+        @include extra-small {
           zoom: 0.6;
         }
       }
