@@ -136,7 +136,23 @@ var _ = window._;
             var $b = $(e.target);
 
             $b.toggleClass('playing');
-            $b.hasClass('playing') ? app.soundCloudPlayer.play() : app.soundCloudPlayer.pause();
+            if($b.hasClass('playing')){
+                app.soundCloudPlayer.play();
+                // Manually fire tracking:
+                ga('send', 'event', {
+                    eventCategory: 'Audio Play Pressed',
+                    eventAction: 'click',
+                    eventLabel: 'Audio'
+                });
+            }else{
+                app.soundCloudPlayer.pause();
+                // Manually fire tracking:
+                ga('send', 'event', {
+                    eventCategory: 'Audio Pause Pressed',
+                    eventAction: 'click',
+                    eventLabel: 'Audio'
+                });
+            }
         });
 
         app.soundCloudPlayer = SC.Widget('SoundCloudPlayer');
@@ -202,6 +218,13 @@ var _ = window._;
 
                 }
 
+                // Manually fire tracking:
+                ga('send', 'event', {
+                    eventCategory: 'Open ' + targetAction,
+                    eventAction: 'click',
+                    eventLabel: 'Header Navigation'
+                });
+
                 $targetEl.css(css)
                     .slideDown('slow', function () {
                         callback();
@@ -241,7 +264,19 @@ var _ = window._;
         $('#purchaseToggle').on('click', function (e) {
             e.preventDefault();
             $(this).toggleClass('open');
-            $(this).hasClass('open') ? $purchaseEl.slideDown('slow') : $purchaseEl.slideUp('fast');
+            if($(this).hasClass('open')){
+                $purchaseEl.slideDown('slow');
+
+                // Manually fire tracking:
+                ga('send', 'event', {
+                    eventCategory: 'Open Purchase Links',
+                    eventAction: 'click',
+                    eventLabel: 'Header Navigation'
+                });
+
+            }else{
+                $purchaseEl.slideUp('fast');
+            }
         });
 
         $('.purchase-links').css('display', 'none');
@@ -256,6 +291,14 @@ var _ = window._;
         $('.scroll-first').click(function (e) {
             clearTimeout(app.scrollToTimeout);
             app.ignoreScrollEvents = true;
+
+            // Manually fire tracking:
+            ga('send', 'event', {
+                eventCategory: 'Scroll First Clicked',
+                eventAction: 'click',
+                eventLabel: 'Scroll Control'
+            });
+
             $('html,body')
                 .clearQueue()
                 .animate({
@@ -273,6 +316,14 @@ var _ = window._;
         $('.scroll-next').click(function (e) {
             // $('html,body').animate({ scrollTop: $(e.target).closest('section').next().offset().top }, 'slow');
             var scrollTop = $(window).scrollTop();
+
+            // Manually fire tracking:
+            ga('send', 'event', {
+                eventCategory: 'Scroll Next Clicked',
+                eventAction: 'click',
+                eventLabel: 'Scroll Control'
+            });
+
             $('section').each(function () {
                 if ($(this).offset().top > scrollTop) {
                     clearTimeout(app.scrollToTimeout);
@@ -297,6 +348,14 @@ var _ = window._;
             $('.scroll-next').fadeOut();
             clearTimeout(app.scrollToTimeout);
             app.ignoreScrollEvents = true;
+
+            // Manually fire tracking:
+            ga('send', 'event', {
+                eventCategory: 'Scroll To Top Clicked',
+                eventAction: 'click',
+                eventLabel: 'Scroll Control'
+            });
+
             $('html,body')
                 .clearQueue()
                 .animate({
