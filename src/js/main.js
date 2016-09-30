@@ -133,8 +133,16 @@ var _ = window._;
 
     app.initAudio = function(){
         $('.header-audioControl').bind('click', function(e){
-            $(e.target).toggleClass('playing');
+            var $b = $(e.target);
+
+            $b.toggleClass('playing');
+            $b.hasClass('playing') ? app.soundCloudPlayer.play() : app.soundCloudPlayer.pause();
         });
+
+        app.soundCloudPlayer = SC.Widget('SoundCloudPlayer');
+        app.soundCloudPlayer.bind(SC.Widget.Events.PLAY, function(){
+            $('.header-audioControl').addClass('playing');
+        })
     };
 
     app.initHeader = function () {
@@ -566,6 +574,7 @@ var _ = window._;
 
         window.addEventListener("resize", _.debounce(this.resizeVideo, 500));
         window.addEventListener("resize", _.debounce(this.closeHeader, 10));
+
 
     };
 
