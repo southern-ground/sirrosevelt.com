@@ -131,6 +131,12 @@ var _ = window._;
         $('.secondaryHeaderContent-close').hide();
     };
 
+    app.initAudio = function(){
+        $('.header-audioControl').bind('click', function(e){
+            $(e.target).toggleClass('playing');
+        });
+    };
+
     app.initHeader = function () {
 
         $('.header-nav-item > a').on('click', function (e) {
@@ -561,6 +567,7 @@ var _ = window._;
         this.initVideo();
         this.initPurchaseLinks();
         this.initScroll();
+        this.initAudio();
 
         window.addEventListener("resize", _.debounce(this.resizeVideo, 500));
         window.addEventListener("resize", _.debounce(this.closeHeader, 10));

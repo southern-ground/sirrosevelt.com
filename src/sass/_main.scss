@@ -155,7 +155,7 @@ html {
           &.open {
             background-position: 100% 0;
           }
-          @include mobileSmall{
+          @include newMobileSmall{
             margin-right: 20px;
           }
         }
@@ -163,7 +163,7 @@ html {
       .logo {
         width: 100%;
         max-width: 320px;
-        @include mobileSmall{
+        @include newMobileSmall{
           max-width: calc(100vw - 100px);
           margin-left:20px;
         }
@@ -250,6 +250,9 @@ html {
             }
 
           }
+          li.join{
+            display: none;
+          }
         }
 
         ul.social-links {
@@ -288,9 +291,13 @@ html {
           width: 48px;
           height: 48px;
           background: url('../img/player-control.png');
+          background-position: 48px 0;
           text-indent: 99999px;
           border: 1px solid white;
           margin: 0 0 0 20px;
+          &.playing{
+            background-position: 0 0;
+          }
         }
 
         @media only screen and (max-width: 1660px) {
@@ -347,7 +354,7 @@ html {
               margin: 10px auto 0 auto;
             }
           }
-          @include mobile{
+          @include newMobile{
             width: 100%;
             background: opacify($headerBackground, 0.9);
             display: flex;
@@ -370,7 +377,7 @@ html {
               }
             }
           }
-          @include mobile {
+          @include newMobile {
             width: 100%;
             background: opacify($headerBackground, 0.9);
             display: flex;
@@ -380,7 +387,7 @@ html {
         }
       }
 
-      @include mobile {
+      @include newMobile {
         .hamburger {
           display: block;
         }
@@ -398,7 +405,7 @@ html {
           -moz-box-shadow: inset 0px -9px 31px 3px rgba(0,0,0,0.19);
           box-shadow: inset 0px -9px 31px 3px rgba(0,0,0,0.19);
 
-          @include mobile{
+          @include newMobile{
             top: $headerHeightMobile;
           }
 
@@ -515,7 +522,7 @@ html {
               max-width: 300px;
               height: auto;
             }
-            @include mobile {
+            @include newMobile {
               margin: 20px 0 0 0;
               width: calc(100vw - 40px);
               max-width: 400px;
@@ -528,7 +535,7 @@ html {
             width: 18vh;
             max-width: 210px;
             margin-top: 18vh;
-            @include mobile {
+            @include newMobile {
               margin-top:16vh;
             }
           }
@@ -541,7 +548,7 @@ html {
             &_bottom{
               z-index: $headerCardGroupZ;
               text-align:center;
-              @include mobile{
+              @include newMobile{
                 margin-bottom: 60px;
               }
             }
@@ -608,7 +615,7 @@ html {
                 text-transform: uppercase;
                 text-align: center;
                 position: absolute;
-                bottom: 20px;
+                top: 50%;
                 width: 100%;
 
                 font-size: calc(4vw + 4vh + 2vmin);
