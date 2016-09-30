@@ -4,7 +4,7 @@ var _ = window._;
 
     window.com = window.com || {};
 
-    var SCROLLJACK_TIMEOUT = 250,
+    var SCROLLJACK_TIMEOUT = 500,
         PERCENT_REQUIRED_TO_SCROLL = 0.60;
 
     var elementInViewport = function(el) {
@@ -26,10 +26,6 @@ var _ = window._;
             (left + width) > window.pageXOffset
         );
     };
-
-    var prevScrollTop = 0,
-        scrollDown = false,
-        scrollToTimeout;
 
     var app = window.com.sirrosevelt || {};
 
@@ -287,7 +283,7 @@ var _ = window._;
             return false;
         });
 
-        window.addEventListener("scroll", app.updateScroll); // _.debounce(updateScroll, 25));
+        window.addEventListener("scroll", _.debounce(app.updateScroll, 100));
 
         this.updateScroll();
 
@@ -372,19 +368,7 @@ var _ = window._;
 
     };
 
-    app.updateScroll = function(e){
-
-        var doc = document.documentElement,
-            top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0),
-            winH = $(window).height();
-
-        scrollDown = prevScrollTop - top < 0 ? true : false;
-        prevScrollTop = top;
-
-        // Clear any possible scrollToTimeouts
-        clearTimeout(scrollToTimeout);
-
-        app.updateVideos();
+    app.updateLyrics = function(top){
 
         // Adjust the opacity on any lyric text on the screen:
 
@@ -410,7 +394,12 @@ var _ = window._;
                 $(this).find('.glitch').css('opacity', 0);
 
             }
+
         });
+
+    };
+
+    app.updateScrollNag = function(){
 
         // Update the scroll nag position if necessary:
 
@@ -423,71 +412,94 @@ var _ = window._;
             app.$scrollNext.clearQueue().delay(1500).fadeIn();
         }
 
-        // If an element is more than 20% from the top of the page, snap to it.
-        if(!elementInViewport(document.getElementById('Members')) &&
-            !elementInViewport(document.getElementById('EndCard'))){
+    };
+
+    app.updateScroll = function(e){
+
+        // Function is called w/in the Window scope.
+
+        var doc = document.documentElement,
+            top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0),
+            winH = $(window).height();
+
+        app.isScrollingDown = app.prevScrollTop - top < 0 ? true : false;
+        app.prevScrollTop = top;
+
+        // Clear any possible scrollToTimeouts
+        clearTimeout(app.scrollToTimeout);
+
+        app.updateVideos();
+
+        app.updateLyrics(top);
+
+        app.updateScrollNag();
+
+        /*if(!elementInViewport(document.getElementById('Members')) &&
+            !elementInViewport(document.getElementById('EndCard'))){*/
+
+            var inView = [],
+                directionalScrollJacking = true;
 
             $('.sticky').each(function(){
 
                 if(elementInViewport($(this).get(0))){
+                    if(directionalScrollJacking){
+                        inView.push($(this));
+                    }else{
+                        var myTop = $(this).offset().top;
 
-                    var myTop = $(this).offset().top;
+                        var percFromTopOfViewport = Math.abs(top - myTop) / winH;
 
-                    var percFromTopOfViewport = Math.abs(top - myTop) / winH;
+                        if(percFromTopOfViewport < PERCENT_REQUIRED_TO_SCROLL){
 
-                    if(percFromTopOfViewport < PERCENT_REQUIRED_TO_SCROLL){
+                            // Snap to!
 
-                        // Snap to!
+                            // Doubly clear any timeouts:
+                            clearTimeout(scrollToTimeout);
 
-                        // Doubly clear any timeouts:
-                        clearTimeout(scrollToTimeout);
+                            // Stop any animations running or queued.
+                            $('html,body').clearQueue();
 
-                        // Stop any animations running or queued.
-                        $('html,body').clearQueue();
+                            scrollToTimeout = setTimeout(function(){
+                                $('html,body').animate({ scrollTop: myTop }, 'slow', 'easeOutBounce');
+                            }, SCROLLJACK_TIMEOUT);
 
-                        scrollToTimeout = setTimeout(function(){
-                            $('html,body').animate({ scrollTop: myTop }, 'slow', 'easeOutBounce');
-                        }, SCROLLJACK_TIMEOUT);
-
-                        return;
+                            return;
+                        }
                     }
                 }
 
             });
 
+            if(directionalScrollJacking){
 
-            /*
-             scrollToTimeout = setTimeout(function(){
+                var newTop = 0;
 
-             console.warn('Scroll To Timeout');
+                if(elementInViewport($('#SundayVideo').get(0))
+                    || elementInViewport($('.section-band').get(0))){
+                    return;
+                }
 
-             // Stop any animations running or queued.
-             $('html,body').clearQueue();
+                if(inView.length === 1){
+                    newTop = inView[0].offset().top;
+                }else if(inView.length > 1){
+                    if(app.isScrollingDown){
+                        newTop = inView[inView.length - 1].offset().top;
+                    }else{
+                        newTop = inView[0].offset().top;
+                    }
+                }else{
+                    // Nothing?
+                }
 
-             if(scrollDelta === 0){
-             return;
-             }
+                if(newTop > 0){
+                    scrollToTimeout = setTimeout(function(){
+                        $('html,body').animate({ scrollTop: newTop }, 'slow', 'easeOutBounce');
+                    }, SCROLLJACK_TIMEOUT);
+                }
+            }
 
-             // Gather a list of all items in view:
-             var inView = [];
-             $('section').each(function(){
-             if(elementInViewport($(this).get(0))){
-             console.log('top:', top, 'section:', (top - $(this).offset().top));
-             inView.push($(this));
-             }
-             });
-
-             if(scrollDelta < 0){
-             // If scrolling down, gravitate to teh next one.
-             $('html,body').animate({ scrollTop: inView[inView.length - 1].offset().top }, 'slow', 'easeOutBounce');
-             }else{
-             // ... Otherwise go the other way.
-             $('html,body').animate({ scrollTop: inView[0].offset().top }, 'slow', 'easeOutBounce');
-             }
-
-             }, 500);
-             */
-        }
+        /*}*/
 
     };
 
