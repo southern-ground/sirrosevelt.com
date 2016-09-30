@@ -136,10 +136,13 @@ var _ = window._;
     };
 
     app.initAudio = function(){
+
         $('.header-audioControl').bind('click', function(e){
+
             var $b = $(e.target);
 
             $b.toggleClass('playing');
+
             if($b.hasClass('playing')){
                 app.soundCloudPlayer.play();
                 // Manually fire tracking:
@@ -157,12 +160,20 @@ var _ = window._;
                     eventLabel: 'Audio'
                 });
             }
+
         });
 
         app.soundCloudPlayer = SC.Widget('SoundCloudPlayer');
+
         app.soundCloudPlayer.bind(SC.Widget.Events.PLAY, function(){
-            $('.header-audioControl').addClass('playing');
-        })
+            $('.header-audioControl')
+                .addClass('playing online');
+        });
+
+        app.soundCloudPlayer.bind(SC.Widget.Events.FINISH, function(){
+            $('.header-audioControl').removeClass('playing');
+        });
+
     };
 
     app.initHeader = function () {
