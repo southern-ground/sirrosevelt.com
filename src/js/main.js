@@ -7,13 +7,13 @@ var _ = window._;
     var SCROLLJACK_TIMEOUT = 500,
         PERCENT_REQUIRED_TO_SCROLL = 0.60;
 
-    var elementInViewport = function(el) {
+    var elementInViewport = function (el) {
         var top = el.offsetTop;
         var left = el.offsetLeft;
         var width = el.offsetWidth;
         var height = el.offsetHeight;
 
-        while(el.offsetParent) {
+        while (el.offsetParent) {
             el = el.offsetParent;
             top += el.offsetTop;
             left += el.offsetLeft;
@@ -63,7 +63,7 @@ var _ = window._;
 
         var $el, $v;
 
-        $('.videoWrapper').each(function(){
+        $('.videoWrapper').each(function () {
             $el = $(this);
             $v = $(this).find('.ambientVideo');
 
@@ -104,9 +104,9 @@ var _ = window._;
         if (this.videoState.bufferingDetected) {
             this.videoState.timeDelayed++;
         } else {
-            if(this.videoState.lastPlayPos === this.videoState.currentPlayPos){
+            if (this.videoState.lastPlayPos === this.videoState.currentPlayPos) {
                 this.videoState.timeDelayed++;
-            }else{
+            } else {
                 this.videoState.timeDelayed = 0;
             }
         }
@@ -116,14 +116,14 @@ var _ = window._;
         if (this.videoState.timeDelayed * this.videoState.interval / 1000 > 2.5) {
             clearInterval(this.checkPlayingInterval);
             this.showStaticImage();
-        }else if(this.videoState.currentPlayPos > 1.5){
+        } else if (this.videoState.currentPlayPos > 1.5) {
             console.warn('ambient video playing');
             clearInterval(this.checkPlayingInterval);
         }
 
     };
 
-    app.closeHeader = function(){
+    app.closeHeader = function () {
         $('.header-nav-item > a').removeClass('open');
         $('.header-nav-option').css('display', 'none');
         $('header .innerWrapper').css('display', '');
@@ -131,9 +131,9 @@ var _ = window._;
         $('.secondaryHeaderContent-close').hide();
     };
 
-    app.initHeader = function(){
+    app.initHeader = function () {
 
-        $('.header-nav-item > a').on('click', function(e){
+        $('.header-nav-item > a').on('click', function (e) {
 
             e.preventDefault();
 
@@ -141,7 +141,7 @@ var _ = window._;
                 leftEdge = $eventTarget.offset().left,
                 targetAction = $eventTarget.data('nav-action');
 
-            $('.header-nav-item>a').filter(function(){
+            $('.header-nav-item>a').filter(function () {
                 return $(this).data('nav-action') != targetAction;
             }).removeClass('open');
 
@@ -151,44 +151,45 @@ var _ = window._;
             $('.header-nav-option').slideUp('fast')
                 .attr('data-open', '');
 
-            if($eventTarget.hasClass('open')){
+            if ($eventTarget.hasClass('open')) {
 
                 // Open the target area:
-                var $targetEl = $('.header-nav-option[data-nav-target='+targetAction+']'),
+                var $targetEl = $('.header-nav-option[data-nav-target=' + targetAction + ']'),
                     css = {},
-                    callback = function(){};
+                    callback = function () {
+                    };
 
                 // Check if we're in the mobile/shrunken state:
-                if($('.hamburger-button').hasClass('open')){
+                if ($('.hamburger-button').hasClass('open')) {
 
                     css = {
                         position: 'fixed',
                         left: 0,
                         right: 0,
                         top: 0,
-                        bottom:0,
-                        zIndex:999
+                        bottom: 0,
+                        zIndex: 60
                     };
 
                     newTop = $('.innerWrapper').offset().top + $('.innerWrapper').height();
 
-                    callback = function(){
+                    callback = function () {
                         $('.secondaryHeaderContent-close').show();
                     }
 
-                }else{
+                } else {
 
                     css = {
                         position: 'absolute',
                         left: targetAction === "join" ? leftEdge - (($targetEl.width() - ($eventTarget.width() * 0.5)) * 0.5) : leftEdge,
                         top: $('header').height(),
-                        zIndex:999
+                        zIndex: 999
                     };
 
                 }
 
                 $targetEl.css(css)
-                    .slideDown('slow', function(){
+                    .slideDown('slow', function () {
                         callback();
                     })
                     .attr('data-open', true);
@@ -197,21 +198,21 @@ var _ = window._;
 
         });
 
-        $('.hamburger-button').on('click', function(e){
+        $('.hamburger-button').on('click', function (e) {
 
             var $el = $(e.target);
 
             $el.toggleClass('open');
 
-            if($el.hasClass('open')){
+            if ($el.hasClass('open')) {
                 $('header .innerWrapper').slideDown();
-            }else{
+            } else {
                 $('header .innerWrapper').slideUp();
             }
 
         });
 
-        $('.secondaryHeaderContent-close').bind('click', function(){
+        $('.secondaryHeaderContent-close').bind('click', function () {
             $(this).hide();
             $('.header-nav-option[data-open="true"]').slideUp('fast');
         });
@@ -219,11 +220,11 @@ var _ = window._;
         return this;
     };
 
-    app.initPurchaseLinks = function(){
+    app.initPurchaseLinks = function () {
 
         var $purchaseEl = $('.purchase-links');
 
-        $('#purchaseToggle').on('click', function(e){
+        $('#purchaseToggle').on('click', function (e) {
             e.preventDefault();
             $(this).toggleClass('open');
             $(this).hasClass('open') ? $purchaseEl.slideDown('slow') : $purchaseEl.slideUp('fast');
@@ -234,14 +235,13 @@ var _ = window._;
         return this;
     };
 
-    app.initScroll = function(){
+    app.initScroll = function () {
 
         this.$scrollNext = $('.scroll-next');
 
-        var _this = this;
-
-        $('.scroll-first').click(function(e){
-            clearTimeout(scrollToTimeout);
+        $('.scroll-first').click(function (e) {
+            clearTimeout(app.scrollToTimeout);
+            app.ignoreScrollEvents = true;
             $('html,body')
                 .clearQueue()
                 .animate({
@@ -249,37 +249,48 @@ var _ = window._;
                         .closest('section')
                         .next()
                         .offset().top
-                }, 'slow');
+                }, 'slow', function () {
+                    console.log('Scrolling complete');
+                    app.ignoreScrollEvents = false;
+                });
             return false;
         });
 
-        $('.scroll-next').click(function(e){
+        $('.scroll-next').click(function (e) {
             // $('html,body').animate({ scrollTop: $(e.target).closest('section').next().offset().top }, 'slow');
             var scrollTop = $(window).scrollTop();
-            $('section').each(function(){
-                if($(this).offset().top > scrollTop){
-                    clearTimeout(scrollToTimeout);
+            $('section').each(function () {
+                if ($(this).offset().top > scrollTop) {
+                    clearTimeout(app.scrollToTimeout);
+                    app.ignoreScrollEvents = true;
                     $('html,body')
                         .clearQueue()
                         .animate({
                             scrollTop: $(this)
                                 .offset()
                                 .top
-                        }, 'slow');
+                        }, 'slow', function () {
+                            console.log('Scrolling complete');
+                            app.ignoreScrollEvents = false;
+                        });
                     return false;
                 }
             });
             return false;
         });
 
-        $('.scroll-to-top').click(function(e){
+        $('.scroll-to-top').click(function (e) {
             $('.scroll-next').fadeOut();
-            clearTimeout(scrollToTimeout);
+            clearTimeout(app.scrollToTimeout);
+            app.ignoreScrollEvents = true;
             $('html,body')
                 .clearQueue()
                 .animate({
                     scrollTop: 0
-                }, 'slow');
+                }, 'slow', function () {
+                    console.log('Scrolling complete');
+                    app.ignoreScrollEvents = false;
+                });
             return false;
         });
 
@@ -289,7 +300,7 @@ var _ = window._;
 
     };
 
-    app.startVideo = function($video){
+    app.startVideo = function ($video) {
 
         $video.attr('src', $video.data('src'));
         $video.attr('muted', 'muted'); // Most videos shouldn't have audio.
@@ -297,7 +308,7 @@ var _ = window._;
 
         var videoEl = $video.get(0);
 
-        if(this.isMobile){
+        if (this.isMobile) {
             console.warn('Attempting to play video on mobile');
             makeVideoPlayableInline(videoEl, false);
 
@@ -321,11 +332,11 @@ var _ = window._;
 
         var $v, videoEl;
 
-        $('.ambientVideo').each(function(){
+        $('.ambientVideo').each(function () {
 
             $v = $(this);
 
-            if(elementInViewport($v.get(0))){
+            if (elementInViewport($v.get(0))) {
                 app.startVideo($v);
             }
 
@@ -347,7 +358,7 @@ var _ = window._;
             videoW, videoH, scale, newW, newH,
             $v;
 
-        $('.ambientVideo').each(function(){
+        $('.ambientVideo').each(function () {
 
             $v = $(this);
 
@@ -368,26 +379,26 @@ var _ = window._;
 
     };
 
-    app.updateLyrics = function(top){
+    app.updateLyrics = function (top) {
 
         // Adjust the opacity on any lyric text on the screen:
 
-        $('.section-lyric').each(function(){
+        $('.section-lyric').each(function () {
 
-            if(elementInViewport($(this).get(0))){
+            if (elementInViewport($(this).get(0))) {
 
                 // $(this).find('h1.glitch').delay(1500).fadeIn('slow', 'easeOutBounce');
 
                 var opacity = 1 - (($(this).offset().top - top) / ($(window).height() * 0.3));
 
-                if(opacity > 1){
+                if (opacity > 1) {
                     opacity -= 2;
                     opacity *= -1;
                 }
 
                 $(this).find('h1.glitch').css('opacity', opacity);
 
-            }else{
+            } else {
 
                 // $(this).find('h1.glitch').fadeOut();
 
@@ -399,27 +410,29 @@ var _ = window._;
 
     };
 
-    app.updateScrollNag = function(){
+    app.updateScrollNag = function () {
 
         // Update the scroll nag position if necessary:
 
-        if(elementInViewport(document.getElementById('SundayVideo'))
+        if (elementInViewport(document.getElementById('SundayVideo'))
             || elementInViewport(document.getElementById('Members'))
-            || elementInViewport(document.getElementById('EndCard'))){
+            || elementInViewport(document.getElementById('EndCard'))) {
             // At the top or bottom; hide the scroll control on the side.
             app.$scrollNext.clearQueue().fadeOut();
-        }else{
+        } else {
             app.$scrollNext.clearQueue().delay(1500).fadeIn();
         }
 
     };
 
-    app.updateScroll = function(e){
+    app.updateScroll = function (e) {
+
+        console.log('updateScroll');
 
         // Function is called w/in the Window scope.
 
         var doc = document.documentElement,
-            top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0),
+            top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0),
             winH = $(window).height();
 
         app.isScrollingDown = app.prevScrollTop - top < 0 ? true : false;
@@ -435,22 +448,24 @@ var _ = window._;
         app.updateScrollNag();
 
         /*if(!elementInViewport(document.getElementById('Members')) &&
-            !elementInViewport(document.getElementById('EndCard'))){*/
+         !elementInViewport(document.getElementById('EndCard'))){*/
+
+        if (!app.ignoreScrollEvents) {
 
             var inView = [],
                 directionalScrollJacking = true;
 
-            $('.sticky').each(function(){
+            $('.sticky').each(function () {
 
-                if(elementInViewport($(this).get(0))){
-                    if(directionalScrollJacking){
+                if (elementInViewport($(this).get(0))) {
+                    if (directionalScrollJacking) {
                         inView.push($(this));
-                    }else{
+                    } else {
                         var myTop = $(this).offset().top;
 
                         var percFromTopOfViewport = Math.abs(top - myTop) / winH;
 
-                        if(percFromTopOfViewport < PERCENT_REQUIRED_TO_SCROLL){
+                        if (percFromTopOfViewport < PERCENT_REQUIRED_TO_SCROLL) {
 
                             // Snap to!
 
@@ -460,8 +475,8 @@ var _ = window._;
                             // Stop any animations running or queued.
                             $('html,body').clearQueue();
 
-                            scrollToTimeout = setTimeout(function(){
-                                $('html,body').animate({ scrollTop: myTop }, 'slow', 'easeOutBounce');
+                            scrollToTimeout = setTimeout(function () {
+                                $('html,body').animate({scrollTop: myTop}, 'slow', 'easeOutQuad');
                             }, SCROLLJACK_TIMEOUT);
 
                             return;
@@ -471,60 +486,61 @@ var _ = window._;
 
             });
 
-            if(directionalScrollJacking){
+            if (directionalScrollJacking) {
 
                 var newTop = 0;
 
-                if(elementInViewport($('#SundayVideo').get(0))
-                    || elementInViewport($('.section-band').get(0))){
+                if (elementInViewport($('#SundayVideo').get(0))
+                    || elementInViewport($('.section-band').get(0))) {
                     return;
                 }
 
-                if(inView.length === 1){
+                if (inView.length === 1) {
                     newTop = inView[0].offset().top;
-                }else if(inView.length > 1){
-                    if(app.isScrollingDown){
+                } else if (inView.length > 1) {
+                    if (app.isScrollingDown) {
                         newTop = inView[inView.length - 1].offset().top;
-                    }else{
+                    } else {
                         newTop = inView[0].offset().top;
                     }
-                }else{
+                } else {
                     // Nothing?
                 }
 
-                if(newTop > 0){
-                    scrollToTimeout = setTimeout(function(){
-                        $('html,body').animate({ scrollTop: newTop }, 'slow', 'easeOutBounce');
+                if (newTop > 0) {
+                    scrollToTimeout = setTimeout(function () {
+                        $('html,body').animate({scrollTop: newTop}, 'slow', 'easeOutQuad');
                     }, SCROLLJACK_TIMEOUT);
                 }
             }
 
+        }
         /*}*/
 
     };
 
-    app.updateVideos = function(){
+    app.updateVideos = function () {
 
         // Check all the videos and pause as necessary:
 
-        $('.ambientVideo').each(function(){
+        $('.ambientVideo').each(function () {
 
             $videoRef = $(this);
             videoElement = $(this).get(0);
 
-            if(elementInViewport(videoElement)){
+            if (elementInViewport(videoElement)) {
                 // Video is on-screen.
-                if($videoRef.data('video-started')) {
+                if ($videoRef.data('video-started')) {
                     // Video has previously been started before
                     if (videoElement.paused) {
                         videoElement.play();
                     }
-                }else{
+                } else {
                     // Video hasn't played yet:
                     app.startVideo($videoRef);
                 }
-            }else{
-                if($videoRef.data('video-started') && !videoElement.paused){
+            } else {
+                if ($videoRef.data('video-started') && !videoElement.paused) {
                     videoElement.pause();
                 }
             }
