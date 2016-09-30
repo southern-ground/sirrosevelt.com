@@ -433,8 +433,6 @@ var _ = window._;
 
     app.updateScroll = function (e) {
 
-        console.log('updateScroll');
-
         // Function is called w/in the Window scope.
 
         var doc = document.documentElement,
@@ -459,7 +457,7 @@ var _ = window._;
         if (!app.ignoreScrollEvents) {
 
             var inView = [],
-                directionalScrollJacking = true;
+                directionalScrollJacking = false;
 
             $('.sticky').each(function () {
 
@@ -475,13 +473,10 @@ var _ = window._;
 
                             // Snap to!
 
-                            // Doubly clear any timeouts:
-                            clearTimeout(scrollToTimeout);
-
                             // Stop any animations running or queued.
                             $('html,body').clearQueue();
 
-                            scrollToTimeout = setTimeout(function () {
+                            app.scrollToTimeout = setTimeout(function () {
                                 $('html,body').animate({scrollTop: myTop}, 'slow', 'easeOutQuad');
                             }, SCROLLJACK_TIMEOUT);
 
