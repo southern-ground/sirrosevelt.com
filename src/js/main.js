@@ -4,6 +4,9 @@ var _ = window._;
 
     window.com = window.com || {};
 
+    var SCROLLJACK_TIMEOUT = 250,
+        PERCENT_REQUIRED_TO_SCROLL = 0.60;
+
     var elementInViewport = function(el) {
         var top = el.offsetTop;
         var left = el.offsetLeft;
@@ -25,150 +28,8 @@ var _ = window._;
     };
 
     var prevScrollTop = 0,
-        scrollDelta = 0,
+        scrollDown = false,
         scrollToTimeout;
-
-    var updateScroll = function(e){
-
-        var doc = document.documentElement,
-            top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0),
-            winH = $(window).height();
-
-        scrollDelta = prevScrollTop - top;
-        prevScrollTop = top;
-
-        // Clear any possible scrollToTimeouts
-        clearTimeout(scrollToTimeout);
-
-        // Check all the videos and pause as necessary:
-
-        $('.ambientVideo').each(function(){
-
-            $videoRef = $(this);
-            videoElement = $(this).get(0);
-
-            if(elementInViewport(videoElement)){
-                // Video is on-screen.
-                if($videoRef.data('started')) {
-                    // Video has previously been started before
-                    if (videoElement.paused) {
-                        videoElement.play();
-                    }
-                }else{
-                    // Video hasn't played yet:
-                    app.startVideo($videoRef);
-                }
-            }else{
-                if($videoRef.data('started') && !videoElement.paused){
-                    videoElement.pause();
-                }
-            }
-
-        });
-
-        // Adjust the opacity on any lyric text on the screen:
-
-        $('.section-lyric').each(function(){
-
-            if(elementInViewport($(this).get(0))){
-
-                // $(this).find('h1.glitch').delay(1500).fadeIn('slow', 'easeOutBounce');
-
-                var opacity = 1 - (($(this).offset().top - top) / ($(window).height() * 0.3));
-
-                if(opacity > 1){
-                    opacity -= 2;
-                    opacity *= -1;
-                }
-
-                $(this).find('h1.glitch').css('opacity', opacity);
-
-            }else{
-
-                // $(this).find('h1.glitch').fadeOut();
-
-                $(this).find('.glitch').css('opacity', 0);
-
-            }
-        });
-
-        // Update the scroll nag position if necessary:
-
-        if(elementInViewport(document.getElementById('SundayVideo'))
-            || elementInViewport(document.getElementById('Members'))
-            || elementInViewport(document.getElementById('EndCard'))){
-            // At the top or bottom; hide the scroll control on the side.
-            app.$scrollNext.clearQueue().fadeOut();
-        }else{
-            app.$scrollNext.clearQueue().delay(1500).fadeIn();
-        }
-
-        // If an element is more than 20% from the top of the page, snap to it.
-        if(!elementInViewport(document.getElementById('Members')) &&
-            !elementInViewport(document.getElementById('EndCard'))){
-
-            $('.sticky').each(function(){
-
-                if(elementInViewport($(this).get(0))){
-
-                    var myTop = $(this).offset().top;
-
-                    var percFromTopOfViewport = Math.abs(top - myTop) / winH;
-
-                    if(percFromTopOfViewport < 0.45){
-
-                        // Snap to!
-
-                        // Doubly clear any timeouts:
-                        clearTimeout(scrollToTimeout);
-
-                        // Stop any animations running or queued.
-                        $('html,body').clearQueue();
-
-                        scrollToTimeout = setTimeout(function(){
-                            $('html,body').animate({ scrollTop: myTop }, 'slow', 'easeOutBounce');
-                        }, 750);
-
-                        return;
-                    }
-                }
-            });
-
-
-            /*
-            scrollToTimeout = setTimeout(function(){
-
-                console.warn('Scroll To Timeout');
-
-                // Stop any animations running or queued.
-                $('html,body').clearQueue();
-
-                if(scrollDelta === 0){
-                    return;
-                }
-
-                // Gather a list of all items in view:
-                var inView = [];
-                $('section').each(function(){
-                    if(elementInViewport($(this).get(0))){
-                        console.log('top:', top, 'section:', (top - $(this).offset().top));
-                        inView.push($(this));
-                    }
-                });
-
-                if(scrollDelta < 0){
-                    // If scrolling down, gravitate to teh next one.
-                    $('html,body').animate({ scrollTop: inView[inView.length - 1].offset().top }, 'slow', 'easeOutBounce');
-                }else{
-                    // ... Otherwise go the other way.
-                    $('html,body').animate({ scrollTop: inView[0].offset().top }, 'slow', 'easeOutBounce');
-                }
-
-            }, 500);
-            */
-        }
-
-    };
 
     var app = window.com.sirrosevelt || {};
 
@@ -271,6 +132,7 @@ var _ = window._;
         $('.header-nav-option').css('display', 'none');
         $('header .innerWrapper').css('display', '');
         $('.hamburger-button').removeClass('open');
+        $('.secondaryHeaderContent-close').hide();
     };
 
     app.initHeader = function(){
@@ -290,37 +152,74 @@ var _ = window._;
             $eventTarget.toggleClass('open');
 
             // Close all:
-            $('.header-nav-option').slideUp('fast');
+            $('.header-nav-option').slideUp('fast')
+                .attr('data-open', '');
 
             if($eventTarget.hasClass('open')){
 
                 // Open the target area:
-                var $targetEl = $('.header-nav-option[data-nav-target='+targetAction+']');
+                var $targetEl = $('.header-nav-option[data-nav-target='+targetAction+']'),
+                    css = {},
+                    callback = function(){};
 
-                var newCSS = {
-                    position: 'absolute',
-                    left: targetAction === "join" ? leftEdge - (($targetEl.width() - ($eventTarget.width() * 0.5)) * 0.5) : leftEdge,
-                    top: $('header').height(),
-                    zIndex:999
-                };
+                // Check if we're in the mobile/shrunken state:
+                if($('.hamburger-button').hasClass('open')){
 
-                $targetEl.css(newCSS)
-                    .slideDown('slow');
+                    css = {
+                        position: 'fixed',
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom:0,
+                        zIndex:999
+                    };
+
+                    newTop = $('.innerWrapper').offset().top + $('.innerWrapper').height();
+
+                    callback = function(){
+                        $('.secondaryHeaderContent-close').show();
+                    }
+
+                }else{
+
+                    css = {
+                        position: 'absolute',
+                        left: targetAction === "join" ? leftEdge - (($targetEl.width() - ($eventTarget.width() * 0.5)) * 0.5) : leftEdge,
+                        top: $('header').height(),
+                        zIndex:999
+                    };
+
+                }
+
+                $targetEl.css(css)
+                    .slideDown('slow', function(){
+                        callback();
+                    })
+                    .attr('data-open', true);
+
             }
 
         });
 
         $('.hamburger-button').on('click', function(e){
+
             var $el = $(e.target);
+
             $el.toggleClass('open');
+
             if($el.hasClass('open')){
                 $('header .innerWrapper').slideDown();
-
             }else{
                 $('header .innerWrapper').slideUp();
             }
 
         });
+
+        $('.secondaryHeaderContent-close').bind('click', function(){
+            $(this).hide();
+            $('.header-nav-option[data-open="true"]').slideUp('fast');
+        });
+
         return this;
     };
 
@@ -388,9 +287,9 @@ var _ = window._;
             return false;
         });
 
-        window.addEventListener("scroll", updateScroll); // _.debounce(updateScroll, 25));
+        window.addEventListener("scroll", app.updateScroll); // _.debounce(updateScroll, 25));
 
-        updateScroll();
+        this.updateScroll();
 
     };
 
@@ -398,7 +297,7 @@ var _ = window._;
 
         $video.attr('src', $video.data('src'));
         $video.attr('muted', 'muted'); // Most videos shouldn't have audio.
-        $video.data('started', true);
+        $video.data('video-started', true);
 
         var videoEl = $video.get(0);
 
@@ -421,7 +320,6 @@ var _ = window._;
     app.initVideo = function () {
 
         console.log('app::initVideo');
-        console.log(this);
 
         this.videos = [];
 
@@ -470,6 +368,155 @@ var _ = window._;
                 width: newW + 'px',
                 height: newH + 'px'
             });
+        });
+
+    };
+
+    app.updateScroll = function(e){
+
+        var doc = document.documentElement,
+            top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0),
+            winH = $(window).height();
+
+        scrollDown = prevScrollTop - top < 0 ? true : false;
+        prevScrollTop = top;
+
+        // Clear any possible scrollToTimeouts
+        clearTimeout(scrollToTimeout);
+
+        app.updateVideos();
+
+        // Adjust the opacity on any lyric text on the screen:
+
+        $('.section-lyric').each(function(){
+
+            if(elementInViewport($(this).get(0))){
+
+                // $(this).find('h1.glitch').delay(1500).fadeIn('slow', 'easeOutBounce');
+
+                var opacity = 1 - (($(this).offset().top - top) / ($(window).height() * 0.3));
+
+                if(opacity > 1){
+                    opacity -= 2;
+                    opacity *= -1;
+                }
+
+                $(this).find('h1.glitch').css('opacity', opacity);
+
+            }else{
+
+                // $(this).find('h1.glitch').fadeOut();
+
+                $(this).find('.glitch').css('opacity', 0);
+
+            }
+        });
+
+        // Update the scroll nag position if necessary:
+
+        if(elementInViewport(document.getElementById('SundayVideo'))
+            || elementInViewport(document.getElementById('Members'))
+            || elementInViewport(document.getElementById('EndCard'))){
+            // At the top or bottom; hide the scroll control on the side.
+            app.$scrollNext.clearQueue().fadeOut();
+        }else{
+            app.$scrollNext.clearQueue().delay(1500).fadeIn();
+        }
+
+        // If an element is more than 20% from the top of the page, snap to it.
+        if(!elementInViewport(document.getElementById('Members')) &&
+            !elementInViewport(document.getElementById('EndCard'))){
+
+            $('.sticky').each(function(){
+
+                if(elementInViewport($(this).get(0))){
+
+                    var myTop = $(this).offset().top;
+
+                    var percFromTopOfViewport = Math.abs(top - myTop) / winH;
+
+                    if(percFromTopOfViewport < PERCENT_REQUIRED_TO_SCROLL){
+
+                        // Snap to!
+
+                        // Doubly clear any timeouts:
+                        clearTimeout(scrollToTimeout);
+
+                        // Stop any animations running or queued.
+                        $('html,body').clearQueue();
+
+                        scrollToTimeout = setTimeout(function(){
+                            $('html,body').animate({ scrollTop: myTop }, 'slow', 'easeOutBounce');
+                        }, SCROLLJACK_TIMEOUT);
+
+                        return;
+                    }
+                }
+
+            });
+
+
+            /*
+             scrollToTimeout = setTimeout(function(){
+
+             console.warn('Scroll To Timeout');
+
+             // Stop any animations running or queued.
+             $('html,body').clearQueue();
+
+             if(scrollDelta === 0){
+             return;
+             }
+
+             // Gather a list of all items in view:
+             var inView = [];
+             $('section').each(function(){
+             if(elementInViewport($(this).get(0))){
+             console.log('top:', top, 'section:', (top - $(this).offset().top));
+             inView.push($(this));
+             }
+             });
+
+             if(scrollDelta < 0){
+             // If scrolling down, gravitate to teh next one.
+             $('html,body').animate({ scrollTop: inView[inView.length - 1].offset().top }, 'slow', 'easeOutBounce');
+             }else{
+             // ... Otherwise go the other way.
+             $('html,body').animate({ scrollTop: inView[0].offset().top }, 'slow', 'easeOutBounce');
+             }
+
+             }, 500);
+             */
+        }
+
+    };
+
+    app.updateVideos = function(){
+
+        // Check all the videos and pause as necessary:
+
+        $('.ambientVideo').each(function(){
+
+            $videoRef = $(this);
+            videoElement = $(this).get(0);
+
+            if(elementInViewport(videoElement)){
+                // Video is on-screen.
+                if($videoRef.data('video-started')) {
+                    // Video has previously been started before
+                    if (videoElement.paused) {
+                        videoElement.play();
+                    }
+                }else{
+                    // Video hasn't played yet:
+                    app.startVideo($videoRef);
+                }
+            }else{
+                if($videoRef.data('video-started') && !videoElement.paused){
+                    videoElement.pause();
+                }
+            }
+
         });
 
     };
