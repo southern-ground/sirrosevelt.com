@@ -36,6 +36,75 @@ $headerHeight: 95px;
   align-items: center;
 }
 
+h1,h2,h3{
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+
+}
+
+h2.twitterCTA {
+  position: relative;
+  font-size: 6vh;
+  letter-spacing: 4px;
+  margin: 0 20px;
+  text-align: center;
+
+  a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    padding: 16px 40px;
+    &:visited {
+      color: white;
+    }
+    &:active {
+      color: white;
+    }
+    &:hover {
+      background: rgba(0,0,0,0.8);
+      color: white;
+      text-decoration: none;
+    }
+    &.drawer {
+      &:after {
+        -webkit-transition: all 300ms 0s ease-in-out;
+        transition: all 300ms 0s ease-in-out;
+        content: url('../img/drawer-icon.png');
+        display: inline-block;
+        position: absolute;
+        bottom: 4px;
+      }
+
+    }
+    &.open {
+      &:after {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+        bottom: -1px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    font-size:5vh;
+  }
+
+  @media only screen and (max-width: 875px) {
+    font-size:4vh;
+  }
+
+  @media only screen and (max-width: 710px) {
+    font-size:5vw;
+    margin: 0 40px;
+    a{
+      padding: 20px 20px 16px 20px !important;
+    }
+  }
+
+}
+
 html {
   body {
 
@@ -80,6 +149,9 @@ html {
       .logo {
         width: 100%;
         max-width: 320px;
+        @media only screen and (max-width: 1023px) {
+          max-width: calc(100vw - 80px);
+        }
       }
       .header-background {
         position: relative;
@@ -214,13 +286,28 @@ html {
 
       }
       #SecondaryHeaderContent {
-        div.join-list, ul.purchase-links {
+        .secondaryHeaderContent-close{
+          background: url('../img/hamburger.svg');
+          background-size: 200%;
+          background-position: 100% 0;
+          position: fixed;
+          top: 20px;
+          right:20px;
+          dispay: block;
+          height: 40px;
+          width: 40px;
+          border: 2px solid white;
+          z-index:20000;
+          text-indent: 10000px;
+        }
+        .join-list, .purchase-links {
           background: $headerBackground;
           color: white;
           text-transform: uppercase;
           text-align: center;
-          width: 518px;
-          padding: 36px 20px 0 20px;
+        }
+        .join-list{
+          padding: 20px;
           form {
             text-align: center;
             width: 100%;
@@ -246,17 +333,35 @@ html {
               margin: 10px auto 0 auto;
             }
           }
+          @media only screen and (max-width: 1023px) {
+            width: 100%;
+            background: opacify($headerBackground, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
         }
-        ul.purchase-links {
-          list-style: none;
-          width: 170px;
-          li {
-            display: block;
-            padding: 10px;
-            img {
-              width: 100%;
-              height: auto;
+        .purchase-links {
+          position:relative;
+          width:170px;
+          &-list{
+            list-style: none;
+            width: 170px;
+            li {
+              display: block;
+              padding: 10px;
+              img {
+                width: 100%;
+                height: auto;
+              }
             }
+          }
+          @media only screen and (max-width: 1023px) {
+            width: 100%;
+            background: opacify($headerBackground, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
         }
       }
@@ -290,7 +395,12 @@ html {
                 display: inline-block;
                 margin: 0;
                 width: 100%;
+                padding: 5px 10px !important;
+                &:after{
+                  content: '' !important;
+                }
               }
+
             }
           }
           .social-links {
@@ -343,6 +453,13 @@ html {
         min-height: 100vh;
         position: relative;
 
+        .glitch {
+          @include textGlitch("lyric-glitch-one", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 115);
+          &-two {
+            @include textGlitch("lyric-glitch-two", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 135);
+          }
+        }
+
         &.section-video {
           overflow-x: hidden;
           overflow-y: hidden;
@@ -385,50 +502,6 @@ html {
             }
           }
 
-          h2 {
-            text-transform: uppercase;
-            font-size: 1.875rem;
-            margin: 15px 0 0;
-            text-align: center;
-            letter-spacing: 4px;
-            font-weight: 300;
-            position: relative;
-            @include extra-small {
-              font-size: 1.5rem;
-            }
-            a {
-              color: white;
-              text-decoration: none;
-              &:visited {
-                color: white;
-              }
-              &:active {
-                color: white;
-              }
-              &:hover {
-                text-decoration: underline;
-              }
-              &.drawer {
-                &:after {
-                  -webkit-transition: all 300ms 0s ease-in-out;
-                  transition: all 300ms 0s ease-in-out;
-                  content: url('../img/drawer-icon.png');
-                  display: inline-block;
-                  position: absolute;
-                  bottom: 4px;
-                }
-
-              }
-              &.open {
-                &:after {
-                  -webkit-transform: rotate(90deg);
-                  transform: rotate(90deg);
-                  bottom: -1px;
-                }
-              }
-            }
-          }
-
           .headGroup {
 
             position: absolute;
@@ -438,37 +511,12 @@ html {
               max-width: 210px;
               top: 18vh;
               width: 18vh;
-              @include extra-small {
-
-              }
             }
 
             &_bottom {
               z-index: 3;
               bottom: 0;
-              h2 {
-                a{
-                  border: 2px solid white;
-                  padding: 16px 40px;
-                  &:hover{
-                    background: rgba(0,0,0,0.8);
-                    color: white;
-                    text-decoration: none;
-                  }
-                }
-                font-size: 6vh;
-                font-weight: bold;
-                margin: 0 20px;
-                @include extra-small {
-                  font-size: 16px;
-                }
-              }
-              @include extra-small {
-
-              }
-              @include mobile {
-
-              }
+              text-align:center;
             }
           }
 
@@ -494,13 +542,6 @@ html {
 
             margin: 0 20px;
 
-          }
-
-          .glitch {
-            @include textGlitch("lyric-glitch-one", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 115);
-            &-two {
-              @include textGlitch("lyric-glitch-two", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 135);
-            }
           }
 
         }
@@ -593,48 +634,17 @@ html {
             width: auto;
           }
           h1, h2 {
-            text-transform: uppercase;
-            font-weight: bold;
             text-align: center;
           }
           h1 {
             font-size: 6.1vh;
-            margin-top: 30vh;
+            margin: 30vh 20px 20px 20px;
           }
-          h2 {
-            a{
-              color: white;
-              border: 2px solid white;
-              padding: 16px 40px 10px 40px;
-              text-decoration: none;
-              &:visited{
-                text-decoration:none;
-              }
-              &:active{
-                text-decoration: none;
-              }
-              &:hover{
-                background: white;
-                color: #D423A7;
-                text-decoration: none;
-              }
+          h2.twitterCTA{
+            a:hover{
+              background: white;
+              color: #d423a7;
             }
-            font-size: 6vh;
-            font-weight: bold;
-            margin: 0 20px;
-            @include extra-small {
-              font-size: 16px;
-            }
-            /*
-            border: 2px solid white;
-            font-size: 3.7vh;
-            padding: 16px 40px;
-            font-weight: bold;
-            margin: 0 20px;
-            @include extra-small {
-              font-size: 16px;
-            }
-            */
           }
           .endCard {
             &-logo {
