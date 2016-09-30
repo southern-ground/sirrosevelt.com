@@ -117,12 +117,17 @@ var _ = window._;
         this.videoState.lastPlayPos = this.videoState.currentPlayPos;
 
         if (this.videoState.timeDelayed * this.videoState.interval / 1000 > 2.5) {
+
             clearInterval(this.checkPlayingInterval);
             console.warn('showing fail-over images');
             this.showStaticImage();
+
         } else if (this.videoState.currentPlayPos > 1.5) {
+
             console.warn('ambient video playing');
+            app.$currentVideo.attr('data-video-started', true);
             clearInterval(this.checkPlayingInterval);
+
         }
 
     };
@@ -138,6 +143,9 @@ var _ = window._;
     app.initAudio = function(){
 
         $('.header-audioControl').bind('click', function(e){
+
+            e.stopPropagation();
+            e.preventDefault();
 
             var $b = $(e.target);
 
@@ -166,12 +174,23 @@ var _ = window._;
         app.soundCloudPlayer = SC.Widget('SoundCloudPlayer');
 
         app.soundCloudPlayer.bind(SC.Widget.Events.PLAY, function(){
+            console.warn('SoundCloud PLAY');
             $('.header-audioControl')
                 .addClass('playing online');
         });
 
         app.soundCloudPlayer.bind(SC.Widget.Events.FINISH, function(){
+            console.warn('SoundCloud FINISH');
             $('.header-audioControl').removeClass('playing');
+        });
+
+        app.soundCloudPlayer.bind(SC.Widget.Events.READY, function(){
+            console.warn('SoundCloud READY');
+        });
+
+        app.soundCloudPlayer.bind(SC.Widget.Events.ERROR, function(e){
+            console.warn('SoundCloud ERROR');
+            console.log(e)
         });
 
     };
@@ -251,6 +270,9 @@ var _ = window._;
         });
 
         $('.header-hamburger').on('click', function (e) {
+
+            e.stopPropagation();
+            e.preventDefault();
 
             var $el = $(e.target);
 
@@ -391,17 +413,15 @@ var _ = window._;
 
         $video.attr('src', $video.data('src'));
         $video.attr('muted', 'muted'); // Most videos shouldn't have audio.
-        $video.data('video-started', true);
 
         var videoEl = $video.get(0);
 
-        //if (this.isMobile) {
-
-        console.warn('Attempting to play video mobile');
+        //if (this.isMobile) { console.warn('Attempting to play video mobile');
 
         makeVideoPlayableInline(videoEl, false);
 
         app.currentVideo = videoEl;
+        app.$currentVideo = $video;
         app.videos.push(videoEl);
 
         // Only try and monitor progress on mobile devices:
@@ -611,18 +631,19 @@ var _ = window._;
 
         $('.ambientVideo').each(function () {
 
-            $videoRef = $(this);
-            videoElement = $(this).get(0);
+            var $videoRef = $(this),
+                videoElement = $(this).get(0),
+                videoHasPreviouslyPlayed = $videoRef.data('video-started');
 
             if (elementInViewport(videoElement)) {
+
                 // Video is on-screen.
 
-                if ($videoRef.data('video-started')) {
+                if (videoHasPreviouslyPlayed) {
 
                     // Video has previously been started before
                     if (videoElement.paused) {
                         videoElement.play();
-
                     }
 
                 } else {
@@ -633,9 +654,11 @@ var _ = window._;
                 }
 
             } else {
-                if ($videoRef.data('video-started') && !videoElement.paused) {
+
+                if (videoHasPreviouslyPlayed && !videoElement.paused) {
                     videoElement.pause();
                 }
+
             }
 
         });
