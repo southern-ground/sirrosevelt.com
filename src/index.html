@@ -109,7 +109,6 @@
         </div>
     </div>
     <div id="SecondaryHeaderContent">
-        <a href="#" class="secondaryHeaderContent-close" style="display:none">CLOSE</a>
 
         <div class="header-nav-option join-list"
              style="display:none;"
@@ -120,6 +119,7 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
+
         <div class="header-nav-option purchase-links"
              style="display:none;"
              data-nav-target="listen">
@@ -160,12 +160,15 @@
                 </li>
             </ul>
         </div>
+
+        <a href="#" class="secondaryHeaderContent-close" style="display:none">CLOSE</a>
+
     </div>
 </header>
 
 <div id="content">
 
-    <section id="SundayVideo" class="section-video head-card">
+    <section id="SundayVideo" class="section-video headCard">
 
         <div class="videoWrapper"
              data-background-image="{{data.assetURL}}img/mobile-background.jpg"
@@ -181,14 +184,9 @@
 
         </div>
 
-        <div class="headGroup headGroup_top">
+        <img class="headCard-logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sirrosevelt-monogram-white.svg"/>
 
-            <img class="headGroup-logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sirrosevelt-monogram-white.svg"/>
-
-
-        </div>
-
-        <div class="headGroup headGroup_bottom">
+        <div class="headCard-group_bottom">
 
             <h2 class="twitterCTA">
                 <a href="{{data.links.twitter}}">World&nbsp;Premiere on&nbsp;Twitter</a>
