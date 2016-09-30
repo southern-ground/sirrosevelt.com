@@ -7,27 +7,27 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/icons/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/icons/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/icons/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/icons/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="img/icons/apple-touch-icon-60x60.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="img/icons/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="img/icons/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="img/icons/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="img/icons/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/icons/apple-touch-icon-114x114.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/icons/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/icons/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="img/icons/apple-touch-icon-60x60.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="img/icons/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="img/icons/apple-touch-icon-76x76.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="img/icons/apple-touch-icon-152x152.png"/>
 
-    <link rel="icon" type="image/png" href="img/icons/favicon-196x196.png" sizes="196x196" />
-    <link rel="icon" type="image/png" href="img/icons/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/png" href="img/icons/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="img/icons/favicon-16x16.png" sizes="16x16" />
-    <link rel="icon" type="image/png" href="img/icons/favicon-128.png" sizes="128x128" />
+    <link rel="icon" type="image/png" href="img/icons/favicon-196x196.png" sizes="196x196"/>
+    <link rel="icon" type="image/png" href="img/icons/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/png" href="img/icons/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="img/icons/favicon-16x16.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="img/icons/favicon-128.png" sizes="128x128"/>
 
-    <meta name="msapplication-TileColor" content="#FFFFFF" />
-    <meta name="msapplication-TileImage" content="mstile-144x144.png" />
-    <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
-    <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
-    <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
-    <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+    <meta name="msapplication-TileColor" content="#FFFFFF"/>
+    <meta name="msapplication-TileImage" content="mstile-144x144.png"/>
+    <meta name="msapplication-square70x70logo" content="mstile-70x70.png"/>
+    <meta name="msapplication-square150x150logo" content="mstile-150x150.png"/>
+    <meta name="msapplication-wide310x150logo" content="mstile-310x150.png"/>
+    <meta name="msapplication-square310x310logo" content="mstile-310x310.png"/>
 
     <!-- Place favicon.ico in the root directory -->
 
@@ -58,56 +58,60 @@
 <header>
     <div class="header-background">
         <div class="wrapper">
+
             <h1 aria-live="polite" aria-hidden="false">
                 Sir Rosevelt
-                <img class="logo" src="img/sirrosevelt-header-title.svg" />
+                <img class="logo" src="img/sirrosevelt-header-title.svg"/>
             </h1>
-            <div class="innerWrapper">
-                <div class="flexy">
 
-                    <ul class="header-nav ">
-                        <li class="header-nav-item join">
-                            <a href="#" data-nav-action="join">Join</a>
-                        </li>
-                        <li class="header-nav-item listen">
-                            <a href="#" data-nav-action="listen">Listen</a>
-                        </li>
-                    </ul>
+            <div class="flexGroup">
+                <div class="innerWrapper">
+                    <div class="flexy">
 
-                    <ul class="social-links">
-                        <li class="">
-                            <a href="{{data.links.facebook}}"
-                               class="social facebook"
-                               target="_blank"
-                               data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
-                        </li>
-                        <li class="">
-                            <a href="{{data.links.twitter}}"
-                               class="social twitter"
-                               target="_blank"
-                               data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
-                        </li>
-                        <li class="">
-                            <a href="{{data.links.instagram}}"
-                               class="social instagram"
-                               target="_blank"
-                               data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
-                        </li>
-                        <li class="">
-                            <a href="{{data.links.youtube}}"
-                               class="social youtube"
-                               target="_blank"
-                               data-asset-path="{{data.assetURL|safe}}img/social.png">YouTube</a>
-                        </li>
-                    </ul>
+                        <ul class="header-nav ">
+                            <li class="header-nav-item join">
+                                <a href="#" data-nav-action="join">Join</a>
+                            </li>
+                            <li class="header-nav-item listen">
+                                <a href="#" data-nav-action="listen">Listen</a>
+                            </li>
+                        </ul>
 
+                        <ul class="social-links">
+                            <li class="">
+                                <a href="{{data.links.facebook}}"
+                                   class="social facebook"
+                                   target="_blank"
+                                   data-asset-path="{{data.assetURL|safe}}img/social.png">Facebook</a>
+                            </li>
+                            <li class="">
+                                <a href="{{data.links.twitter}}"
+                                   class="social twitter"
+                                   target="_blank"
+                                   data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
+                            </li>
+                            <li class="">
+                                <a href="{{data.links.instagram}}"
+                                   class="social instagram"
+                                   target="_blank"
+                                   data-asset-path="{{data.assetURL|safe}}img/social.png">Twitter</a>
+                            </li>
+                            <li class="">
+                                <a href="{{data.links.youtube}}"
+                                   class="social youtube"
+                                   target="_blank"
+                                   data-asset-path="{{data.assetURL|safe}}img/social.png">YouTube</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="controls flexy">
                     <a href="#" class="header-audioControl">Play/Pause</a>
-
+                    <a href="#" class="header-hamburger">Menu</a>
                 </div>
             </div>
-            <div class="hamburger">
-                <a href="#" class="hamburger-button">Menu</a>
-            </div>
+
         </div>
     </div>
     <div id="SecondaryHeaderContent">
@@ -117,7 +121,7 @@
              data-nav-target="join">
             Be in the know about Sir Rosevelt and future launches:
             <form>
-                <input type="email" placeholder="Email Address" />
+                <input type="email" placeholder="Email Address"/>
                 <button type="submit">Submit</button>
             </form>
         </div>
@@ -186,7 +190,8 @@
 
         </div>
 
-        <img class="headCard-logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sirrosevelt-monogram-white.svg"/>
+        <img class="headCard-logo" alt="Sir Rosevelt's Emblem"
+             src="{{data.assetURL}}img/sirrosevelt-monogram-white.svg"/>
 
         <div class="headCard-group_bottom">
 
@@ -196,7 +201,7 @@
 
             <div class="scroll scroll-first">
                 Scroll
-                <img class="scroll-icon" src="img/scroll-icon.png" />
+                <img class="scroll-icon" src="img/scroll-icon.png"/>
             </div>
 
         </div>
@@ -286,18 +291,19 @@
             <a href="{{data.links.twitter}}">World&nbsp;Premiere on&nbsp;Twitter</a>
         </h2>
 
-        <img class="endCard-logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sirrosevelt-monogram-white.svg"/>
+        <img class="endCard-logo" alt="Sir Rosevelt's Emblem"
+             src="{{data.assetURL}}img/sirrosevelt-monogram-white.svg"/>
 
         <div class="scroll scroll-to-top">
             Back to Top
-            <img class="scroll-icon scroll-icon-inverse" src="img/scroll-icon.png" />
+            <img class="scroll-icon scroll-icon-inverse" src="img/scroll-icon.png"/>
         </div>
 
     </section>
 
     <div class="scroll scroll-next" style="display:none;">
         Scroll
-        <img class="scroll-icon" src="img/scroll-icon.png" />
+        <img class="scroll-icon" src="img/scroll-icon.png"/>
     </div>
 
 </div>
@@ -305,7 +311,8 @@
 <footer>&copy;2016</footer>
 
 <div style="display:none;">
-    <iframe id="SoundCloudPlayer" width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/282108974&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false"></iframe>
+    <iframe id="SoundCloudPlayer" width="100%" height="450" scrolling="no" frameborder="no"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/282108974&amp;auto_play=true&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false"></iframe>
 </div>
 
 <script src="{{data.assetURL}}js/vendor/jquery-1.12.0.min.js"></script>

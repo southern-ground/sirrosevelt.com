@@ -142,42 +142,28 @@ html {
       right: 0;
       height: $headerHeight;
       z-index: $headerZ;
-      .hamburger {
-        display: none;
-        &-button {
-          width: 40px;
-          height: 40px;
-          background: url(../img/hamburger.svg);
-          background-size: 200%;
-          background-position: 0 0;
-          text-indent: 9999px;
-          display: block;
-          &.open {
-            background-position: 100% 0;
-          }
-          @include newMobileSmall{
-            margin-right: 20px;
-          }
-        }
-      }
+
       .logo {
         width: 100%;
         max-width: 320px;
         @include newMobileSmall{
-          max-width: calc(100vw - 100px);
+          max-width: 55vw;
           margin-left:20px;
         }
       }
+
       .header-background {
         position: relative;
         background: $headerBackground;
         width: 100%;
         height: 100%;
       }
+
       ul {
         margin: 0;
         padding: 0;
       }
+
       .wrapper {
         margin: 0 auto;
         width: 100%;
@@ -193,12 +179,63 @@ html {
           padding: 0;
         }
 
+        .flexGroup{
+          display: flex;
+          flex-direction: row;
+        }
         .innerWrapper {
           justify-content: space-between;
           align-items: center;
           .flexy {
             flex-direction: row;
           }
+        }
+
+        .controls{
+          flex-direction: row;
+
+          .header-audioControl, .header-hamburger{
+            display: inline-block;
+            text-indent: 99999px;
+
+          }
+
+          .header{
+            &-audioControl{
+              width: 48px;
+              height: 48px;
+              background: url('../img/player-control.png');
+              background-position: 48px 0;
+              border: 1px solid white;
+              box-sizing: border-box;
+              -moz-box-sizing: border-box;
+              -webkit-box-sizing: border-box;
+              margin: 0 20px;
+              &.playing{
+                background-position: 0 0;
+              }
+              @include newMobile{
+                zoom: 0.833;
+              }
+            }
+            &-hamburger{
+              width: 40px;
+              height: 40px;
+              background: url(../img/hamburger.svg);
+              background-size: 200%;
+              background-position: 0 0;
+              &.open {
+                background-position: 100% 0;
+              }
+              @include newMobileSmall{
+                margin-right: 20px;
+              }
+              @include aboveMobile{
+                display: none;
+              }
+            }
+          }
+
         }
 
         ul.header-nav {
@@ -283,20 +320,6 @@ html {
               width: 25%;
               text-align: center;
             }
-          }
-        }
-
-        .header-audioControl {
-          display: block;
-          width: 48px;
-          height: 48px;
-          background: url('../img/player-control.png');
-          background-position: 48px 0;
-          text-indent: 99999px;
-          border: 1px solid white;
-          margin: 0 0 0 20px;
-          &.playing{
-            background-position: 0 0;
           }
         }
 
@@ -388,9 +411,6 @@ html {
       }
 
       @include newMobile {
-        .hamburger {
-          display: block;
-        }
         .innerWrapper {
           background: $headerBackground;
           display: none;
@@ -448,14 +468,13 @@ html {
         }
         height: $headerHeightMobile;
       }
+
       @include aboveMobile{
-        .hamburger {
-          display: none;
-        }
         .innerWrapper {
           display: flex;
         }
       }
+
     }
 
     #content {
