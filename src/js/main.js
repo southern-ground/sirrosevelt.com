@@ -127,7 +127,7 @@ var _ = window._;
         $('.header-nav-item > a').removeClass('open');
         $('.header-nav-option').css('display', 'none');
         $('header .innerWrapper').css('display', '');
-        $('.hamburger-button').removeClass('open');
+        $('.header-hamburger').removeClass('open');
         $('.secondaryHeaderContent-close').hide();
     };
 
@@ -190,7 +190,7 @@ var _ = window._;
                     };
 
                 // Check if we're in the mobile/shrunken state:
-                if ($('.hamburger-button').hasClass('open')) {
+                if ($('.header-hamburger').hasClass('open')) {
 
                     css = {
                         position: 'fixed',
@@ -235,7 +235,7 @@ var _ = window._;
 
         });
 
-        $('.hamburger-button').on('click', function (e) {
+        $('.header-hamburger').on('click', function (e) {
 
             var $el = $(e.target);
 
@@ -307,7 +307,6 @@ var _ = window._;
                         .next()
                         .offset().top
                 }, 'slow', function () {
-                    console.log('Scrolling complete');
                     app.ignoreScrollEvents = false;
                 });
             return false;
