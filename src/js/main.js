@@ -64,10 +64,13 @@ var _ = window._;
         var $el, $v;
 
         $('.videoWrapper').each(function () {
+
             $el = $(this);
             $v = $(this).find('.ambientVideo');
 
-            $el.css('background-image', "url('" + $el.data('background-image') + "')");
+            console.log($v.data('poster'));
+
+            $el.css('background-image', "url('" + $v.data('poster') + "')");
             $el.css('background-size', 'cover');
             $el.css('background-position', 'center center');
 
@@ -115,6 +118,7 @@ var _ = window._;
 
         if (this.videoState.timeDelayed * this.videoState.interval / 1000 > 2.5) {
             clearInterval(this.checkPlayingInterval);
+            console.warn('showing fail-over images');
             this.showStaticImage();
         } else if (this.videoState.currentPlayPos > 1.5) {
             console.warn('ambient video playing');
@@ -601,15 +605,22 @@ var _ = window._;
 
             if (elementInViewport(videoElement)) {
                 // Video is on-screen.
+
                 if ($videoRef.data('video-started')) {
+
                     // Video has previously been started before
                     if (videoElement.paused) {
                         videoElement.play();
+
                     }
+
                 } else {
+
                     // Video hasn't played yet:
                     app.startVideo($videoRef);
+
                 }
+
             } else {
                 if ($videoRef.data('video-started') && !videoElement.paused) {
                     videoElement.pause();
