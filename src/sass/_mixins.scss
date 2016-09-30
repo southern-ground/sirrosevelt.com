@@ -146,33 +146,15 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 }
 
-@mixin responsiveFont($min_width,$max_width, $min_font, $max_font){
-  @media (min-width: #{$min_width}px) and (max-width: #{$max_width}px){
+@mixin responsiveFont($min_width,$max_width, $min_font, $max_font) {
+  @media (min-width: #{$min_width}px) and (max-width: #{$max_width}px) {
 
-      font-size: calc( #{$min_font}px + (#{$max_font} - #{$min_font}) * ( (100vw - #{$min_width}px) / ( #{$max_width} - #{$min_width}) ));
-
-  }
-  @media (min-width: #{$max_width}px){
-
-      font-size: #{$max_font}px;
+    font-size: calc(#{$min_font}px + (#{$max_font} - #{$min_font}) * ((100vw - #{$min_width}px) / (#{$max_width} - #{$min_width})));
 
   }
-}
+  @media (min-width: #{$max_width}px) {
 
-@mixin mobile(){
-  @media only screen and (max-width: 1023px) {
-    @content;
-  }
-}
+    font-size: #{$max_font}px;
 
-@mixin mobileSmall(){
-  @media only screen and (max-width: 599px) {
-    @content;
-  }
-}
-
-@mixin aboveMobile(){
-  @media only screen and (min-width: 1024px){
-    @content;
   }
 }
