@@ -43,7 +43,7 @@ var _ = window._;
     app.isiMobile = navigator.userAgent.match(/(iPhone|iPad)/i);
 
     app.videoState = {
-        interval: 50.0,
+        interval: 50,
         lastPlayPos: 0,
         currentPlayPos: 0,
         bufferingDetected: false,
@@ -314,19 +314,23 @@ var _ = window._;
 
         var videoEl = $video.get(0);
 
-        if (this.isMobile) {
-            console.warn('Attempting to play video on mobile');
-            makeVideoPlayableInline(videoEl, false);
+        //if (this.isMobile) {
 
-            app.currentVideo = videoEl;
-            app.videos.push(videoEl);
+        console.warn('Attempting to play video mobile');
 
-            // Only try and monitor progress on mobile devices:
-            clearInterval(app.checkPlayingInterval);
-            app.checkPlayingInterval = setInterval(function () {
-                app.checkVideoPlaying();
-            }, app.videoState.interval);
-        }
+        makeVideoPlayableInline(videoEl, false);
+
+        app.currentVideo = videoEl;
+        app.videos.push(videoEl);
+
+        // Only try and monitor progress on mobile devices:
+        clearInterval(app.checkPlayingInterval);
+
+        app.checkPlayingInterval = setInterval(function () {
+            app.checkVideoPlaying();
+        }, app.videoState.interval);
+
+        //}
 
     };
 
@@ -334,9 +338,9 @@ var _ = window._;
 
         console.log('app::initVideo');
 
-        this.videos = [];
+        var $v;
 
-        var $v, videoEl;
+        this.videos = [];
 
         $('.ambientVideo').each(function () {
 
