@@ -109,49 +109,57 @@
         </div>
     </div>
     <div id="SecondaryHeaderContent">
-        <div class="header-nav-option join-list" style="display:none;" data-nav-target="join">
+        <a href="#" class="secondaryHeaderContent-close" style="display:none">CLOSE</a>
+
+        <div class="header-nav-option join-list"
+             style="display:none;"
+             data-nav-target="join">
             Be in the know about Sir Rosevelt and future launches:
             <form>
                 <input type="email" placeholder="Email Address" />
                 <button type="submit">Submit</button>
             </form>
         </div>
-        <ul class="header-nav-option purchase-links" style="display:none;" data-nav-target="listen">
-            <li>
-                <a href="{{data.links.itunes}}"
-                   target="_blank">
-                    <img
-                            class="store-button"
-                            src="{{data.assetURL}}img/purchase-icons/Get_it_on_iTunes_Badge_US_1114.svg"/>
-                </a>
-            </li>
-            <li>
-                <a href="{{data.links.appleMusic}}"
-                   target="_blank">
-                    <img
-                            class="store-button"
-                            src="{{data.assetURL}}img/purchase-icons/US_Listen_on_Apple_Music_Badge.svg"/>
-                </a>
-            </li>
-            <li>
-                <a href="{{data.links.googlePlay}}"
-                   target="_blank">
-                    <img class="store-button" src="{{data.assetURL}}img/purchase-icons/googleplay.png"/>
-                </a>
-            </li>
-            <li>
-                <a href="{{data.links.amazon}}"
-                   target="_blank">
-                    <img class="store-button" src="{{data.assetURL}}img/purchase-icons/amazon.png"/>
-                </a>
-            </li>
-            <li>
-                <a href="{{data.links.spotify}}"
-                   target="_blank">
-                    <img class="store-button" src="{{data.assetURL}}img/purchase-icons/spotify.png"/>
-                </a>
-            </li>
-        </ul>
+        <div class="header-nav-option purchase-links"
+             style="display:none;"
+             data-nav-target="listen">
+            <ul class="purchase-links-list">
+                <li>
+                    <a href="{{data.links.itunes}}"
+                       target="_blank">
+                        <img
+                                class="store-button"
+                                src="{{data.assetURL}}img/purchase-icons/Get_it_on_iTunes_Badge_US_1114.svg"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{data.links.appleMusic}}"
+                       target="_blank">
+                        <img
+                                class="store-button"
+                                src="{{data.assetURL}}img/purchase-icons/US_Listen_on_Apple_Music_Badge.svg"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{data.links.googlePlay}}"
+                       target="_blank">
+                        <img class="store-button" src="{{data.assetURL}}img/purchase-icons/googleplay.png"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{data.links.amazon}}"
+                       target="_blank">
+                        <img class="store-button" src="{{data.assetURL}}img/purchase-icons/amazon.png"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{data.links.spotify}}"
+                       target="_blank">
+                        <img class="store-button" src="{{data.assetURL}}img/purchase-icons/spotify.png"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </header>
 
@@ -182,8 +190,8 @@
 
         <div class="headGroup headGroup_bottom">
 
-            <h2>
-                <a href="{{data.links.twitter}}">World Premiere on Twitter</a>
+            <h2 class="twitterCTA">
+                <a href="{{data.links.twitter}}">World&nbsp;Premiere on&nbsp;Twitter</a>
             </h2>
 
             <div class="scroll scroll-first">
@@ -270,12 +278,12 @@
 
     <section id="EndCard" class="section-endCard">
 
-        <h1>
+        <h1 class="endCard-title glitch" data-text="Put On Your Sunday Finest.">
             Put On Your Sunday Finest.
         </h1>
 
-        <h2>
-            <a href="{{data.links.twitter}}">World Premiere on Twitter</a>
+        <h2 class="twitterCTA">
+            <a href="{{data.links.twitter}}">World&nbsp;Premiere on&nbsp;Twitter</a>
         </h2>
 
         <img class="endCard-logo" alt="Sir Rosevelt's Emblem" src="{{data.assetURL}}img/sirrosevelt-monogram-white.svg"/>
@@ -298,6 +306,7 @@
 
 <script src="{{data.assetURL}}js/vendor/jquery-1.12.0.min.js"></script>
 <script src="{{data.assetURL}}js/vendor/jquery.easing.1.3.js"></script>
+<script src="{{data.assetURL}}js/vendor/jquery.fittext.js"></script>
 <script src="{{data.assetURL}}js/vendor/iphone-inline-video.browser.js"></script>
 <script src="{{data.assetURL}}js/vendor/underscore-min.js"></script>
 <script src="{{data.assetURL}}js/plugins.js"></script>
