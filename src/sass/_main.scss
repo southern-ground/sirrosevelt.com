@@ -1,5 +1,15 @@
-$headerBackground: rgba(0, 0, 0, 0.6);
+$headerBackground: rgba(0, 0, 0, 0.8);
 $headerHeight: 95px;
+$headerHeightMobile: 80px;
+
+$videoWrapperZ: 10;
+$headerCardLogoZ: 20;
+$headerCardGroupZ: 30;
+
+$headerZ: 40;
+$secondaryHeaderContentZ: 50;
+$secondaryCloseZ: 60;
+$scrollNextZ: 70;
 
 @font-face {
   font-family: "Neutraface Text";
@@ -63,8 +73,9 @@ h2.twitterCTA {
       color: white;
     }
     &:hover {
-      background: rgba(0,0,0,0.8);
-      color: white;
+      background: #ffffff;
+      border: 2px solid #ffffff;
+      color: black;
       text-decoration: none;
     }
     &.drawer {
@@ -87,7 +98,7 @@ h2.twitterCTA {
     }
   }
 
-  @media only screen and (max-width: 1024px) {
+  @include aboveMobile {
     font-size:5vh;
   }
 
@@ -130,7 +141,7 @@ html {
       left: 0;
       right: 0;
       height: $headerHeight;
-      z-index: 10;
+      z-index: $headerZ;
       .hamburger {
         display: none;
         &-button {
@@ -144,13 +155,17 @@ html {
           &.open {
             background-position: 100% 0;
           }
+          @include mobileSmall{
+            margin-right: 20px;
+          }
         }
       }
       .logo {
         width: 100%;
         max-width: 320px;
-        @media only screen and (max-width: 1023px) {
-          max-width: calc(100vw - 80px);
+        @include mobileSmall{
+          max-width: calc(100vw - 100px);
+          margin-left:20px;
         }
       }
       .header-background {
@@ -179,7 +194,6 @@ html {
         }
 
         .innerWrapper {
-
           justify-content: space-between;
           align-items: center;
           .flexy {
@@ -293,12 +307,12 @@ html {
           position: fixed;
           top: 20px;
           right:20px;
-          dispay: block;
+          display: block;
           height: 40px;
           width: 40px;
           border: 2px solid white;
-          z-index:20000;
-          text-indent: 10000px;
+          z-index:$secondaryCloseZ;
+          text-indent: 9999px;
         }
         .join-list, .purchase-links {
           background: $headerBackground;
@@ -333,7 +347,7 @@ html {
               margin: 10px auto 0 auto;
             }
           }
-          @media only screen and (max-width: 1023px) {
+          @include mobile{
             width: 100%;
             background: opacify($headerBackground, 0.9);
             display: flex;
@@ -356,7 +370,7 @@ html {
               }
             }
           }
-          @media only screen and (max-width: 1023px) {
+          @include mobile {
             width: 100%;
             background: opacify($headerBackground, 0.9);
             display: flex;
@@ -366,7 +380,7 @@ html {
         }
       }
 
-      @media only screen and (max-width: 1023px) {
+      @include mobile {
         .hamburger {
           display: block;
         }
@@ -383,6 +397,10 @@ html {
           -webkit-box-shadow: inset 0px -9px 31px 3px rgba(0,0,0,0.19);
           -moz-box-shadow: inset 0px -9px 31px 3px rgba(0,0,0,0.19);
           box-shadow: inset 0px -9px 31px 3px rgba(0,0,0,0.19);
+
+          @include mobile{
+            top: $headerHeightMobile;
+          }
 
           .header-nav {
             li {
@@ -421,8 +439,9 @@ html {
           }
 
         }
+        height: $headerHeightMobile;
       }
-      @media only screen and (min-width: 1024px) {
+      @include aboveMobile{
         .hamburger {
           display: none;
         }
@@ -477,14 +496,16 @@ html {
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 1;
+            z-index: $videoWrapperZ;
             video.ambientVideo {
               position: absolute;
             }
           }
         }
 
-        &#SundayVideo {
+        &.headCard{
+
+          justify-content: space-between;
 
           #title {
             margin: 60px 0 0;
@@ -502,24 +523,29 @@ html {
             }
           }
 
-          .headGroup {
-
-            position: absolute;
-
-            &_top {
-              z-index: 2;
-              max-width: 210px;
-              top: 18vh;
-              width: 18vh;
-            }
-
-            &_bottom {
-              z-index: 3;
-              bottom: 0;
-              text-align:center;
+          .headCard-logo{
+            z-index: $headerCardLogoZ;
+            width: 18vh;
+            max-width: 210px;
+            margin-top: 18vh;
+            @include mobile {
+              margin-top:16vh;
             }
           }
-
+          .headCard-group{
+            display: flex;
+            justify-content:center;
+            justify-items: center;
+            align-items: center;
+            flex-direction: column;
+            &_bottom{
+              z-index: $headerCardGroupZ;
+              text-align:center;
+              @include mobile{
+                margin-bottom: 60px;
+              }
+            }
+          }
         }
 
         &.section-lyric {
@@ -667,7 +693,7 @@ html {
           position: fixed;
           right: 20px;
           bottom: 20px;
-          z-index: 1000;
+          z-index: $scrollNextZ;
         }
         &.scroll-to-top {
           .scroll-icon {
