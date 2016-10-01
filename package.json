@@ -45,17 +45,47 @@
       "lyricFour": "Don't Matter What Day It Is"
     },
     "externalLinks": {
-      "itunes": "http://republicrec.co/SundayFinest",
-      "appleMusic": "http://republicrec.co/SundayFinestAM",
-      "googlePlay": "http://republicrec.co/SundayFinestGP",
-      "amazon": "http://republicrec.co/SundayFinestAZ",
-      "spotify": "http://republicrec.co/SundayFinestSP",
       "facebook": "https://www.facebook.com/sirrosevelt/",
       "twitter": "https://www.twitter.com/SirROSEVELT",
       "instagram": "https://www.instagram.com/sirrosevelt/",
       "youtube": "https://www.youtube.com/channel/UCteiOfbPdMAYSZocoxO2R6A",
       "twitterSearch": "https://twitter.com/search?q=%23whoissirrosevelt"
     },
+    "purchaseLinks": [
+      {
+        "id": "itunes",
+        "url": "http://republicrec.co/SundayFinest",
+        "icon": "img/purchase-icons/Get_it_on_iTunes_Badge_US_1114.svg",
+        "title": "iTunes",
+        "inactive": "20161001"
+      },
+      {
+         "id": "appleMusic",
+        "url": "http://republicrec.co/SundayFinestAM",
+        "icon": "img/purchase-icons/US_Listen_on_Apple_Music_Badge.svg",
+        "title": "Apple Music",
+        "inactive": "20161001"
+      },
+       {
+         "id":"googlePlay",
+        "url": "http://republicrec.co/SundayFinestGP",
+        "icon": "img/purchase-icons/googleplay.png",
+        "title": "Google Play",
+         "inactive": "20161001"
+      },
+      {
+        "id": "amazon",
+        "url": "http://republicrec.co/SundayFinestAZ",
+        "icon": "img/purchase-icons/amazon.png",
+        "title": "Amazon"
+      },
+      {
+        "id": "spotify",
+        "url": "http://republicrec.co/SundayFinestSP",
+        "icon": "img/purchase-icons/spotify.png",
+        "title": "Spotify"
+      }
+    ],
     "servers": {
       "dev": {
         "name": "dev",

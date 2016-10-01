@@ -21,8 +21,10 @@ var getData = function(argv){
     data.lyrics = pkg['sir-rosevelt-configs'].lyrics;
     // Append the external links:
     data.links = pkg['sir-rosevelt-configs'].externalLinks;
+    // Add the purchase links:
+    data.purchaseLinks = pkg['sir-rosevelt-configs'].purchaseLinks;
 
-    console.log(data);
+
 
     return {
         data: data

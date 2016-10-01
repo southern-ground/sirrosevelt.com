@@ -291,6 +291,16 @@ var _ = window._;
             $('.header-nav-option[data-open="true"]').slideUp('fast');
         });
 
+        // Handle disabled purchase links:
+        $('.purchase-link').on('click', function(e){
+            if($(e.target).attr('disabled')){
+                e.preventDefault();
+                e.stopPropagation();
+                void(0);
+                return false;
+            }
+        });
+
         return this;
     };
 

@@ -408,6 +408,22 @@ html {
             li {
               display: block;
               padding: 10px;
+              position: relative;
+              a[disabled=disabled]{
+                &:after{
+                  content: "Coming Soon";
+                  color: red;
+                  font-size: 0.625rem;
+                  width: 150px;
+                  left: 10px;
+                  top: 20px;
+                  padding: 10px;
+                  position: absolute;
+                }
+                img{
+                  opacity: 0.2;
+                }
+              }
               img {
                 width: 100%;
                 height: auto;

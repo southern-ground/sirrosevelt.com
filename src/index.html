@@ -131,40 +131,9 @@
              style="display:none;"
              data-nav-target="listen">
             <ul class="purchase-links-list">
-                <li>
-                    <a href="{{data.links.itunes}}"
-                       target="_blank">
-                        <img
-                                class="store-button"
-                                src="{{data.assetURL}}img/purchase-icons/Get_it_on_iTunes_Badge_US_1114.svg"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{data.links.appleMusic}}"
-                       target="_blank">
-                        <img
-                                class="store-button"
-                                src="{{data.assetURL}}img/purchase-icons/US_Listen_on_Apple_Music_Badge.svg"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{data.links.googlePlay}}"
-                       target="_blank">
-                        <img class="store-button" src="{{data.assetURL}}img/purchase-icons/googleplay.png"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{data.links.amazon}}"
-                       target="_blank">
-                        <img class="store-button" src="{{data.assetURL}}img/purchase-icons/amazon.png"/>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{data.links.spotify}}"
-                       target="_blank">
-                        <img class="store-button" src="{{data.assetURL}}img/purchase-icons/spotify.png"/>
-                    </a>
-                </li>
+                {% for purchaseOption in data.purchaseLinks %}
+                <li><a href="{{purchaseOption.url}}" class="purchase-link" target="_blank" {% if purchaseOption.inactive %}disabled="disabled"{% endif %}><img class="store-button {% if purchaseOption.inactive %}disabled{% endif %}" src="{{data.assetURL}}{{purchaseOption.icon}}" title="{{purchaseOption.title}}" /></a></li>
+                {% endfor %}
             </ul>
         </div>
 
