@@ -303,7 +303,7 @@ var _ = window._;
 
         // Handle disabled purchase links:
         $('.purchase-link').on('click', function(e){
-            if($(e.target).attr('disabled')){
+            if($(e.currentTarget).attr('disabled')){
                 e.preventDefault();
                 e.stopPropagation();
                 void(0);
