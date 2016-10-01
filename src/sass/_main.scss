@@ -344,6 +344,7 @@ html {
 
       }
       #SecondaryHeaderContent {
+        background: $headerBackground;
         .secondaryHeaderContent-close{
           background: url('../img/hamburger.svg');
           background-size: 200%;
