@@ -79,6 +79,16 @@ var _ = window._;
 
         });
 
+        // Manually fire tracking:
+        ga('send',
+            'event',
+            'Videos',
+            'Failure to Load',
+            "RC-2",
+            {
+                nonInteraction: true
+            });
+
     };
 
     app.checkVideoPlaying = function () {
