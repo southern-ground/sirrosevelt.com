@@ -54,10 +54,10 @@
     "purchaseLinks": [
       {
         "id": "itunes",
-        "url": "http://republicrec.co/SundayFinest",
+        "url": "https://itunes.apple.com/us/album/sir-rosevelt/id1160838281?app=itunes",
+        "previous": ["http://republicrec.co/SundayFinest"],
         "icon": "img/purchase-icons/Get_it_on_iTunes_Badge_US_1114.svg",
-        "title": "iTunes",
-        "inactive": "20161001"
+        "title": "iTunes"
       },
       {
          "id": "appleMusic",
