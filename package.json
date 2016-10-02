@@ -54,8 +54,8 @@
     "purchaseLinks": [
       {
         "id": "itunes",
-        "url": "https://itunes.apple.com/us/album/sir-rosevelt/id1160838281?app=itunes",
-        "previous": ["http://republicrec.co/SundayFinest"],
+        "url": "http://hyperurl.co/nbisq5",
+        "previous": ["https://itunes.apple.com/us/album/sir-rosevelt/id1160838281?app=itunes","http://republicrec.co/SundayFinest"],
         "icon": "img/purchase-icons/Get_it_on_iTunes_Badge_US_1114.svg",
         "title": "iTunes"
       },
