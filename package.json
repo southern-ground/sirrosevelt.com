@@ -56,23 +56,26 @@
       {
         "id": "itunes",
         "url": "http://hyperurl.co/nbisq5",
-        "previous": ["https://itunes.apple.com/us/album/sir-rosevelt/id1160838281?app=itunes","http://republicrec.co/SundayFinest"],
+        "previous": [
+          "https://itunes.apple.com/us/album/sir-rosevelt/id1160838281?app=itunes",
+          "http://republicrec.co/SundayFinest"
+        ],
         "icon": "img/purchase-icons/Get_it_on_iTunes_Badge_US_1114.svg",
         "title": "iTunes"
       },
       {
-         "id": "appleMusic",
+        "id": "appleMusic",
         "url": "http://republicrec.co/SundayFinestAM",
         "icon": "img/purchase-icons/US_Listen_on_Apple_Music_Badge.svg",
         "title": "Apple Music",
         "inactive": "20161001"
       },
-       {
-         "id":"googlePlay",
+      {
+        "id": "googlePlay",
         "url": "http://republicrec.co/SundayFinestGP",
         "icon": "img/purchase-icons/googleplay.png",
         "title": "Google Play",
-         "inactive": "20161001"
+        "inactive": "20161001"
       },
       {
         "id": "amazon",
@@ -119,7 +122,9 @@
   "version": "5.3.0",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "gulp-uglify": "^2.0.0",
     "iphone-inline-video": "^1.9.3",
+    "pump": "^1.0.1",
     "underscore": "^1.8.3"
   }
 }

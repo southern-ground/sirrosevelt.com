@@ -4,15 +4,17 @@ var gulp = require('gulp'),
     pkg = require('./package.json'),
     dirs = pkg['sir-rosevelt-configs'].directories,
     commands = pkg['sir-rosevelt-configs'].commands,
-    config,
+    config = {data: {name: 'prod'}},
     browserSync = require('browser-sync'),
     print = require('gulp-print'),
     sass = require('gulp-sass'),
     render = require('gulp-nunjucks-render'),
     shell = require('gulp-shell'),
-    data = require('gulp-data');
+    data = require('gulp-data'),
+    uglify = require('gulp-uglify'),
+    pump = require('pump');
 
-var getData = function(argv){
+var getData = function (argv) {
 
     var server = argv.build || "stage",
         data = pkg['sir-rosevelt-configs'].servers[server];
@@ -25,11 +27,28 @@ var getData = function(argv){
     data.purchaseLinks = pkg['sir-rosevelt-configs'].purchaseLinks;
 
 
-
     return {
         data: data
     };
 };
+
+gulp.task('compress', function (done) {
+
+    if (config.data.name === "dev") {
+        // Pass through; don't compress
+        return gulp.src(dirs.src + '/js/**/*.js')
+            .pipe(gulp.dest(dirs.dist + '/js/'));
+    } else {
+        pump([
+                gulp.src(dirs.src + '/js/**/*.js'),
+                uglify(),
+                gulp.dest(dirs.dist + '/js/')
+            ],
+            done
+        );
+    }
+
+});
 
 gulp.task('clean', function (done) {
     require('del')([
@@ -39,14 +58,17 @@ gulp.task('clean', function (done) {
     });
 });
 
-gulp.task('copy', [
-    'copy:jquery',
-    'copy:normalize',
-    'copy:bootstrap',
-    'copy:iphone-inline-video',
-    'copy:underscore',
-    'copy:sundry'
-]);
+gulp.task('copy', function (done) {
+    runSequence([
+            'copy:jquery',
+            'copy:normalize',
+            'copy:bootstrap',
+            'copy:iphone-inline-video',
+            'copy:underscore',
+            'copy:sundry'],
+        'compress',
+        done);
+});
 
 gulp.task('copy:jquery', function () {
     return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
@@ -80,6 +102,8 @@ gulp.task('copy:sundry', function () {
         dirs.src + '/**/*',
         // Exclude the following files
         // (other tasks will handle the copying of these files)
+        '!' + dirs.src + '/js/**/*.js',
+        '!' + dirs.src + '/js',
         '!' + dirs.src + '/sass/**/*.scss',
         '!' + dirs.src + '/sass',
         '!' + dirs.src + '/doc/**/*.*',
@@ -92,11 +116,20 @@ gulp.task('copy:sundry', function () {
 });
 
 gulp.task('sass', function () {
+
+    var options = {};
+
+    if(config.data.name !== 'dev'){
+        options.outputStyle = 'compressed';
+    }
+
+    console.log(options);
+
     return gulp.src([dirs.src + '/sass/**/*.scss', '!' + dirs.src + '/sass/**/_*.scss'])
         .pipe(print(function (filepath) {
             return "\tsassing " + filepath;
         }))
-        .pipe(sass())
+        .pipe(sass(options))
         .pipe(gulp.dest(dirs.src + '/css'));
 });
 
@@ -104,8 +137,8 @@ gulp.task('serve', function () {
 
     browserSync.init({server: "./dist"});
 
-    gulp.watch([dirs.src + "/**/*.html", dirs.src + "/**/*.js", dirs.src + "/sass/**/*.scss", dirs.src + "/img/*.*"], function(){
-       runSequence(['build'], browserSync.reload);
+    gulp.watch([dirs.src + "/**/*.html", dirs.src + "/**/*.js", dirs.src + "/sass/**/*.scss", dirs.src + "/img/*.*"], function () {
+        runSequence(['build'], browserSync.reload);
     });
 
     gulp.watch([dirs.dest + "/js/**/*.js", dirs.dest + "/css/**/*.css", dirs.dest + "/img/**/*.*"], browserSync.reload());
@@ -114,15 +147,15 @@ gulp.task('serve', function () {
 
 gulp.task('render', function (done) {
 
-    if(!config){ // called by itself, possibly?
+    if (!config) { // called by itself, possibly?
         config = getData(require('yargs').argv);
     }
 
     return gulp.src([dirs.src + '/**/*.html', '!' + dirs.src + '/rev.html'])
-        .pipe(print(function(filepath) {
+        .pipe(print(function (filepath) {
             return "\tRendering " + filepath;
         }))
-        .pipe(data(function(){
+        .pipe(data(function () {
             return config;
         }))
         .pipe(render())
@@ -144,11 +177,11 @@ gulp.task('build', function (done) {
         done);
 });
 
-gulp.task('default', function(){
+gulp.task('default', function () {
 
     config = getData(require('yargs').argv);
 
-    runSequence(['build'], 'serve', function(){
+    runSequence(['build'], 'serve', function () {
         console.log('Default likes to watch');
     });
 });
