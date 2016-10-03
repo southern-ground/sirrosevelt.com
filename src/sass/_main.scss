@@ -50,7 +50,7 @@ h1,h2,h3{
   color: white;
   text-transform: uppercase;
   font-weight: bold;
-
+  text-align: center;
 }
 
 h2.twitterCTA {
@@ -143,6 +143,12 @@ html {
       height: $headerHeight;
       z-index: $headerZ;
 
+      h1{
+        text-indent: -9999px;
+        font-size:0;
+        position: absolute;
+      }
+
       .logo {
         width: 100%;
         max-width: 320px;
@@ -172,12 +178,6 @@ html {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        h1 {
-          font-size: 0;
-          margin: 0;
-          padding: 0;
-        }
 
         .flexGroup{
           display: flex;
@@ -541,9 +541,6 @@ html {
           overflow-y: hidden;
           display: flex;
           justify-content: center;
-          h1 {
-            text-transform: uppercase;
-          }
           .videoWrapper {
             position: absolute;
             top: 0;
@@ -612,7 +609,7 @@ html {
           -moz-transition: background .25s ease-in-out;
           -webkit-transition: background .25s ease-in-out;
 
-          h1 {
+          h2 {
             text-transform: uppercase;
             // font-size: 5.3vh;
             // font-size: calc(4vw + 4vh + 2vmin);  <!-- Not bad -->
@@ -709,20 +706,20 @@ html {
         }
 
         &.section-endCard {
+
           background-image: url('../img/grandients/background-dd208f-c02bde.svg');
-          // @include linearGradient(#dd208f,#c02bde);
           padding: 0 20px;
+
           img#EndCardLogo {
             height: 200px;
             width: auto;
           }
-          h1, h2 {
-            text-align: center;
-          }
-          h1 {
+
+          h2.endCard-title {
             font-size: 6.1vh;
             margin: 30vh 20px 20px 20px;
           }
+
           h2.twitterCTA{
             a:hover{
               background: white;
@@ -730,6 +727,7 @@ html {
             }
           }
           .endCard {
+
             &-logo {
               max-width: 20vh;
             }

@@ -63,7 +63,10 @@
                 Sir Rosevelt
             </h1>
 
-            <img class="logo" src="img/zac-brown-new-group-southern-pop-sir-rosevelt.svg"/>
+            <img class="logo top-logo"
+                 src="img/zac-brown-new-group-southern-pop-sir-rosevelt.svg"
+                 alt="Zac Brown's New Group Sir Rosevelt"
+            />
 
             <div class="flexGroup">
                 <div class="innerWrapper">
@@ -71,10 +74,14 @@
 
                         <ul class="header-nav ">
                             <li class="header-nav-item join">
-                                <a href="#" data-nav-action="join">Join</a>
+                                <a href="#"
+                                   title="Keep Up To Date with Zac Brown and Sir Rosevelt"
+                                   data-nav-action="join">Join</a>
                             </li>
                             <li class="header-nav-item listen">
-                                <a href="#" data-nav-action="listen">Listen</a>
+                                <a href="#"
+                                   title="Listen to Zac Brown Sir Rosevelt"
+                                   data-nav-action="listen">Listen</a>
                             </li>
                         </ul>
 
@@ -83,24 +90,28 @@
                                 <a href="{{data.links.facebook}}"
                                    class="social facebook"
                                    target="_blank"
+                                   title="Follow Sir Rosevelt on Facebook"
                                    data-asset-path="{{data.assetURL|safe}}img/zac-brown-new-group-southern-pop-sir-rosevelt-social.png">Facebook</a>
                             </li>
                             <li class="">
                                 <a href="{{data.links.twitter}}"
                                    class="social twitter"
                                    target="_blank"
+                                   title="Follow Sir Rosevelt on Twitter"
                                    data-asset-path="{{data.assetURL|safe}}img/zac-brown-new-group-southern-pop-sir-rosevelt-social.png">Twitter</a>
                             </li>
                             <li class="">
                                 <a href="{{data.links.instagram}}"
                                    class="social instagram"
                                    target="_blank"
+                                   title="Follow Sir Rosevelt on Instagram"
                                    data-asset-path="{{data.assetURL|safe}}img/zac-brown-new-group-southern-pop-sir-rosevelt-social.png">Twitter</a>
                             </li>
                             <li class="">
                                 <a href="{{data.links.youtube}}"
                                    class="social youtube"
                                    target="_blank"
+                                   title="Follow Sir Rosevelt on YouTube"
                                    data-asset-path="{{data.assetURL|safe}}img/zac-brown-new-group-southern-pop-sir-rosevelt-social.png">YouTube</a>
                             </li>
                         </ul>
@@ -132,7 +143,7 @@
              data-nav-target="listen">
             <ul class="purchase-links-list">
                 {% for purchaseOption in data.purchaseLinks %}
-                <li><a href="{{purchaseOption.url}}" class="purchase-link" target="_blank" {% if purchaseOption.inactive %}disabled="disabled"{% endif %}><img class="store-button {% if purchaseOption.inactive %}disabled{% endif %}" src="{{data.assetURL}}{{purchaseOption.icon}}" title="{{purchaseOption.title}}" /></a></li>
+                <li><a href="{{purchaseOption.url}}" class="purchase-link" target="_blank" {% if purchaseOption.inactive %}disabled="disabled"{% endif %}><img class="store-button {% if purchaseOption.inactive %}disabled{% endif %}" src="{{data.assetURL}}{{purchaseOption.icon}}" title="{{purchaseOption.title}}" alt="Get Sir Rosevelt on {{purchaseOption.title}}" /></a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -165,21 +176,26 @@
 
             <h2 class="twitterCTA">
                 <a href="{{data.externalLinks.sundayFinestVideo}}"
-                   target="_blank">
+                   target="_blank"
+                   title="Sir Rosevelt Sunday Finest on YouTube"
+                >
                     Watch Sunday Finest Music Video
                 </a>
             </h2>
 
             <div class="scroll scroll-first">
                 Scroll
-                <img class="scroll-icon" src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"/>
+                <img class="scroll-icon"
+                     src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
+                     alt="Scroll Down"
+                />
             </div>
 
         </div>
 
     </section>
     <section id="SundayLyric" class="section-lyric lyric_one sticky">
-        <h1 class="glitch" data-text="{{data.lyrics.lyricOne}}">{{data.lyrics.lyricOne}}</h1>
+        <h2 class="glitch" data-text="{{data.lyrics.lyricOne}}">{{data.lyrics.lyricOne}}</h2>
     </section>
 
     <section id="GroundhogVideo" class="section-video sticky">
@@ -198,7 +214,7 @@
 
     </section>
     <section id="GroundhogLyric" class="section-lyric lyric_two sticky">
-        <h1 class="glitch glitch-two" data-text="{{data.lyrics.lyricTwo}}">{{data.lyrics.lyricTwo}}</h1>
+        <h2 class="glitch glitch-two" data-text="{{data.lyrics.lyricTwo}}">{{data.lyrics.lyricTwo}}</h2>
     </section>
 
     <section id="MakeupVideo" class="section-video sticky">
@@ -215,7 +231,7 @@
         </div>
     </section>
     <section id="MakeupLyric" class="section-lyric lyric_three sticky">
-        <h1 class="glitch" data-text="{{data.lyrics.lyricThree}}">{{data.lyrics.lyricThree}}</h1>
+        <h2 class="glitch" data-text="{{data.lyrics.lyricThree}}">{{data.lyrics.lyricThree}}</h2>
     </section>
 
     <section id="EdsaDoorVideo" class="section-video sticky">
@@ -232,7 +248,7 @@
         </div>
     </section>
     <section id="EdsaDoorLyric" class="section-lyric lyric_four sticky">
-        <h1 class="glitch glitch-two" data-text="{{data.lyrics.lyricFour}}">{{data.lyrics.lyricFour}}</h1>
+        <h2 class="glitch glitch-two" data-text="{{data.lyrics.lyricFour}}">{{data.lyrics.lyricFour}}</h2>
     </section>
 
     <section id="Members" class="section-band">
@@ -251,13 +267,14 @@
 
     <section id="EndCard" class="section-endCard">
 
-        <h1 class="endCard-title glitch" data-text="Put On Your Sunday Finest.">
+        <h2 class="endCard-title glitch" data-text="Put On Your Sunday Finest.">
             Put On Your Sunday Finest.
-        </h1>
+        </h2>
 
         <h2 class="twitterCTA">
             <a href="{{data.externalLinks.sundayFinestVideo}}"
-               target="_blank">
+               target="_blank"
+               title="Sir Rosevelt Sunday Finest on YouTube">
                 Watch The Music Video
             </a>
         </h2>
@@ -267,14 +284,20 @@
 
         <div class="scroll scroll-to-top">
             Back to Top
-            <img class="scroll-icon scroll-icon-inverse" src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"/>
+            <img class="scroll-icon scroll-icon-inverse"
+                 src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
+                 alt="Scroll to Top"
+            />
         </div>
 
     </section>
 
     <div class="scroll scroll-next" style="display:none;">
         Scroll
-        <img class="scroll-icon" src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"/>
+        <img class="scroll-icon"
+             src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
+             alt="Scroll Down"
+        />
     </div>
 
 </div>

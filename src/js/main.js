@@ -311,6 +311,20 @@ var _ = window._;
             }
         });
 
+        $('.top-logo').on('click', function(e){
+
+            e.preventDefault();
+
+            ga('send', 'event', {
+                eventCategory: 'Header Logo Clicked',
+                eventAction: 'click',
+                eventLabel: 'Scroll Control'
+            });
+
+            app.scrollToTop();
+
+        });
+
         return this;
     };
 
@@ -401,9 +415,6 @@ var _ = window._;
         });
 
         $('.scroll-to-top').click(function (e) {
-            $('.scroll-next').fadeOut();
-            clearTimeout(app.scrollToTimeout);
-            app.ignoreScrollEvents = true;
 
             // Manually fire tracking:
             ga('send', 'event', {
@@ -412,20 +423,34 @@ var _ = window._;
                 eventLabel: 'Scroll Control'
             });
 
-            $('html,body')
-                .clearQueue()
-                .animate({
-                    scrollTop: 0
-                }, 'slow', function () {
-                    console.log('Scrolling complete');
-                    app.ignoreScrollEvents = false;
-                });
-            return false;
+            app.scrollToTop();
+
         });
 
         window.addEventListener("scroll", _.debounce(app.updateScroll, 100));
 
         this.updateScroll();
+
+    };
+
+    app.scrollToTop = function(){
+
+        $('.scroll-next').fadeOut();
+
+        clearTimeout(app.scrollToTimeout);
+
+        app.ignoreScrollEvents = true;
+
+        $('html,body')
+            .clearQueue()
+            .animate({
+                scrollTop: 0
+            }, 'slow', function () {
+                console.log('Scrolling complete');
+                app.ignoreScrollEvents = false;
+            });
+
+        return false;
 
     };
 
@@ -527,7 +552,7 @@ var _ = window._;
                     opacity *= -1;
                 }
 
-                $(this).find('h1.glitch').css('opacity', opacity);
+                $(this).find('.glitch').css('opacity', opacity);
 
             } else {
 
