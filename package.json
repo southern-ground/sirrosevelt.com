@@ -81,7 +81,8 @@
         "id": "amazon",
         "url": "http://republicrec.co/SundayFinestAZ",
         "icon": "img/purchase-icons/amazon.png",
-        "title": "Amazon"
+        "title": "Amazon",
+        "inactive": "20161004"
       },
       {
         "id": "spotify",
