@@ -302,7 +302,7 @@ html {
 
           }
           li.join{
-            display: none;
+            // display: none;
           }
         }
 
@@ -367,6 +367,13 @@ html {
         }
         .join-list{
           padding: 20px;
+          .formResponse{
+            font-weight: normal;
+            font-size: 0.875rem;
+          }
+          .formError{
+            color: red;
+          }
           form {
             text-align: center;
             width: 100%;
@@ -379,7 +386,6 @@ html {
               background: transparent;
               color: white;
               text-transform: uppercase;
-
             }
             input {
               border-bottom: 2px solid white;
@@ -390,6 +396,9 @@ html {
             button {
               border: 1px solid white;
               margin: 10px auto 0 auto;
+            }
+            #JoinButton.inactive{
+              opacity: 0.4;
             }
           }
           @include newMobile{

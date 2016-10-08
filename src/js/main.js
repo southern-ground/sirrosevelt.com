@@ -150,9 +150,9 @@ var _ = window._;
         $('.secondaryHeaderContent-close').hide();
     };
 
-    app.initAudio = function(){
+    app.initAudio = function () {
 
-        $('.header-audioControl').bind('click', function(e){
+        $('.header-audioControl').bind('click', function (e) {
 
             e.stopPropagation();
             e.preventDefault();
@@ -161,7 +161,7 @@ var _ = window._;
 
             $b.toggleClass('playing');
 
-            if($b.hasClass('playing')){
+            if ($b.hasClass('playing')) {
                 app.soundCloudPlayer.play();
                 // Manually fire tracking:
                 ga('send', 'event', {
@@ -169,7 +169,7 @@ var _ = window._;
                     eventAction: 'click',
                     eventLabel: 'Audio'
                 });
-            }else{
+            } else {
                 app.soundCloudPlayer.pause();
                 // Manually fire tracking:
                 ga('send', 'event', {
@@ -183,22 +183,22 @@ var _ = window._;
 
         app.soundCloudPlayer = SC.Widget('SoundCloudPlayer');
 
-        app.soundCloudPlayer.bind(SC.Widget.Events.PLAY, function(){
+        app.soundCloudPlayer.bind(SC.Widget.Events.PLAY, function () {
             console.warn('SoundCloud PLAY');
             $('.header-audioControl')
                 .addClass('playing online');
         });
 
-        app.soundCloudPlayer.bind(SC.Widget.Events.FINISH, function(){
+        app.soundCloudPlayer.bind(SC.Widget.Events.FINISH, function () {
             console.warn('SoundCloud FINISH');
             $('.header-audioControl').removeClass('playing');
         });
 
-        app.soundCloudPlayer.bind(SC.Widget.Events.READY, function(){
+        app.soundCloudPlayer.bind(SC.Widget.Events.READY, function () {
             console.warn('SoundCloud READY');
         });
 
-        app.soundCloudPlayer.bind(SC.Widget.Events.ERROR, function(e){
+        app.soundCloudPlayer.bind(SC.Widget.Events.ERROR, function (e) {
             console.warn('SoundCloud ERROR');
             console.log(e)
         });
@@ -292,13 +292,96 @@ var _ = window._;
                 $('header .innerWrapper').slideDown();
             } else {
                 $('header .innerWrapper').slideUp();
+                $('#JoinEmail, #FormSuccess, #FormError').val('');
             }
 
         });
 
-        $('.secondaryHeaderContent-close').bind('click', function () {
+        $('.secondaryHeaderContent-close').on('click', function ()  {
             $(this).hide();
             $('.header-nav-option[data-open="true"]').slideUp('fast');
+            $('.header-nav-item>a').removeClass('open');
+            $('#JoinEmail, #FormSuccess, #FormError').val('');
+        });
+
+        var clearFeedback = function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            $('#FormSuccess, #FormError').html('');
+            void(0);
+            return false;
+        };
+
+        $('#JoinEmail')
+            .change(clearFeedback)
+            .focus(clearFeedback);
+
+        $('#JoinButton').on('click', function (e) {
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $el = $(e.target);
+
+            if($el.hasClass('inactive')){
+                return;
+            }
+
+            var sanitizeField = function (html) {
+
+                var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
+
+                var tagOrComment = new RegExp(
+                    '<(?:' +
+                    '!--(?:(?:-*[^->])*--+|-?)' +
+                    '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*' +
+                    '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*' +
+                    '|/?[a-z]' +
+                    tagBody +
+                    ')>',
+                    'gi');
+
+                var oldHtml;
+
+                do {
+                    oldHtml = html;
+                    html = html.replace(tagOrComment, '');
+                } while (html !== oldHtml);
+
+                return html.replace(/</g, '&lt;');
+            },
+                validateEmail = function (email) {
+                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            },
+                email = sanitizeField($('#JoinEmail').val());
+
+            if(!validateEmail(email)){
+                $('#FormError').html('Please enter a valid email address.');
+                return;
+            }
+
+            var url = "http://southerngroundnashville.com/sir-rosevelt-mail.php";
+
+            $el.addClass('inactive');
+
+            $.post(url, {
+                email: $('#JoinEmail').val()
+            }, function (data) {
+                if(data && data.status && data.status === 200){
+                    // Success:
+                    $('#FormSuccess').html('Success! Thanks for signing up.');
+                    $el.removeClass('inactive');
+                }else{
+                    // Error:
+                    $('#FormError').html('An error occurred. Please try again later.');
+                    console.warn(data);
+                    $el.removeClass('inactive');
+                }
+            });
+
+            $('#JoinEmail').val('');
+
         });
 
         // Handle disabled purchase links:
@@ -335,7 +418,7 @@ var _ = window._;
         $('#purchaseToggle').on('click', function (e) {
             e.preventDefault();
             $(this).toggleClass('open');
-            if($(this).hasClass('open')){
+            if ($(this).hasClass('open')) {
                 $purchaseEl.slideDown('slow');
 
                 // Manually fire tracking:
@@ -345,7 +428,7 @@ var _ = window._;
                     eventLabel: 'Header Navigation'
                 });
 
-            }else{
+            } else {
                 $purchaseEl.slideUp('fast');
             }
         });
