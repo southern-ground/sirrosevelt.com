@@ -282,14 +282,29 @@ var _ = window._;
                 $('header .innerWrapper').slideDown();
             } else {
                 $('header .innerWrapper').slideUp();
+                $('#JoinEmail, #FormSuccess, #FormError').val('');
             }
 
         });
 
-        $('.secondaryHeaderContent-close').on('click', function () {
+        $('.secondaryHeaderContent-close').on('click', function ()  {
             $(this).hide();
             $('.header-nav-option[data-open="true"]').slideUp('fast');
+            $('.header-nav-item>a').removeClass('open');
+            $('#JoinEmail, #FormSuccess, #FormError').val('');
         });
+
+        var clearFeedback = function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            $('#FormSuccess, #FormError').html('');
+            void(0);
+            return false;
+        };
+
+        $('#JoinEmail')
+            .change(clearFeedback)
+            .focus(clearFeedback);
 
         $('#JoinButton').on('click', function (e) {
 
@@ -358,6 +373,7 @@ var _ = window._;
             $('#JoinEmail').val('');
 
         });
+
         return this;
     };
 
