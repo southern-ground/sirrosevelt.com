@@ -152,6 +152,7 @@ var _ = window._;
 
     app.initAudio = function () {
 
+        /*
         $('.header-audioControl').bind('click', function (e) {
 
             e.stopPropagation();
@@ -203,6 +204,9 @@ var _ = window._;
             console.log(e)
         });
 
+        */
+
+        return app;
     };
 
     app.initHeader = function () {
