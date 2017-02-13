@@ -120,7 +120,7 @@ gulp.task('sass', function () {
 
     var options = {};
 
-    if(config.data.name !== 'dev'){
+    if (config.data.name !== 'dev') {
         options.outputStyle = 'compressed';
     }
 

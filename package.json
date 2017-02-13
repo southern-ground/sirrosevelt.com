@@ -99,7 +99,7 @@
       },
       "stage": {
         "name": "stage",
-        "assetURL": "http://staging.sirrosevelt.com.s3-website-us-east-1.amazonaws.com/"
+        "assetURL": "http://sirrosevelt.com/"
       },
       "preprod": {
         "name": "preprod",
