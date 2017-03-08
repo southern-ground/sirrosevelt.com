@@ -152,6 +152,7 @@ html {
       .logo {
         width: 100%;
         max-width: 320px;
+        zoom: 0.8;
         @include newMobileSmall{
           max-width: 55vw;
           margin-left:20px;
@@ -262,11 +263,14 @@ html {
             a {
               color: white;
               border: 2px solid white;
-              padding: 5px 40px 5px 26px;
               text-transform: uppercase;
               text-decoration: none;
               margin: 0 10px 0 0;
               font-size: 1.75rem;
+              padding: 5px 26px;
+              &.menuItem{
+                padding: 5px 40px 5px 26px;
+              }
 
               &:visited {
                 color: white;
@@ -278,7 +282,7 @@ html {
               &:hover {
                 text-decoration: none;
               }
-              &:after {
+              &.menuItem:after {
                 -webkit-transition: all 300ms 0s ease-in-out;
                 transition: all 300ms 0s ease-in-out;
                 content: url('../img/v2-header-chevron.png');
@@ -311,6 +315,7 @@ html {
           list-style: none;
           line-height: 0;
           font-size: 0;
+          zoom: 0.7;
           li {
             display: inline-block;
             position: relative;

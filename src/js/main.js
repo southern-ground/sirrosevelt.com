@@ -143,7 +143,7 @@ var _ = window._;
     };
 
     app.closeHeader = function () {
-        $('.header-nav-item > a').removeClass('open');
+        $('.header-nav-item > a.menuItemm').removeClass('open');
         $('.header-nav-option').css('display', 'none');
         $('header .innerWrapper').css('display', '');
         $('.header-hamburger').removeClass('open');
@@ -211,7 +211,7 @@ var _ = window._;
 
     app.initHeader = function () {
 
-        $('.header-nav-item > a').on('click', function (e) {
+        $('.header-nav-item > a.menuItem').on('click', function (e) {
 
             e.preventDefault();
 
@@ -219,7 +219,7 @@ var _ = window._;
                 leftEdge = $eventTarget.offset().left,
                 targetAction = $eventTarget.data('nav-action');
 
-            $('.header-nav-item>a').filter(function () {
+            $('.header-nav-item>a.menuItem').filter(function () {
                 return $(this).data('nav-action') != targetAction;
             }).removeClass('open');
 
@@ -304,7 +304,7 @@ var _ = window._;
         $('.secondaryHeaderContent-close').on('click', function ()  {
             $(this).hide();
             $('.header-nav-option[data-open="true"]').slideUp('fast');
-            $('.header-nav-item>a').removeClass('open');
+            $('.header-nav-item>a.menuItem').removeClass('open');
             $('#JoinEmail, #FormSuccess, #FormError').val('');
         });
 
