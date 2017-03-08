@@ -55,42 +55,37 @@
     "purchaseLinks": [
       {
         "id": "itunes",
-        "url": "http://hyperurl.co/nbisq5",
+        "url": "https://itunes.apple.com/us/album/sunday-finest-single/id1197621865?uo=4&app=itunes&at=1000lsEM&ct=LFV_6dcf9ad636060179750b151fcce957ac",
         "previous": [
           "https://itunes.apple.com/us/album/sir-rosevelt/id1160838281?app=itunes",
           "http://republicrec.co/SundayFinest"
         ],
         "icon": "img/purchase-icons/Get_it_on_iTunes_Badge_US_1114.svg",
-        "title": "iTunes",
-        "inactive": "20170213"
+        "title": "iTunes"
       },
       {
         "id": "appleMusic",
-        "url": "http://republicrec.co/SundayFinestAM",
+        "url": "https://itunes.apple.com/us/album/sunday-finest-single/id1197621865?uo=4&&app=music&at=1000lsEM&ct=LFV_6dcf9ad636060179750b151fcce957ac",
         "icon": "img/purchase-icons/US_Listen_on_Apple_Music_Badge.svg",
-        "title": "Apple Music",
-        "inactive": "20161001"
+        "title": "Apple Music"
       },
       {
         "id": "googlePlay",
-        "url": "http://republicrec.co/SundayFinestGP",
+        "url": "https://play.google.com/store/music/album/Sir_Rosevelt_Sunday_Finest?id=Bnpdpivjb7ygfroertz2gfau7nq&PAffiliateID=10lHrU&PCamRefID=LFV_6dcf9ad636060179750b151fcce957ac",
         "icon": "img/purchase-icons/googleplay.png",
-        "title": "Google Play",
-        "inactive": "20161001"
+        "title": "Google Play"
       },
       {
         "id": "amazon",
-        "url": "http://republicrec.co/SundayFinestAZ",
+        "url": "https://www.amazon.com/Sunday-Finest-Explicit/dp/B01N6T8M0N/ref=sr_1_1?ie=UTF8&qid=1485806308&sr=8-1&keywords=sir+rosevelt+sunday+finest&tag=linkfire03-20&linkCode=as2&ascsubtag=6dcf9ad636060179750b151fcce957ac",
         "icon": "img/purchase-icons/amazon.png",
-        "title": "Amazon",
-        "inactive": "20161004"
+        "title": "Amazon"
       },
       {
         "id": "spotify",
-        "url": "http://republicrec.co/SundayFinestSP",
+        "url": "https://open.spotify.com/album/6e5sJpp6dabOUY5UtF1EFS",
         "icon": "img/purchase-icons/spotify.png",
-        "title": "Spotify",
-        "inactive": "20161004"
+        "title": "Spotify"
       }
     ],
     "servers": {
