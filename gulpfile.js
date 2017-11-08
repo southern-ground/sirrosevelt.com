@@ -172,6 +172,7 @@ gulp.task('git-revision', shell.task(commands.gitRevision));
 gulp.task('build', function (done) {
 
     runSequence(
+        ['git-revision'],
         ['clean', 'sass'],
         ['render'],
         ['copy'],
