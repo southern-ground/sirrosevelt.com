@@ -36,7 +36,7 @@
       "src": "src"
     },
     "commands": {
-      "gitRevision": "git rev-list HEAD --max-count=1 --format='%ci' > ./src/rev.html"
+      "gitRevision": "git rev-list HEAD --max-count=1 --format='%s' > ./src/rev.html"
     },
     "lyrics": {
       "lyricOne": "Turn It Up",
