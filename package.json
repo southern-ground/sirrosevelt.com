@@ -95,15 +95,11 @@
       },
       "stage": {
         "name": "stage",
-        "assetURL": "http://sirrosevelt.com/"
-      },
-      "preprod": {
-        "name": "preprod",
-        "assetURL": "http://sirrosevelt.s3-website-us-east-1.amazonaws.com/"
+        "assetURL": "http://stage.sirrosevelt.com.s3-website-us-east-1.amazonaws.com/"
       },
       "prod": {
         "name": "prod",
-        "assetURL": "http://sirrosevelt.com/"
+        "assetURL": "http://prod.sirrosevelt.com.s3-website.us-east-2.amazonaws.com/"
       }
     }
   },
