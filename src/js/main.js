@@ -630,14 +630,22 @@ var _ = window._;
                 videoHeight = $v.data('src-height') || 1080,
                 scale = desiredHeight / videoHeight;
 
-            w = h = desiredHeight;
+            if(innerW > 1440){
+                $v.css('height', '55vw');
+            }else if(innerW > 690){
+                $v.css('height', '50vw');
+            }else{
+                $v.css('height', '100vw');
+            }
+            console.log($v.css('height'));
+            /*w = h = desiredHeight;
 
             $v.css({
                 top: ((h - newH) * 0.5) + "px", //top: 0,
                 left: ((w - newW) * 0.5) + 'px',
                 width: newW + 'px',
                 height: newH + 'px'
-            });
+            });*/
         });
 
     };

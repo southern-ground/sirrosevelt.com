@@ -647,7 +647,7 @@ html {
                         margin: 95px auto 40px;
                         flex-direction: row;
                         justify-content: space-between;
-                        p{
+                        p {
                             margin: 0;
                         }
                     }
@@ -662,15 +662,16 @@ html {
                     align-items: stretch;
                     align-content: center;
                     width: 100vw;
-                    a{
+                    a {
                         text-decoration: none;
                         color: white;
                     }
                     .eye-image {
                         height: 50vw;
                         width: 50vw;
-                        overflow:hidden;
-                        img{
+                        overflow: hidden;
+                        position: relative;
+                        img {
                             height: 50vw;
                             width: auto;
                             position: relative;
@@ -678,7 +679,7 @@ html {
                         @include extra-small {
                             height: 100vw;
                             width: 100vw;
-                            img{
+                            img {
                                 height: 100vw;
                             }
                         }
@@ -704,7 +705,7 @@ html {
                     background: -webkit-linear-gradient(-45deg, #ff65e1 0%, #11fcfe 100%); /* Chrome10-25,Safari5.1-6 */
                     background: linear-gradient(135deg, #ff65e1 0%, #11fcfe 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff65e1', endColorstr='#11fcfe', GradientType=1); /* IE6-9 fallback on horizontal gradient */
-                    h2{
+                    h2 {
                         color: white;
                         font-size: 24px;
                         line-height: 32px;
@@ -724,12 +725,12 @@ html {
                 .order-cta {
 
                 }
-                &#Members{
+                &#Members {
                     min-height: auto;
                 }
-                &#BrandingVideo{
+                &#BrandingVideo {
                     min-height: auto;
-                    h2{
+                    h2 {
                         margin: 0;
                         padding: 40px 10px;
                         font-size: 48px;
@@ -761,6 +762,22 @@ html {
                             position: absolute;
                         }
                     }
+                    .videoWrapper--half-screen {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 50%;
+                        pointer-events: none;
+                        overflow:hidden;
+                        video.ambientVideo {
+                            position: absolute;
+                        }
+                    }
+                }
+
+                &.half-page{
+                    position: relative;
                 }
 
                 &.headCard {
@@ -854,13 +871,13 @@ html {
                     }
                 }
 
-                &#Eye, &#SundayFinestVideo{
+                &#Eye, &#SundayFinestVideo {
                     min-height: auto;
                 }
 
                 &.section-band {
                     flex-direction: column;
-                    .member-names{
+                    .member-names {
                         width: 100%;
                         margin: 30px auto;
                         display: flex;
@@ -870,29 +887,29 @@ html {
                             margin: 20px auto;
                             zoom: 0.8;
                         }
-                        div{
+                        div {
                             text-align: center;
                             flex-basis: 33%;
                             text-transform: uppercase;
                             font-size: 25px;
                             letter-spacing: 8px;
-                            .first-name{
+                            .first-name {
                                 display: block;
-                                font-size:50px;
+                                font-size: 50px;
                                 line-height: 64px;
                             }
-                            @include extra-small{
-                                font-size:12px;
+                            @include extra-small {
+                                font-size: 12px;
                                 letter-spacing: 6px;
-                                .first-name{
-                                    font-size:24px;
+                                .first-name {
+                                    font-size: 24px;
                                     line-height: 24px;
                                 }
 
                             }
                         }
                     }
-                    .member-photo{
+                    .member-photo {
                         width: 100%;
                         height: auto;
                     }
@@ -910,14 +927,14 @@ html {
                             }
                         }
                     }
-                    .dinner-is-ready{
-                        font-size:50px;
+                    .dinner-is-ready {
+                        font-size: 50px;
                         line-height: 64px;
                         text-transform: uppercase;
                         margin: 42px auto 28px;
                         letter-spacing: 8px;
                         text-align: center;
-                        @include extra-small{
+                        @include extra-small {
                             font-size: 32px;
                             line-height: 40px;
                             margin: 20px auto 0;
@@ -926,7 +943,7 @@ html {
                     .endCard-logo {
                         width: 280px;
                         height: auto;
-                        @include extra-small{
+                        @include extra-small {
                             width: 40vw;
                             max-width: 280px;
                         }
@@ -937,9 +954,6 @@ html {
 
                     background-image: url('http://prod.sirrosevelt.com.s3-website.us-east-2.amazonaws.com/img/grandients/background-dd208f-c02bde.svg');
                     padding: 0 20px;
-
-
-
 
                     h2.endCard-title {
                         font-size: 6.1vh;
