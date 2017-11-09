@@ -25,8 +25,8 @@ var getData = function (argv) {
     data.links = pkg['sir-rosevelt-configs'].externalLinks;
     // Add the purchase links:
     data.purchaseLinks = pkg['sir-rosevelt-configs'].purchaseLinks;
-
     data.externalLinks = pkg['sir-rosevelt-configs'].externalLinks;
+    data.preorderLink = pkg['sir-rosevelt-configs'].preorderLink;
 
     return {
         data: data

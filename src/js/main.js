@@ -8,23 +8,27 @@ var _ = window._;
         PERCENT_REQUIRED_TO_SCROLL = 0.60;
 
     var elementInViewport = function (el) {
-        var top = el.offsetTop;
-        var left = el.offsetLeft;
-        var width = el.offsetWidth;
-        var height = el.offsetHeight;
+        try{
+            var top = el.offsetTop;
+            var left = el.offsetLeft;
+            var width = el.offsetWidth;
+            var height = el.offsetHeight;
 
-        while (el.offsetParent) {
-            el = el.offsetParent;
-            top += el.offsetTop;
-            left += el.offsetLeft;
+            while (el.offsetParent) {
+                el = el.offsetParent;
+                top += el.offsetTop;
+                left += el.offsetLeft;
+            }
+
+            return (
+                top < (window.pageYOffset + window.innerHeight) &&
+                left < (window.pageXOffset + window.innerWidth) &&
+                (top + height) > window.pageYOffset &&
+                (left + width) > window.pageXOffset
+            );
+        }catch(e){
+            return false;
         }
-
-        return (
-            top < (window.pageYOffset + window.innerHeight) &&
-            left < (window.pageXOffset + window.innerWidth) &&
-            (top + height) > window.pageYOffset &&
-            (left + width) > window.pageXOffset
-        );
     };
 
     var app = window.com.sirrosevelt || {};
@@ -67,8 +71,6 @@ var _ = window._;
 
             $el = $(this);
             $v = $(this).find('.ambientVideo, .ambientVideo--half-screen');
-
-            console.log($v.data('poster'));
 
             $el.css('background-image', "url('" + $v.data('poster') + "')");
             $el.css('background-size', 'cover');
@@ -620,26 +622,19 @@ var _ = window._;
             });
         });
 
-        // Half-width Videos:
-        var w = window.innerWidth * 0.5,
-            h = window.innerHeight,
-            videoW, videoH, scale, newW, newH,
-            $v;
+        $('.videoWrapper--half-screen').each(function () {
 
-        $('.ambientVideo--half-screen').each(function () {
+            var innerW = $(window).innerWidth(),
+                $v = $(this).find('.ambientVideo--half-screen'),
+                desiredHeight = innerW > 690 ? innerW / 2 : innerW,
+                videoHeight = $v.data('src-height') || 1080,
+                scale = desiredHeight / videoHeight;
 
-            $v = $(this);
+            w = h = desiredHeight;
 
-            videoW = $v.data('src-width') || 1920 * 0.5;
-            videoH = $v.data('src-height') || 1080;
-
-            scale = (Math.max(w / videoW, h / videoH) * 10000 | 1) / 10000,
-                newW = videoW * scale | 1,
-                newH = videoH * scale | 1;
-
-            $(this).css({
-                top: ((h - newH) * 0.5) | 1 + "px", //top: 0,
-                left: ((w - newW) * 0.5) | 1 + 'px',
+            $v.css({
+                top: ((h - newH) * 0.5) + "px", //top: 0,
+                left: ((w - newW) * 0.5) + 'px',
                 width: newW + 'px',
                 height: newH + 'px'
             });

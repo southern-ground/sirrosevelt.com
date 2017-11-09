@@ -573,27 +573,25 @@ html {
                     width: 100%;
                     height: 100%;
                 }
-
                 .glitch {
                     @include textGlitch("lyric-glitch-one", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 115);
                     &-two {
                         @include textGlitch("lyric-glitch-two", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 135);
                     }
+                    &-three {
+                        @include textGlitch("lyric-glitch-three", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 120);
+                    }
                 }
                 .cta-overlay {
-                    margin: 95px auto 40px;
+                    padding: 0 10px;
                     display: flex;
+                    margin: 40px auto 40px;
                     justify-content: center;
                     flex-direction: column;
                     align-items: center;
                     width: 100vw;
                     max-width: 1366px;
                     text-align: center;
-
-                    @media only screen and (min-width: 1300px) {
-                        justify-content: space-between;
-                        flex-direction: row;
-                    }
 
                     h2 {
                         font-size: 48px;
@@ -602,8 +600,9 @@ html {
                         padding: 0;
                         margin: 0;
                         @include extra-small {
-                            font-size: 32px;
+                            font-size: 24px;
                             letter-spacing: 4px;
+                            text-align: center;
                         }
                     }
                     p {
@@ -612,28 +611,30 @@ html {
                         margin: 0;
                         letter-spacing: 4.7px;
                         text-transform: uppercase;
+                        margin: 0 0 40px;
                         @include extra-small {
-                            font-size: 18px;
+                            font-size: 16px;
                             letter-spacing: 4px;
                             margin-top: 10px;
+                            padding: 10px;
+                            margin-bottom: 20px;
                         }
                     }
-                    .cta {
+                    a.cta {
                         border: 2px solid white;
                         padding: 10px 20px;
                         font-size: 32px;
                         letter-spacing: 9px;
                         text-transform: uppercase;
                         font-weight: normal;
-                        margin: 20px 0 0 0;
+                        margin: 50px 0 0 0;
                         color: white;
                         text-decoration: none;
-                        @media only screen and (min-width: 1300px) {
-                            margin: 0;
-                        }
+
                         @include extra-small {
                             font-size: 28px;
                             letter-spacing: 4px;
+                            margin: 20px 0 0;
                         }
                         &:hover {
                             background-color: white;
@@ -641,6 +642,16 @@ html {
                             cursor: pointer;
                         }
                     }
+
+                    @media only screen and (min-width: 1300px) {
+                        margin: 95px auto 40px;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        p{
+                            margin: 0;
+                        }
+                    }
+
                 }
                 .two-columns {
                     display: flex;
@@ -656,14 +667,20 @@ html {
                         color: white;
                     }
                     .eye-image {
-                        background-size: cover;
                         height: 50vw;
-                        max-height: 650px;
                         width: 50vw;
-                        background-position-x: 60%;
+                        overflow:hidden;
+                        img{
+                            height: 50vw;
+                            width: auto;
+                            position: relative;
+                        }
                         @include extra-small {
-                            min-height: 100vw;
+                            height: 100vw;
                             width: 100vw;
+                            img{
+                                height: 100vw;
+                            }
                         }
                     }
                     div {
@@ -687,35 +704,44 @@ html {
                     background: -webkit-linear-gradient(-45deg, #ff65e1 0%, #11fcfe 100%); /* Chrome10-25,Safari5.1-6 */
                     background: linear-gradient(135deg, #ff65e1 0%, #11fcfe 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
                     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff65e1', endColorstr='#11fcfe', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+                    h2{
+                        color: white;
+                        font-size: 24px;
+                        line-height: 32px;
+                        @include medium {
+                            font-size: 32px;
+                            line-height: 64px;
+                        }
+                        text-transform: uppercase;
+                        text-align: center;
+                        padding: 40px;
+                        a {
+                            display: inline;
+                            text-decoration: underline;
+                        }
+                    }
                 }
                 .order-cta {
-                    color: white;
-                    font-size: 24px;
-                    line-height: 32px;
-                    @include medium {
-                        font-size: 32px;
-                        line-height: 64px;
-                    }
-                    text-transform: uppercase;
-                    text-align: center;
-                    padding: 40px;
-                    a {
-                        display: inline;
-                    }
+
+                }
+                &#Members{
+                    min-height: auto;
                 }
                 &#BrandingVideo{
+                    min-height: auto;
                     h2{
                         margin: 0;
-                        padding: 40px 0;
+                        padding: 40px 10px;
                         font-size: 48px;
                         letter-spacing: 9px;
                         font-weight: normal;
                         @include extra-small {
-                            font-size: 32px;
+                            font-size: 24px;
                             letter-spacing: 4px;
                         }
                     }
                 }
+
                 &.section-video {
                     overflow-x: hidden;
                     overflow-y: hidden;
@@ -840,6 +866,10 @@ html {
                         display: flex;
                         flex-direction: row;
                         justify-content: space-around;
+                        @include extra-small {
+                            margin: 20px auto;
+                            zoom: 0.8;
+                        }
                         div{
                             text-align: center;
                             flex-basis: 33%;
@@ -850,6 +880,15 @@ html {
                                 display: block;
                                 font-size:50px;
                                 line-height: 64px;
+                            }
+                            @include extra-small{
+                                font-size:12px;
+                                letter-spacing: 6px;
+                                .first-name{
+                                    font-size:24px;
+                                    line-height: 24px;
+                                }
+
                             }
                         }
                     }
@@ -877,10 +916,20 @@ html {
                         text-transform: uppercase;
                         margin: 42px auto 28px;
                         letter-spacing: 8px;
+                        text-align: center;
+                        @include extra-small{
+                            font-size: 32px;
+                            line-height: 40px;
+                            margin: 20px auto 0;
+                        }
                     }
                     .endCard-logo {
                         width: 280px;
                         height: auto;
+                        @include extra-small{
+                            width: 40vw;
+                            max-width: 280px;
+                        }
                     }
                 }
 

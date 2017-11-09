@@ -191,11 +191,8 @@
 </header>
 
 <div id="content">
-
     <section id="CoverAnimation" class="section-video headCard">
-
         <div class="videoWrapper">
-
             <video class="ambientVideo"
                    data-src="{{data.assetURL}}video/cover-animation.mp4"
                    data-poster="{{data.assetURL}}img/video-posters/mobile-background.jpg"
@@ -203,7 +200,6 @@
                    data-src-height="1080"
                    autoplay loop muted webkit-playsinline>
             </video>
-
         </div>
 
         <div class="headCard-group_bottom">
@@ -228,25 +224,16 @@
                 <p>Feat. &quot;Something &#039;bout You&quot; and &quot;Sunday Finest&quot;</p>
             </div>
             <div>
-                <a href="PREORDER_LINK" class="cta" target="_blank">Pre-Order Now</a>
+                <a href="{{data.preorderLink}}" class="cta" target="_blank">Pre-Order Now</a>
             </div>
         </div>
         <div class="two-columns">
-            <div class="half-page eye-image" style="background-image:url({{data.assetURL}}img/video-posters/eye.jpg);">
-                <!--<div class="videoWrapper">
-                <video class="ambientVideo"
-                       data-src="{{data.assetURL}}video/eye.mp4"
-                       data-poster="{{data.assetURL}}img/video-posters/eye.jpg"
-                       data-src-width="1920"
-                       data-src-height="1080"
-                       autoplay loop muted webkit-playsinline>
-                </video>
-
-            </div>-->
+            <div class="eye-image">
+                <img src="{{data.assetURL}}img/eye.gif" />
             </div>
-            <div class="half-page gradient-back">
-                <h2 class="order-cta">Instantly receive <br/>&quot;something &#039;bout you&quot; <br/>with <a
-                    href="PREORDER_LINK" target="_blank">album pre-order</a></h2>
+            <div class="gradient-back">
+                <h2>Instantly receive <br/>&quot;something &#039;bout you&quot; <br/>with <a
+                    href="{{data.preorderLink}}" target="_blank">album pre-order</a></h2>
             </div>
         </div>
     </section>
@@ -260,22 +247,24 @@
     <section id="SundayFinestVideo" class="section-video">
         <div class="two-columns">
             <div class="half-page gradient-back">
-                <h2 class="order-cta"><a href="https://www.youtube.com/watch?v=GMgA7uZ7vj4" target="_blank">Watch the &quot;Sunday Finest&quot;
-                    video</a></h2>
+                <h2 class="order-cta">
+                    <a href="https://www.youtube.com/watch?v=GMgA7uZ7vj4" target="_blank">
+                        Watch the &quot;Sunday Finest&quot; video
+                    </a>
+                </h2>
             </div>
 
-            <div class="half-page eye-image"
-                 style="background-image:url({{data.assetURL}}img/video-posters/sunday-finest.jpg);">
-                <!--<div class="videoWrapper">
-                <video class="ambientVideo"
-                       data-src="{{data.assetURL}}video/eye.mp4"
-                       data-poster="{{data.assetURL}}img/video-posters/eye.jpg"
-                       data-src-width="1920"
-                       data-src-height="1080"
-                       autoplay loop muted webkit-playsinline>
-                </video>
-
-            </div>-->
+            <div class="half-page eye-image section-video">
+                <!--<img src="{{data.assetURL}}img/groundhog.gif" />-->
+                <div class="videoWrapper--half-screen">
+                    <video class="ambientVideo--half-screen"
+                           data-src="{{data.assetURL}}video/groundhog-2000kbps.mp4"
+                           data-poster="{{data.assetURL}}img/video-posters/groundhog-2000kbps.jpg"
+                           data-src-width="1920"
+                           data-src-height="1080"
+                           autoplay loop muted webkit-playsinline>
+                    </video>
+                </div>
             </div>
 
         </div>
@@ -283,12 +272,12 @@
 
     <section id="Members" class="section-band">
         <div class="member-names">
-            <div><span class="first-name">Ben</span> Simonetti</div>
-            <div><span class="first-name">Zac</span> Brown</div>
-            <div><span class="first-name">Niko</span> Moon</div>
+            <div><span class="first-name glitch glitch-three" data-text="Ben">Ben</span> <span class="glitch glitch-two" data-text="Simonetti">Simonetti</span></div>
+            <div><span class="first-name glitch glitch-two" data-text="Zac">Zac</span> <span class="glitch glitch-ones" data-text="Brown">Brown</span></div>
+            <div><span class="first-name glitch glitch-two" data-text="Niko">Niko</span> <span class="glitch glitch-three" data-text="Moon">Moon</span></div>
         </div>
         <img class="member-photo" src="{{data.assetURL}}img/dinner.jpg" />
-        <div class="dinner-is-ready">Dinner is Ready</div>
+        <div class="dinner-is-ready glitch glitch-two" data-text="Dinner is Ready">Dinner is Ready</div>
 
         <img class="endCard-logo" alt="Sir Rosevelt's Emblem"
              src="{{data.assetURL}}img/zac-brown-new-group-southern-pop-sir-rosevelt-monogram-white.svg"/>
