@@ -171,6 +171,8 @@ gulp.task('git-revision', shell.task(commands.gitRevision));
 
 gulp.task('build', function (done) {
 
+    config = getData(require('yargs').argv);
+
     runSequence(
         ['git-revision'],
         ['clean', 'sass'],
