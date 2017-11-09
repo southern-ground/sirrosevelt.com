@@ -66,7 +66,7 @@ var _ = window._;
         $('.videoWrapper').each(function () {
 
             $el = $(this);
-            $v = $(this).find('.ambientVideo');
+            $v = $(this).find('.ambientVideo, .ambientVideo--half-screen');
 
             console.log($v.data('poster'));
 
@@ -575,7 +575,7 @@ var _ = window._;
 
         this.videos = [];
 
-        $('.ambientVideo').each(function () {
+        $('.ambientVideo, .ambientVideo--half-screen').each(function () {
 
             $v = $(this);
 
@@ -606,6 +606,31 @@ var _ = window._;
             $v = $(this);
 
             videoW = $v.data('src-width') || 1920;
+            videoH = $v.data('src-height') || 1080;
+
+            scale = (Math.max(w / videoW, h / videoH) * 10000 | 1) / 10000,
+                newW = videoW * scale | 1,
+                newH = videoH * scale | 1;
+
+            $(this).css({
+                top: ((h - newH) * 0.5) | 1 + "px", //top: 0,
+                left: ((w - newW) * 0.5) | 1 + 'px',
+                width: newW + 'px',
+                height: newH + 'px'
+            });
+        });
+
+        // Half-width Videos:
+        var w = window.innerWidth * 0.5,
+            h = window.innerHeight,
+            videoW, videoH, scale, newW, newH,
+            $v;
+
+        $('.ambientVideo--half-screen').each(function () {
+
+            $v = $(this);
+
+            videoW = $v.data('src-width') || 1920 * 0.5;
             videoH = $v.data('src-height') || 1080;
 
             scale = (Math.max(w / videoW, h / videoH) * 10000 | 1) / 10000,
@@ -657,7 +682,7 @@ var _ = window._;
 
         // Update the scroll nag position if necessary:
 
-        if (elementInViewport(document.getElementById('SundayVideo'))
+        if (elementInViewport(document.getElementById('CoverAnimation'))
             || elementInViewport(document.getElementById('Members'))
             || elementInViewport(document.getElementById('EndCard'))) {
             // At the top or bottom; hide the scroll control on the side.
@@ -728,7 +753,7 @@ var _ = window._;
 
                 var newTop = 0;
 
-                if (elementInViewport($('#SundayVideo').get(0))
+                if (elementInViewport($('#CoverAnimation').get(0))
                     || elementInViewport($('.section-band').get(0))) {
                     return;
                 }

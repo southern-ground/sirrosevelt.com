@@ -31,10 +31,10 @@
 
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/main.css">
-    <script src="./js/vendor/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="{{data.assetURL}}css/normalize.css">
+    <link rel="stylesheet" href="{{data.assetURL}}css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{data.assetURL}}css/main.css">
+    <script src="{{data.assetURL}}js/vendor/modernizr-2.8.3.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400" rel="stylesheet">
 
@@ -45,11 +45,24 @@
 
     <!-- Facebook Pixel Code -->
     <script>
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window,
+            document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '437263696447236'); // Insert your pixel ID here.
         fbq('track', 'PageView');
     </script>
@@ -89,13 +102,6 @@
                     <div class="flexy">
 
                         <ul class="header-nav ">
-                            <li class="header-nav-item tour">
-                                <a href="http://gigst.rs/rosevelt"
-                                   title="Buy Tickets"
-                                   class="link"
-                                   target="_blank"
-                                   data-nav-action="join">Tour</a>
-                            </li>
                             <li class="header-nav-item join">
                                 <a href="#"
                                    class="menuItem"
@@ -158,7 +164,7 @@
              data-nav-target="join">
             Be in the know about Sir Rosevelt and future launches:
             <form method="post" action="http://southerngroundnashville.com/sir-rosevelt-mail.php">
-                <input id="JoinEmail" type="email" placeholder="Email Address" name="email" />
+                <input id="JoinEmail" type="email" placeholder="Email Address" name="email"/>
                 <button id="JoinButton" type="submit">Submit</button>
             </form>
             <p id="FormError" class="formResponse formError"></p>
@@ -170,7 +176,11 @@
              data-nav-target="listen">
             <ul class="purchase-links-list">
                 {% for purchaseOption in data.purchaseLinks %}
-                <li><a href="{{purchaseOption.url}}" class="purchase-link" target="_blank" {% if purchaseOption.inactive %}disabled="disabled"{% endif %}><img class="store-button {% if purchaseOption.inactive %}disabled{% endif %}" src="{{data.assetURL}}{{purchaseOption.icon}}" title="{{purchaseOption.title}}" alt="Get Sir Rosevelt on {{purchaseOption.title}}" /></a></li>
+                <li><a href="{{purchaseOption.url}}" class="purchase-link" target="_blank" {% if purchaseOption.inactive
+                       %}disabled="disabled" {% endif %}><img
+                    class="store-button {% if purchaseOption.inactive %}disabled{% endif %}"
+                    src="{{data.assetURL}}{{purchaseOption.icon}}" title="{{purchaseOption.title}}"
+                    alt="Get Sir Rosevelt on {{purchaseOption.title}}"/></a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -182,12 +192,12 @@
 
 <div id="content">
 
-    <section id="SundayVideo" class="section-video headCard">
+    <section id="CoverAnimation" class="section-video headCard">
 
         <div class="videoWrapper">
 
             <video class="ambientVideo"
-                   data-src="{{data.assetURL}}video/sir-rosevelt-v3-2000kbps.mp4"
+                   data-src="{{data.assetURL}}video/cover-animation.mp4"
                    data-poster="{{data.assetURL}}img/video-posters/mobile-background.jpg"
                    data-src-width="1920"
                    data-src-height="1080"
@@ -196,19 +206,7 @@
 
         </div>
 
-        <img class="headCard-logo" alt="Sir Rosevelt's Emblem"
-             src="{{data.assetURL}}img/zac-brown-new-group-southern-pop-sir-rosevelt-monogram-white.svg"/>
-
         <div class="headCard-group_bottom">
-
-            <h2 class="twitterCTA">
-                <a href="{{data.externalLinks.sundayFinestVideo}}"
-                   target="_blank"
-                   title="Sir Rosevelt Sunday Finest on YouTube"
-                >
-                    Watch Sunday Finest Music Video
-                </a>
-            </h2>
 
             <div class="scroll scroll-first">
                 Scroll
@@ -221,90 +219,76 @@
         </div>
 
     </section>
-    <section id="SundayLyric" class="section-lyric lyric_one sticky">
-        <h2 class="glitch" data-text="{{data.lyrics.lyricOne}}">{{data.lyrics.lyricOne}}</h2>
-    </section>
-
-    <section id="GroundhogVideo" class="section-video sticky">
-
-        <div class="videoWrapper">
-
-            <video class="ambientVideo"
-                   data-src="{{data.assetURL}}video/groundhog-2000kbps.mp4"
-                   data-poster="{{data.assetURL}}img/video-posters/groundhog-2000kbps.jpg"
-                   data-src-width="1920"
-                   data-src-height="804"
-                   autoplay loop muted webkit-playsinline>
-            </video>
-
+    <section id="Eye" class="section-video ">
+        <div class="cta-overlay">
+            <div>
+                <h2>
+                    Debut Album Out 12.15.17
+                </h2>
+                <p>Feat. &quot;Something &#039;bout You&quot; and &quot;Sunday Finest&quot;</p>
+            </div>
+            <div>
+                <a href="PREORDER_LINK" class="cta" target="_blank">Pre-Order Now</a>
+            </div>
         </div>
+        <div class="two-columns">
+            <div class="half-page eye-image" style="background-image:url({{data.assetURL}}/img/video-posters/eye.jpg);">
+                <!--<div class="videoWrapper">
+                <video class="ambientVideo"
+                       data-src="{{data.assetURL}}video/eye.mp4"
+                       data-poster="{{data.assetURL}}img/video-posters/eye.jpg"
+                       data-src-width="1920"
+                       data-src-height="1080"
+                       autoplay loop muted webkit-playsinline>
+                </video>
 
-    </section>
-    <section id="GroundhogLyric" class="section-lyric lyric_two sticky">
-        <h2 class="glitch glitch-two" data-text="{{data.lyrics.lyricTwo}}">{{data.lyrics.lyricTwo}}</h2>
-    </section>
-
-    <section id="MakeupVideo" class="section-video sticky">
-        <div class="videoWrapper">
-
-            <video class="ambientVideo"
-                   data-src="{{data.assetURL}}video/girls-makeup-2000kbps.mp4"
-                   data-poster="{{data.assetURL}}img/video-posters/girls-makeup-2000kbps.jpg"
-                   data-src-width="1920"
-                   data-src-height="804"
-                   autoplay loop muted webkit-playsinline>
-            </video>
-
+            </div>-->
+            </div>
+            <div class="half-page gradient-back">
+                <h2 class="order-cta">Instantly receive <br/>&quot;something &#039;bout you&quot; <br/>with <a
+                    href="PREORDER_LINK" target="_blank">album pre-order</a></h2>
+            </div>
         </div>
     </section>
-    <section id="MakeupLyric" class="section-lyric lyric_three sticky">
-        <h2 class="glitch" data-text="{{data.lyrics.lyricThree}}">{{data.lyrics.lyricThree}}</h2>
-    </section>
-
-    <section id="EdsaDoorVideo" class="section-video sticky">
-        <div class="videoWrapper">
-
-            <video class="ambientVideo"
-                   data-src="{{data.assetURL}}video/edsa-door-2000kbps.mp4"
-                   data-poster="{{data.assetURL}}img/video-posters/edsa-door-2000kbps.jpg"
-                   data-src-width="1754"
-                   data-src-height="804"
-                   autoplay loop muted webkit-playsinline>
-            </video>
-
+    <section id="BrandingVideo" class="section-video">
+        <h2 class="branding-video">Watch the Brand New Lyric Video:</h2>
+        <div class='embed-container'>
+            <iframe src='https://www.youtube.com/embed/MzfYVcSUDNQ?modestbranding=1&autohide=1&showinfo=0&controls=0'
+                    frameborder='0' allowfullscreen></iframe>
         </div>
     </section>
-    <section id="EdsaDoorLyric" class="section-lyric lyric_four sticky">
-        <h2 class="glitch glitch-two" data-text="{{data.lyrics.lyricFour}}">{{data.lyrics.lyricFour}}</h2>
+    <section id="SundayFinestVideo" class="section-video">
+        <div class="two-columns">
+            <div class="half-page gradient-back">
+                <h2 class="order-cta"><a href="https://www.youtube.com/watch?v=GMgA7uZ7vj4" target="_blank">Watch the &quot;Sunday Finest&quot;
+                    video</a></h2>
+            </div>
+
+            <div class="half-page eye-image"
+                 style="background-image:url({{data.assetURL}}/img/video-posters/sunday-finest.jpg);">
+                <!--<div class="videoWrapper">
+                <video class="ambientVideo"
+                       data-src="{{data.assetURL}}video/eye.mp4"
+                       data-poster="{{data.assetURL}}img/video-posters/eye.jpg"
+                       data-src-width="1920"
+                       data-src-height="1080"
+                       autoplay loop muted webkit-playsinline>
+                </video>
+
+            </div>-->
+            </div>
+
+        </div>
     </section>
 
     <section id="Members" class="section-band">
-
-        <div class="band-member band-member_niko">
-            <h2>Niko</h2>
+        <div class="member-names">
+            <div><span class="first-name">Ben</span> Simonetti</div>
+            <div><span class="first-name">Zac</span> Brown</div>
+            <div><span class="first-name">Niko</span> Moon</div>
         </div>
-        <div class="band-member band-member_zac">
-            <h2>Zac</h2>
-        </div>
-        <div class="band-member band-member_ben">
-            <h2>Ben</h2>
-        </div>
-
-    </section>
-
-    <section id="EndCard" class="section-endCard">
-
-        <h2 class="endCard-title glitch" data-text="Put On Your Sunday Finest.">
-            Put On Your Sunday Finest.
-        </h2>
-
-        <h2 class="twitterCTA">
-            <a href="{{data.externalLinks.sundayFinestVideo}}"
-               target="_blank"
-               title="Sir Rosevelt Sunday Finest on YouTube">
-                Watch The Music Video
-            </a>
-        </h2>
+        <img class="member-photo" src="{{data.assetURL}}img/dinner.jpg" />
+        <div class="dinner-is-ready">Dinner is Ready</div>
 
         <img class="endCard-logo" alt="Sir Rosevelt's Emblem"
              src="{{data.assetURL}}img/zac-brown-new-group-southern-pop-sir-rosevelt-monogram-white.svg"/>
@@ -312,7 +296,7 @@
         <div class="scroll scroll-to-top">
             Back to Top
             <img class="scroll-icon scroll-icon-inverse"
-                 src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
+                 src="{{data.assetURL}}img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
                  alt="Scroll to Top"
             />
         </div>
@@ -322,14 +306,14 @@
     <div class="scroll scroll-next" style="display:none;">
         Scroll
         <img class="scroll-icon"
-             src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
+             src="{{data.assetURL}}img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
              alt="Scroll Down"
         />
     </div>
 
 </div>
 
-<footer>&copy;2016</footer>
+<footer>&copy;2017</footer>
 
 <script src="{{data.assetURL}}js/vendor/jquery-1.12.0.min.js"></script>
 <script src="{{data.assetURL}}js/vendor/jquery.easing.1.3.js"></script>
@@ -355,7 +339,8 @@ Remarketing tags may not be associated with personally identifiable information 
 </script>
 <noscript>
     <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/996482958/?value=1.00&label=K6a6CMnjlXgQjr-U2wM&guid=ON&script=0"/>
+        <img height="1" width="1" style="border-style:none;" alt=""
+             src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/996482958/?value=1.00&label=K6a6CMnjlXgQjr-U2wM&guid=ON&script=0"/>
     </div>
 </noscript>
 
@@ -363,9 +348,9 @@ Remarketing tags may not be associated with personally identifiable information 
     (function (b, o, i, l, e, r) {
         b.GoogleAnalyticsObject = l;
         b[l] || (b[l] =
-                function () {
-                    (b[l].q = b[l].q || []).push(arguments)
-                });
+            function () {
+                (b[l].q = b[l].q || []).push(arguments)
+            });
         b[l].l = +new Date;
         e = o.createElement(i);
         r = o.getElementsByTagName(i)[0];
