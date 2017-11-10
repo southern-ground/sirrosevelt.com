@@ -607,7 +607,7 @@ html {
                         padding: 0;
                         margin: 0;
                         @include extra-small {
-                            font-size: 24px;
+                            font-size: 16px;
                             letter-spacing: 4px;
                             text-align: center;
                         }
@@ -630,7 +630,7 @@ html {
                     a.cta {
                         border: 2px solid white;
                         padding: 10px 20px;
-                        font-size: 32px;
+                        font-size: 24px;
                         letter-spacing: 9px;
                         text-transform: uppercase;
                         font-weight: normal;
@@ -639,7 +639,7 @@ html {
                         text-decoration: none;
 
                         @include extra-small {
-                            font-size: 28px;
+                            font-size: 24px;
                             letter-spacing: 4px;
                             margin: 20px 0 0;
                         }
@@ -745,14 +745,20 @@ html {
                         margin: 0;
                         padding: 40px 10px;
                         font-weight: normal;
+                        @include mobile{
+                            zoom: 0.7;
+                        }
                         @include extra-small{
-                            zoom:0.7;
-                            font-size: 24px;
+
+                            font-size: 16px;
                             letter-spacing: 4px;
                         }
                         @include small{
                             zoom: 1;
-                            font-size: 28px;
+                            font-size: 24px;
+                        }
+                        @include medium{
+                            font-size: 32px;
                         }
                         @include large{
                             font-size: 52px;
