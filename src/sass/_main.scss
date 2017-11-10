@@ -254,7 +254,14 @@ html {
                 }
 
                 ul.header-nav {
-                    display: inline-block;
+                    @include extra-small{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+                    @include small{
+                        display: inline-block;
+                    }
                     list-style: none;
                     li.header-nav-item {
                         display: inline-block;
@@ -709,10 +716,6 @@ html {
                         color: white;
                         font-size: 24px;
                         line-height: 32px;
-                        @include medium {
-                            font-size: 32px;
-                            line-height: 64px;
-                        }
                         text-transform: uppercase;
                         text-align: center;
                         padding: 40px;
@@ -722,6 +725,14 @@ html {
                         }
                     }
                 }
+                @include medium {
+                    .gradient-back > h2{
+                        font-size: 32px;
+                        line-height: 64px;
+                    }
+
+                }
+
                 .order-cta {
 
                 }
@@ -730,15 +741,22 @@ html {
                 }
                 &#BrandingVideo {
                     min-height: auto;
-                    h2 {
+                    h2.branding-video {
                         margin: 0;
                         padding: 40px 10px;
-                        font-size: 48px;
-                        letter-spacing: 9px;
                         font-weight: normal;
-                        @include extra-small {
+                        @include extra-small{
+                            zoom:0.7;
                             font-size: 24px;
                             letter-spacing: 4px;
+                        }
+                        @include small{
+                            zoom: 1;
+                            font-size: 28px;
+                        }
+                        @include large{
+                            font-size: 52px;
+                            letter-spacing: 6px;
                         }
                     }
                 }
@@ -767,7 +785,7 @@ html {
                         top: 0;
                         right: 0;
                         bottom: 0;
-                        left: 50%;
+                        left: 0;
                         pointer-events: none;
                         overflow:hidden;
                         video.ambientVideo {
