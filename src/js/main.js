@@ -8,7 +8,8 @@ var _ = window._;
         PERCENT_REQUIRED_TO_SCROLL = 0.60;
 
     var elementInViewport = function (el) {
-        try{
+
+        if(el && el.offsetTop){
             var top = el.offsetTop;
             var left = el.offsetLeft;
             var width = el.offsetWidth;
@@ -26,12 +27,15 @@ var _ = window._;
                 (top + height) > window.pageYOffset &&
                 (left + width) > window.pageXOffset
             );
-        }catch(e){
-            return false;
         }
+
+        return true;
+
     };
 
     var app = window.com.sirrosevelt || {};
+
+    app.testingVideoFailOver = false;
 
     app.videoPlaying = false;
 
@@ -67,7 +71,7 @@ var _ = window._;
 
         var $el, $v;
 
-        $('.videoWrapper').each(function () {
+        $('.videoWrapper, .videoWrapper--half-screen').each(function () {
 
             $el = $(this);
             $v = $(this).find('.ambientVideo, .ambientVideo--half-screen');
@@ -82,14 +86,17 @@ var _ = window._;
         });
 
         // Manually fire tracking:
-        ga('send',
-            'event',
-            'Videos',
-            'Failure to Load',
-            "RC-2",
-            {
-                nonInteraction: true
-            });
+        if(window.ga){
+            window.ga('send',
+                'event',
+                'Videos',
+                'Failure to Load',
+                "RC-2",
+                {
+                    nonInteraction: true
+                });
+        }
+
 
     };
 
@@ -303,14 +310,14 @@ var _ = window._;
 
         });
 
-        $('.secondaryHeaderContent-close').on('click', function ()  {
+        $('.secondaryHeaderContent-close').on('click', function () {
             $(this).hide();
             $('.header-nav-option[data-open="true"]').slideUp('fast');
             $('.header-nav-item>a.menuItem').removeClass('open');
             $('#JoinEmail, #FormSuccess, #FormError').val('');
         });
 
-        var clearFeedback = function(e){
+        var clearFeedback = function (e) {
             e.preventDefault();
             e.stopPropagation();
             $('#FormSuccess, #FormError').html('');
@@ -329,40 +336,40 @@ var _ = window._;
 
             var $el = $(e.target);
 
-            if($el.hasClass('inactive')){
+            if ($el.hasClass('inactive')) {
                 return;
             }
 
             var sanitizeField = function (html) {
 
-                var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
+                    var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
 
-                var tagOrComment = new RegExp(
-                    '<(?:' +
-                    '!--(?:(?:-*[^->])*--+|-?)' +
-                    '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*' +
-                    '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*' +
-                    '|/?[a-z]' +
-                    tagBody +
-                    ')>',
-                    'gi');
+                    var tagOrComment = new RegExp(
+                        '<(?:' +
+                        '!--(?:(?:-*[^->])*--+|-?)' +
+                        '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*' +
+                        '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*' +
+                        '|/?[a-z]' +
+                        tagBody +
+                        ')>',
+                        'gi');
 
-                var oldHtml;
+                    var oldHtml;
 
-                do {
-                    oldHtml = html;
-                    html = html.replace(tagOrComment, '');
-                } while (html !== oldHtml);
+                    do {
+                        oldHtml = html;
+                        html = html.replace(tagOrComment, '');
+                    } while (html !== oldHtml);
 
-                return html.replace(/</g, '&lt;');
-            },
+                    return html.replace(/</g, '&lt;');
+                },
                 validateEmail = function (email) {
-                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(email);
-            },
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(email);
+                },
                 email = sanitizeField($('#JoinEmail').val());
 
-            if(!validateEmail(email)){
+            if (!validateEmail(email)) {
                 $('#FormError').html('Please enter a valid email address.');
                 return;
             }
@@ -374,11 +381,11 @@ var _ = window._;
             $.post(url, {
                 email: $('#JoinEmail').val()
             }, function (data) {
-                if(data && data.status && data.status === 200){
+                if (data && data.status && data.status === 200) {
                     // Success:
                     $('#FormSuccess').html('Success! Thanks for signing up.');
                     $el.removeClass('inactive');
-                }else{
+                } else {
                     // Error:
                     $('#FormError').html('An error occurred. Please try again later.');
                     console.warn(data);
@@ -391,8 +398,8 @@ var _ = window._;
         });
 
         // Handle disabled purchase links:
-        $('.purchase-link').on('click', function(e){
-            if($(e.currentTarget).attr('disabled')){
+        $('.purchase-link').on('click', function (e) {
+            if ($(e.currentTarget).attr('disabled')) {
                 e.preventDefault();
                 e.stopPropagation();
                 void(0);
@@ -400,7 +407,7 @@ var _ = window._;
             }
         });
 
-        $('.top-logo').on('click', function(e){
+        $('.top-logo').on('click', function (e) {
 
             e.preventDefault();
 
@@ -522,7 +529,7 @@ var _ = window._;
 
     };
 
-    app.scrollToTop = function(){
+    app.scrollToTop = function () {
 
         $('.scroll-next').fadeOut();
 
@@ -545,12 +552,14 @@ var _ = window._;
 
     app.startVideo = function ($video) {
 
+        if(app.testingVideoFailOver){
+            return false;
+        }
+
         $video.attr('src', $video.data('src'));
         $video.attr('muted', 'muted'); // Most videos shouldn't have audio.
 
         var videoEl = $video.get(0);
-
-        //if (this.isMobile) { console.warn('Attempting to play video mobile');
 
         makeVideoPlayableInline(videoEl, false);
 
@@ -571,7 +580,10 @@ var _ = window._;
 
     app.initVideo = function () {
 
-        console.log('app::initVideo');
+        if(app.testingVideoFailOver){
+            app.showStaticImage();
+            return;
+        }
 
         var $v;
 
@@ -580,18 +592,13 @@ var _ = window._;
         $('.ambientVideo, .ambientVideo--half-screen').each(function () {
 
             $v = $(this);
-
-            if (elementInViewport($v.get(0))) {
-                app.startVideo($v);
-            }
+            app.startVideo($v);
 
         });
 
     };
 
     app.resizeVideo = function () {
-
-        console.log('app::resizeVideo');
 
         if (app.isIEOld || app.isiPad) {
             console.log('\tSuppress video resize');
@@ -630,22 +637,14 @@ var _ = window._;
                 videoHeight = $v.data('src-height') || 1080,
                 scale = desiredHeight / videoHeight;
 
-            if(innerW > 1440){
+            if (innerW > 1440) {
                 $v.css('height', '55vw');
-            }else if(innerW > 690){
+            } else if (innerW > 767) {
                 $v.css('height', '50vw');
-            }else{
+            } else {
                 $v.css('height', '100vw');
             }
-            console.log($v.css('height'));
-            /*w = h = desiredHeight;
 
-            $v.css({
-                top: ((h - newH) * 0.5) + "px", //top: 0,
-                left: ((w - newW) * 0.5) + 'px',
-                width: newW + 'px',
-                height: newH + 'px'
-            });*/
         });
 
     };
@@ -789,7 +788,7 @@ var _ = window._;
 
         // Check all the videos and pause as necessary:
 
-        $('.ambientVideo').each(function () {
+        $('.ambientVideo, .ambientVideo--half-screen').each(function () {
 
             var $videoRef = $(this),
                 videoElement = $(this).get(0),
@@ -826,8 +825,6 @@ var _ = window._;
     };
 
     app.init = function () {
-
-        console.log('app::init');
 
         // Update the styles for the social icons:
 

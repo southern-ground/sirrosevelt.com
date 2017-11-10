@@ -116,12 +116,19 @@
                                    title="Keep Up To Date with Zac Brown and Sir Rosevelt"
                                    data-nav-action="join">Join</a>
                             </li>
-                            <li class="header-nav-item listen">
+                            <li class="header-nav-item">
+                                <a href="{{data.preorderLink}}"
+                                   class="link"
+                                   title="Pre-Order the new Album"
+                                   target="_blank"
+                                   data-nav-action="pre-order">Pre-Order</a>
+                            </li>
+                           <!-- <li class="header-nav-item listen">
                                 <a href="#"
                                    class="menuItem"
                                    title="Listen to Zac Brown Sir Rosevelt"
                                    data-nav-action="listen">Listen</a>
-                            </li>
+                            </li>-->
                         </ul>
 
                         <ul class="social-links">
@@ -203,7 +210,7 @@
         <div class="videoWrapper">
             <video class="ambientVideo"
                    data-src="{{data.assetURL}}video/cover-animation.mp4"
-                   data-poster="{{data.assetURL}}img/video-posters/mobile-background.jpg"
+                   data-poster="{{data.assetURL}}img/video-posters/sr-finalframe-albumart-16-9.jpg"
                    data-src-width="1920"
                    data-src-height="1080"
                    autoplay loop muted webkit-playsinline>
@@ -246,7 +253,7 @@
         </div>
     </section>
     <section id="BrandingVideo" class="section-video">
-        <h2 class="branding-video"><span class=" glitch glitch-two" data-text="Watch the Brand New Lyric Video:">Watch the Brand New Lyric Video:</span></h2>
+        <h2 class="branding-video"><span class="glitch" data-text="Watch the Brand New Lyric Video:">Watch the Brand New Lyric Video:</span></h2>
         <div class='embed-container'>
             <iframe src='https://www.youtube.com/embed/MzfYVcSUDNQ?modestbranding=1&autohide=1&showinfo=0&controls=0'
                     frameborder='0' allowfullscreen></iframe>
@@ -257,7 +264,7 @@
             <div class="half-page gradient-back">
                 <h2 class="order-cta">
                     <a href="https://www.youtube.com/watch?v=GMgA7uZ7vj4" target="_blank">
-                        Watch the &quot;Sunday Finest&quot; video
+                        Watch the &quot;Sunday Finest&quot; music video
                     </a>
                 </h2>
             </div>
@@ -267,7 +274,7 @@
                 <div class="videoWrapper--half-screen">
                     <video class="ambientVideo--half-screen"
                            data-src="{{data.assetURL}}video/groundhog-2000kbps.mp4"
-                           data-poster="{{data.assetURL}}img/video-posters/groundhog-2000kbps.jpg"
+                           data-poster="{{data.assetURL}}img/video-posters/sundayfinest-singleart-FINAL.jpg"
                            data-src-width="1920"
                            data-src-height="1080"
                            height="100%"
@@ -283,7 +290,7 @@
     <section id="Members" class="section-band">
         <div class="member-names">
             <div><span class="first-name glitch glitch-three" data-text="Ben">Ben</span> <span class="glitch glitch-two" data-text="Simonetti">Simonetti</span></div>
-            <div><span class="first-name glitch glitch-two" data-text="Zac">Zac</span> <span class="glitch glitch-ones" data-text="Brown">Brown</span></div>
+            <div><span class="first-name glitch glitch-two" data-text="Zac">Zac</span> <span class="glitch glitch-one" data-text="Brown">Brown</span></div>
             <div><span class="first-name glitch glitch-two" data-text="Niko">Niko</span> <span class="glitch glitch-three" data-text="Moon">Moon</span></div>
         </div>
         <img class="member-photo" src="{{data.assetURL}}img/dinner.jpg" />
