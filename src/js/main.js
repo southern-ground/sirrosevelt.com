@@ -570,11 +570,11 @@ var _ = window._;
         // Only try and monitor progress on mobile devices:
         clearInterval(app.checkPlayingInterval);
 
-        app.checkPlayingInterval = setInterval(function () {
-            app.checkVideoPlaying();
-        }, app.videoState.interval);
-
-        //}
+        if(this.isMobile){
+            app.checkPlayingInterval = setInterval(function () {
+                app.checkVideoPlaying();
+            }, app.videoState.interval);
+        }
 
     };
 
