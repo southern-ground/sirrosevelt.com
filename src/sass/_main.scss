@@ -742,8 +742,7 @@ html {
                 &#BrandingVideo {
                     min-height: auto;
                     h2.branding-video {
-                        margin: 0;
-                        padding: 40px 10px;
+                        margin: 40px 10px;
                         font-weight: normal;
                         @include mobile{
                             zoom: 0.7;
