@@ -544,7 +544,7 @@ html {
             .embed-container {
                 position: relative;
                 padding-bottom: 56.25%;
-                height: 0;
+                height: calc(100vw*(6/9));
                 width: 100vw;
                 max-width: 1366px;
                 overflow: hidden;
