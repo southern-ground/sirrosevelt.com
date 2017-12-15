@@ -221,7 +221,7 @@ Type: {{data.name}} ({{data.assetURL}})
             <div class="scroll scroll-first">
                 Scroll
                 <img class="scroll-icon"
-                     src="img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
+                     src="{{data.assetURL}}img/zac-brown-new-group-southern-pop-sir-rosevelt-scroll-icon.png"
                      alt="Scroll Down"
                 />
             </div>
@@ -245,8 +245,9 @@ Type: {{data.name}} ({{data.assetURL}})
             <div class="eye-image">
                 <img src="{{data.assetURL}}img/eye.gif" />
             </div>
-            <div class="gradient-back" id="tweet">
-
+            <div class="gradient-back">
+                <img class="twitter-icon" src="{{data.assetURL}}img/twitter-white.svg" />
+                <span id="tweet"></span>
             </div>
         </div>
     </section>

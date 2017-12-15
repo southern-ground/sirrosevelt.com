@@ -1038,10 +1038,22 @@ html {
                 }
             }
 
+            .twitter-icon{
+                width: 75px;
+                height: auto;
+                margin: 0 0 20px;
+            }
+
             #tweet{
-                padding: 40px;
-                font-size: 6vw;
-                @include small{
+                padding: 0 40px;
+                font-size: 20px;
+                @media screen and (min-width: 500px){
+                    font-size: 30px;
+                }
+                @media screen and (min-width: 768px){
+                    font-size: 3vw;
+                }
+                @media screen and (min-width: 1334px){
                     font-size: 40px;
                 }
             }
