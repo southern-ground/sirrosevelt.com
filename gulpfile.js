@@ -14,10 +14,9 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     pump = require('pump');
 
-var getData = function (argv) {
+var getData = function (server) {
 
-    var server = argv.build || "stage",
-        data = pkg['sir-rosevelt-configs'].servers[server];
+    var data = pkg['sir-rosevelt-configs'].servers[server];
 
     // Append the lyrics info:
     data.lyrics = pkg['sir-rosevelt-configs'].lyrics;
@@ -149,7 +148,8 @@ gulp.task('serve', function () {
 gulp.task('render', function (done) {
 
     if (!config) { // called by itself, possibly?
-        config = getData(require('yargs').argv);
+        const argv = require('yargs').argv;
+        config = getData(argv.env || "stage");
     }
 
     return gulp.src([dirs.src + '/**/*.html', '!' + dirs.src + '/rev.html'])
@@ -171,7 +171,9 @@ gulp.task('git-revision', shell.task(commands.gitRevision));
 
 gulp.task('build', function (done) {
 
-    config = getData(require('yargs').argv);
+    const argv = require('yargs').argv;
+
+    config = getData(argv.env || "stage");
 
     runSequence(
         ['git-revision'],
