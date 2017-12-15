@@ -119,7 +119,7 @@
     "bootstrap": "^3.3.7",
     "gulp-uglify": "^2.0.0",
     "iphone-inline-video": "^1.9.3",
-    "pump": "^1.0.1",
+    "pump": "^1.0.3",
     "underscore": "^1.8.3"
   }
 }

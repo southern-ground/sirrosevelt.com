@@ -1034,6 +1034,14 @@ html {
                     zoom: 0.6;
                 }
             }
+
+            #tweet{
+                padding: 40px;
+                font-size: 6vw;
+                @include small{
+                    font-size: 40px;
+                }
+            }
         }
 
         footer {

@@ -828,6 +828,8 @@ var _ = window._;
 
         // Update the styles for the social icons:
 
+        this.getTweets();
+
         this.initHeader();
         this.localizeSocial();
         this.resizeVideo();
@@ -839,7 +841,14 @@ var _ = window._;
         window.addEventListener("resize", _.debounce(this.resizeVideo, 500));
         window.addEventListener("resize", _.debounce(this.closeHeader, 10));
 
+    };
 
+    app.getTweets = function(){
+        console.log('getTweets');
+      var url = 'http://sirrosevelt.com/tweets.php';
+      $.getJSON(url, function(data){
+          $('#tweet').html(data[0].full_text);
+      })
     };
 
     app.init();
