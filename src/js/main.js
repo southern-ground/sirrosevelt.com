@@ -9,7 +9,7 @@ var _ = window._;
 
     var elementInViewport = function (el) {
 
-        if(el && el.offsetTop){
+        if (el && el.offsetTop) {
             var top = el.offsetTop;
             var left = el.offsetLeft;
             var width = el.offsetWidth;
@@ -86,7 +86,7 @@ var _ = window._;
         });
 
         // Manually fire tracking:
-        if(window.ga){
+        if (window.ga) {
             window.ga('send',
                 'event',
                 'Videos',
@@ -552,7 +552,7 @@ var _ = window._;
 
     app.startVideo = function ($video) {
 
-        if(app.testingVideoFailOver){
+        if (app.testingVideoFailOver) {
             return false;
         }
 
@@ -570,7 +570,7 @@ var _ = window._;
         // Only try and monitor progress on mobile devices:
         clearInterval(app.checkPlayingInterval);
 
-        if(this.isMobile){
+        if (this.isMobile) {
             app.checkPlayingInterval = setInterval(function () {
                 app.checkVideoPlaying();
             }, app.videoState.interval);
@@ -580,7 +580,7 @@ var _ = window._;
 
     app.initVideo = function () {
 
-        if(app.testingVideoFailOver){
+        if (app.testingVideoFailOver) {
             app.showStaticImage();
             return;
         }
@@ -843,12 +843,16 @@ var _ = window._;
 
     };
 
-    app.getTweets = function(){
-        console.log('getTweets');
-      var url = 'http://sirrosevelt.com/tweets.php';
-      $.getJSON(url, function(data){
-          $('#tweet').html(data[0].full_text);
-      })
+    app.getTweets = function () {
+        var url = 'http://sirrosevelt.com/tweets.php';
+        $.getJSON(url, function (data) {
+            $('#tweet').html(data[0].full_text);
+            $('#tweet').parent()
+                .addClass('clickable')
+                .click(function () {
+                    window.open('https://twitter.com/sirrosevelt', 'twitter');
+                })
+        })
     };
 
     app.init();

@@ -1038,6 +1038,11 @@ html {
                 }
             }
 
+            .clickable{
+                &:hover{
+                    cursor: pointer;
+                }
+            }
             .twitter-icon{
                 width: 75px;
                 height: auto;
