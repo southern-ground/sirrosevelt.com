@@ -653,7 +653,9 @@ html {
                     @media only screen and (min-width: 1300px) {
                         margin: 95px auto 40px;
                         flex-direction: row;
-                        justify-content: space-between;
+                        div{
+                            padding: 0 10px;
+                        }
                         p {
                             margin: 0;
                         }
@@ -725,6 +727,7 @@ html {
                         }
                     }
                 }
+
                 @include medium {
                     .gradient-back > h2{
                         font-size: 32px;
