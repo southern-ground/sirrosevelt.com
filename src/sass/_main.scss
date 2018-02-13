@@ -581,6 +581,7 @@ html {
                     height: 100%;
                 }
                 .glitch {
+                    max-width: 1200px;
                     @include textGlitch("lyric-glitch-one", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 115);
                     &-two {
                         @include textGlitch("lyric-glitch-two", 17, white, rgba(0, 0, 0, 0), red, blue, 1200, 135);
