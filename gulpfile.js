@@ -19,7 +19,7 @@ var getData = function (server) {
     var data = pkg['sir-rosevelt-configs'].servers[server];
 
     // Append the lyrics info:
-    data.lyrics = pkg['sir-rosevelt-configs'].lyrics;
+    data.lyrics = pkg['sir-rosevelt-configs'].lyrics || null;
     // Append the external links:
     data.links = pkg['sir-rosevelt-configs'].externalLinks;
     // Add the purchase links:
@@ -123,8 +123,6 @@ gulp.task('sass', function () {
         options.outputStyle = 'compressed';
     }
 
-    console.log(options);
-
     return gulp.src([dirs.src + '/sass/**/*.scss', '!' + dirs.src + '/sass/**/_*.scss'])
         .pipe(print(function (filepath) {
             return "\tsassing " + filepath;
@@ -185,7 +183,9 @@ gulp.task('build', function (done) {
 
 gulp.task('default', function () {
 
-    config = getData(require('yargs').argv);
+    var env = require('yargs').argv.env || 'dev';
+
+    config = getData(env);
 
     runSequence(['build'], 'serve', function () {
         console.log('Default likes to watch');
